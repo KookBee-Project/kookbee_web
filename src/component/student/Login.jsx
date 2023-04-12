@@ -49,6 +49,7 @@ const Login = () => {
                 </label>
                 <input
                   id="userPw"
+                  type="password"
                   className="border-2 border-gray-400 rounded-md w-full text-xl p-1 mb-10"
                   name="userPw"
                   value={request.userPw}
