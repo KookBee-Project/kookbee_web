@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/user/userSlice";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { data, state, error } = useSelector((state) => state.user);
@@ -66,14 +67,14 @@ const Login = () => {
                   로그인
                 </button>
               </div>
-              <div className="w-1/2">
+              <Link to={"/signup"} className="w-1/2">
                 <button
                   className="w-5/6 h-12 bg-yellow-400 border rounded-xl font-bold text-xl"
                   type="submit"
                 >
                   회원가입
                 </button>
-              </div>
+              </Link>
             </div>
           </div>
         </form>
