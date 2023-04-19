@@ -9,6 +9,7 @@ import HomeworkRead from "../component/homework/HomeworkRead";
 import DayOffHistory from "../component/dayOff/DayOffHistory";
 import DayOffApply from "../component/dayOff/DayOffApply";
 import DayOffClassHistory from "../component/dayOff/DayOffClassHistory";
+import ProductHistory from "../component/product/ProductHistory";
 
 const CustomRoute = () => {
   return (
@@ -24,6 +25,7 @@ const CustomRoute = () => {
           <Route path="/dayoffclasshistory" element={<DayOffClassHistory />} />
           <Route path="/dayoffhistory" element={<DayOffHistory />} />
           <Route path="/dayoffapply" element={<DayOffApply />} />
+          <Route path="/producthistory" element={<ProductHistory />} />
         </Route>
       </Routes>
     </BrowserRouter>

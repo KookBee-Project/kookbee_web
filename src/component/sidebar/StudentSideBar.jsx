@@ -7,7 +7,7 @@ const SideBar = () => {
     { value: "출석 및 수강율", link: "/" },
     { value: "과제", link: "/homeworkhistory" },
     { value: "휴가", link: "/dayoffclasshistory" },
-    { value: "제공 및 대여", link: "/" },
+    { value: "제공 및 대여", link: "/producthistory" },
     { value: "강의평가", link: "/" },
     { value: "공지사항", link: "/" },
     { value: "QnA", link: "/" },
