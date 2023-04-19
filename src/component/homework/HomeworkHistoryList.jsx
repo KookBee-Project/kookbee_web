@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SideBar from "../sidebar/StudentSideBar";
 
 const HomeworkHistoryList = () => {
@@ -18,9 +19,29 @@ const HomeworkHistoryList = () => {
       homeworkTitle: "별 만들기",
       homeworkStartDate: "2023-02-11",
       homeworkEndDate: "2023-02-14",
-      homeworkStatus: "제출완료",
+      homeworkStatus: "수정하기",
+    },
+    {
+      classTitle: "빅데이터 17기",
+      classCurriculum: "Java",
+      classSkillSet: "Java",
+      homeworkTitle: "별 만들기",
+      homeworkStartDate: "2023-02-11",
+      homeworkEndDate: "2023-02-14",
+      homeworkStatus: "채점완료",
     },
   ];
+
+  function getLinkByStatus(status) {
+    if (status === "제출하기")
+      return <Link to={"/homeworkwrite"}>제출하기</Link>;
+    if (status === "수정하기")
+      return <Link to={"/homeworkedit"}>수정하기</Link>;
+    if (status === "채점완료")
+      return <Link to={"/homeworkread"}>채점완료</Link>;
+    return null;
+  }
+
   return (
     <div>
       <div className="table items-center w-max h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
@@ -47,7 +68,7 @@ const HomeworkHistoryList = () => {
                   <td className="p-1">{el.homeworkTitle}</td>
                   <td className="p-1">{el.homeworkStartDate}</td>
                   <td className="p-1">{el.homeworkEndDate}</td>
-                  <td className="p-1">{el.homeworkStatus}</td>
+                  <td className="p-1">{getLinkByStatus(el.homeworkStatus)}</td>
                 </tr>
               ))}
             </tbody>
