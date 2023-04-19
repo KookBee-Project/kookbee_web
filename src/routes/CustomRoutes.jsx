@@ -6,6 +6,9 @@ import HomeworkHistory from "../component/homework/HomeworkHistory";
 import HomeworkWrite from "../component/homework/HomeworkWrite";
 import HomeworkEdit from "../component/homework/HomeworkEdit";
 import HomeworkRead from "../component/homework/HomeworkRead";
+import DayOffHistory from "../component/dayOff/DayOffHistory";
+import DayOffApply from "../component/dayOff/DayOffApply";
+import DayOffClassHistory from "../component/dayOff/DayOffClassHistory";
 
 const CustomRoute = () => {
   return (
@@ -18,6 +21,9 @@ const CustomRoute = () => {
           <Route path="/homeworkwrite" element={<HomeworkWrite />} />
           <Route path="/homeworkedit" element={<HomeworkEdit />} />
           <Route path="/homeworkread" element={<HomeworkRead />} />
+          <Route path="/dayoffclasshistory" element={<DayOffClassHistory />} />
+          <Route path="/dayoffhistory" element={<DayOffHistory />} />
+          <Route path="/dayoffapply" element={<DayOffApply />} />
         </Route>
       </Routes>
     </BrowserRouter>
