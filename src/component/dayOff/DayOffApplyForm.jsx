@@ -1,13 +1,41 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { applyDayOff } from "../../store/dayoff/dayOffSlice";
 
 const DayOffApplyForm = () => {
-  const [data, setData] = useState({
+  const { status, error } = useSelector((state) => state.dayOff);
+  const [request, setRequest] = useState({
+    dayOffStartDate: "",
+    dayOffEndDate: "",
+    dayOffReason: "",
+    bootcampId: 1,
+  });
+  console.log(error);
+  const setInput = (e) => {
+    const { name, value } = e.target;
+    setRequest({ ...request, [name]: value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(request);
+    dispatch(applyDayOff(request));
+  };
+
+  useEffect(() => {
+    if (status === "successed") {
+      alert("휴가 신청에 성공하였습니다.");
+      navigate("/dayoffclasshistory");
+    } else if (status === "failed") alert(error);
+  }, [status]);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [dataG, setDataG] = useState({
     classTitle: "빅데이터 17기",
     classCurriculum: "Java",
-    dayOffStartDate: 0,
-    dayOffEndDate: 0,
-    dayOffReason: "",
   });
 
   const date = new Date();
@@ -24,13 +52,8 @@ const DayOffApplyForm = () => {
     return Math.floor(interval / (1000 * 60 * 60 * 24));
   };
 
-  const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setData({ ...data, [name]: value });
-  };
-
   function endDate(el) {
-    if (data.dayOffStartDate === 0)
+    if (request.dayOffStartDate === 0)
       return (
         <input
           type="date"
@@ -38,8 +61,8 @@ const DayOffApplyForm = () => {
           placeholder="종료일을 입력해주세요."
           name="dayOffEndDate"
           min={dateStr}
-          value={data.dayOffEndDate}
-          onChange={onChangeHandler}
+          value={request.dayOffEndDate}
+          onChange={setInput}
         ></input>
       );
     return (
@@ -48,9 +71,9 @@ const DayOffApplyForm = () => {
         className="float-right ml-3 font-black"
         placeholder="종료일을 입력해주세요."
         name="dayOffEndDate"
-        min={data.dayOffStartDate}
-        value={data.dayOffEndDate}
-        onChange={onChangeHandler}
+        min={request.dayOffStartDate}
+        value={request.dayOffEndDate}
+        onChange={setInput}
       ></input>
     );
   }
@@ -59,15 +82,15 @@ const DayOffApplyForm = () => {
     <div className="table items-center h-5/6 w-2/4 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
       <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
         <div className="text-center font-bold text-3xl mb-5">휴가신청서</div>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="">
             <div className="flex">
               <h1 className="float-left font-bold">훈련과정명 :</h1>
-              <div>{data.classTitle}</div>
+              <div>{dataG.classTitle}</div>
             </div>
             <div className="flex">
               <h1 className="float-left font-bold">커리큘럼 :</h1>
-              <div>{data.classCurriculum}</div>
+              <div>{dataG.classCurriculum}</div>
             </div>
             <div className="flex">
               <h1 className="float-left font-bold">휴가 신청 기간 :</h1>
@@ -76,16 +99,18 @@ const DayOffApplyForm = () => {
                 className="float-right ml-3 font-black"
                 placeholder="시작일을 입력해주세요."
                 name="dayOffStartDate"
-                value={data.dayOffStartDate}
+                value={request.dayOffStartDate}
                 min={dateStr}
-                onChange={onChangeHandler}
+                onChange={setInput}
               ></input>
-              {endDate(data.dayOffEndDate)}
+              {endDate(request.dayOffEndDate)}
             </div>
             <div className="flex">
               <h1 className="float-left font-bold">휴가신청기간 :</h1>
               <div>
-                {new Date(data.dayOffEndDate).getInterval(new Date(data.dayOffStartDate))}
+                {new Date(request.dayOffEndDate).getInterval(
+                  new Date(request.dayOffStartDate)
+                )}
               </div>
             </div>
             <div className="flex">
@@ -96,8 +121,8 @@ const DayOffApplyForm = () => {
                   className="float-left"
                   placeholder="사유를 입력해주세요."
                   name="dayOffReason"
-                  value={data.dayOffReason}
-                  onChange={onChangeHandler}
+                  value={request.dayOffReason}
+                  onChange={setInput}
                 ></input>
                 <div className="flex justify-center mt-10">
                   <button className="bg-yellow-300 rounded-lg w-1/4 h-11 mr-20">
