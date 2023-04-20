@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/user/userSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { data, state, error } = useSelector((state) => state.user);
@@ -10,7 +10,7 @@ const Login = () => {
     userEmail: "",
     userPw: "",
   });
-  
+
   const dispatch = useDispatch();
 
   const onChange = (e) => {
@@ -18,9 +18,12 @@ const Login = () => {
     setRequest({ ...request, [name]: value });
   };
 
+  const navigate = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(login(request));
+    navigate("/producthistory");
   };
 
   return (
