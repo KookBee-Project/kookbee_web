@@ -7,7 +7,6 @@ const StudentSignUp = () => {
   const [users, setUsers] = useState({
     userEmail: "",
     userPw: "",
-    userPwConfirm: "",
     userName: "",
     userBirth: "",
     userPhoneNumber: "",
