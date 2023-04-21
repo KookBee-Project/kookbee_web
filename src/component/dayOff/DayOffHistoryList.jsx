@@ -1,16 +1,26 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 
 const DayOffHistoryList = () => {
-  const data = [
-    {
-      classTitle: "빅데이터 17기",
-      classCurriculum: "Spring Boot",
-      dayOffStartDate: "2023-04-01",
-      dayOffEndDate: "2023-04-03",
-      dayOffPeriod: "3",
-      dayOffStatus: "승인",
-    },
-  ];
+  const dispatch = useDispatch();
+  const { bootcampId, bootcampName } = useLocation.state;
+  const { data, status, error } = useSelector((state) => state.dayOff);
+
+  // useEffect(() => {
+  //   // 아래 바꿔줘야함
+  //   dispatch(getBootcampList(bootcampId));
+  // }, []);
+  // const data = [
+  //   {
+  //     classTitle: "빅데이터 17기",
+  //     classCurriculum: "Spring Boot",
+  //     dayOffStartDate: "2023-04-01",
+  //     dayOffEndDate: "2023-04-03",
+  //     dayOffPeriod: "3",
+  //     dayOffStatus: "승인",
+  //   },
+  // ];
   return (
     <div>
       <div className="table items-center w-max h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">

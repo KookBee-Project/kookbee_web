@@ -6,16 +6,7 @@ import { getBootcampList } from "../../store/dayoff/dayOffSlice";
 const DayOffClassHistoryList = () => {
   const dispatch = useDispatch();
   const { data, status, error } = useSelector((state) => state.dayOff);
-  // const data = [
-  //   {
-  //     classTitle: "빅데이터 17기",
-  //     bootcampStartDate: "2022-11-14",
-  //     bootcampEndDate: "2023-05-17",
-  //     classProgressPeriod: "80일(78.8%)",
-  //     remainingDayOff: "5",
-  //   },
-  // ];
-  
+
   useEffect(() => {
     dispatch(getBootcampList());
   }, []);
@@ -65,7 +56,17 @@ const DayOffClassHistoryList = () => {
                   </td>
                   <td className="p-1 pl-7 pr-7">{el.remainingDayOff}</td>
                   <td className="p-1 pl-10 pr-10 bg-yellow-300 rounded-lg w-13">
-                    <Link to={"/dayoffhistory"}>휴가신청</Link>
+                    <Link
+                      to={{
+                        pathname: "/dayoffhistory",
+                        state: {
+                          bootcampId: el.bootcampId,
+                          bootcampName: el.bootcampName,
+                        },
+                      }}
+                    >
+                      휴가신청
+                    </Link>
                   </td>
                 </tr>
               ))}
