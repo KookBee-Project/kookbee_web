@@ -20,6 +20,18 @@ export const applyDayOff = createAsyncThunk(
   }
 );
 
+export const getBootcampList = createAsyncThunk(
+  "/dayoff/bootcampList",
+  async (request, thunkAPI) => {
+    try {
+      const response = await api_bootcamp("GET", "/dayoff/bootcamplist");
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response);
+    }
+  }
+);
+
 // export const updateCurriculum = createAsyncThunk(
 //   "/curriculum/update",
 //   async (request) => {
@@ -53,6 +65,17 @@ const dayOffSlice = createSlice({
         state.status = "failed";
         state.error = action.payload.data;
         console.log(state.error);
+      })
+      .addCase(getBootcampList.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(getBootcampList.fulfilled, (state, action) => {
+        state.status = "successed";
+        state.data = action.payload;
+      })
+      .addCase(getBootcampList.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
     //   .addCase(updateCurriculum.pending, (state, action) => {
     //     state.status = "loading";
@@ -65,17 +88,6 @@ const dayOffSlice = createSlice({
     //     state.status = "failed";
     //     state.error = action.error.message;
     //   })
-    //   .addCase(readCurriculum.pending, (state, action) => {
-    //     state.status = "loading";
-    //   })
-    //   .addCase(readCurriculum.fulfilled, (state, action) => {
-    //     state.status = "successed";
-    //     state.data = action.payload;
-    //   })
-    //   .addCase(readCurriculum.rejected, (state, action) => {
-    //     state.status = "failed";
-    //     state.error = action.error.message;
-    //   });
   },
 });
 export default dayOffSlice.reducer;

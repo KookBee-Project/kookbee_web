@@ -1,16 +1,24 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getBootcampList } from "../../store/dayoff/dayOffSlice";
 
 const DayOffClassHistoryList = () => {
-  const data = [
-    {
-      classTitle: "빅데이터 17기",
-      classStartDate: "2022-11-14",
-      classEndDate: "2023-05-17",
-      classProgressPeriod: "80일(78.8%)",
-      remainingDayOff: "5",
-    },
-  ];
-
+  const dispatch = useDispatch();
+  const { data, status, error } = useSelector((state) => state.dayOff);
+  // const data = [
+  //   {
+  //     classTitle: "빅데이터 17기",
+  //     bootcampStartDate: "2022-11-14",
+  //     bootcampEndDate: "2023-05-17",
+  //     classProgressPeriod: "80일(78.8%)",
+  //     remainingDayOff: "5",
+  //   },
+  // ];
+  
+  useEffect(() => {
+    dispatch(getBootcampList());
+  }, []);
   Date.prototype.getInterval = function (otherDate) {
     var interval;
     if (this > otherDate) interval = this.getTime() - otherDate.getTime();
@@ -37,19 +45,19 @@ const DayOffClassHistoryList = () => {
             <tbody className="text-center border-t border-sky-400">
               {data?.map((el) => (
                 <tr>
-                  <td className="p-1 pl-7 pr-7">{el.classTitle}</td>
-                  <td className="p-1 pl-7 pr-7">{el.classStartDate}</td>
-                  <td className="p-1 pl-7 pr-7">{el.classEndDate}</td>
+                  <td className="p-1 pl-7 pr-7">{el.bootcampName}</td>
+                  <td className="p-1 pl-7 pr-7">{el.bootcampStartDate}</td>
+                  <td className="p-1 pl-7 pr-7">{el.bootcampEndDate}</td>
                   <td className="p-1 pl-7 pr-7">
                     {data.map((el) =>
-                      new Date().getInterval(new Date(el.classStartDate))
+                      new Date().getInterval(new Date(el.bootcampStartDate))
                     )}
                     일 /
                     {data.map((el) =>
                       String(
-                        new Date().getInterval(new Date(el.classStartDate)) /
-                          new Date(el.classEndDate).getInterval(
-                            new Date(el.classStartDate)
+                        new Date().getInterval(new Date(el.bootcampStartDate)) /
+                          new Date(el.bootcampEndDate).getInterval(
+                            new Date(el.bootcampStartDate)
                           )
                       ).slice(2, 4)
                     )}
