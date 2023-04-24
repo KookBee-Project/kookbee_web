@@ -6,9 +6,11 @@ axios.defaults.withCredentials = true; // 쿠키 값을 전송한다.
 
 export const api = async (method, url, data) => {  
   const refreshToken = localStorage.getItem("refreshToken");
+  const accessToken = localStorage.getItem("accessToken");
   const headers = refreshToken
     ? {
         RefreshToken: refreshToken,
+        AccesToken: accessToken,
       }
     : {};
   const response = await axios({
