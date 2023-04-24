@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getBootcampList } from "../../store/dayoff/dayOffSlice";
 
 const DayOffClassHistoryList = () => {
@@ -16,6 +16,8 @@ const DayOffClassHistoryList = () => {
     else interval = otherDate.getTime() - this.getTime();
     return Math.floor(interval / (1000 * 60 * 60 * 24));
   };
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -56,17 +58,19 @@ const DayOffClassHistoryList = () => {
                   </td>
                   <td className="p-1 pl-7 pr-7">{el.remainingDayOff}</td>
                   <td className="p-1 pl-10 pr-10 bg-yellow-300 rounded-lg w-13">
-                    <Link
-                      to={{
-                        pathname: "/dayoffhistory",
-                        state: {
-                          bootcampId: el.bootcampId,
-                          bootcampName: el.bootcampName,
-                        },
+                    <button
+                      onClick={() => {
+                        navigate(`/dayoff/${el.bootcampId}`, {
+                          state: {
+                            bootcampName: el.bootcampName,
+                            bootcampId: el.bootcampId,
+                            remainingDayOff: el.remainingDayOff,
+                          },
+                        });
                       }}
                     >
                       휴가신청
-                    </Link>
+                    </button>
                   </td>
                 </tr>
               ))}
