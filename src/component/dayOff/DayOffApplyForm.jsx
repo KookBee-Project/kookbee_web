@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { applyDayOff } from "../../store/dayoff/dayOffSlice";
 
 const DayOffApplyForm = () => {
   const { status, error } = useSelector((state) => state.dayOff);
+  const { remainingDayOff } = useLocation().state;
   const [request, setRequest] = useState({
     dayOffStartDate: "",
     dayOffEndDate: "",
     dayOffReason: "",
     bootcampId: 1,
+    remainingDayOff: remainingDayOff,
   });
-  console.log(error);
+
   const setInput = (e) => {
     const { name, value } = e.target;
     setRequest({ ...request, [name]: value });
@@ -20,13 +22,13 @@ const DayOffApplyForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(request);
-    dispatch(applyDayOff(request));
+    dispatch(applyDayOff(request, remainingDayOff));
   };
 
   useEffect(() => {
-    if (status === "successed") {
+    if (status === "successed" && request.dayOffStartDate !== "") {
       alert("휴가 신청에 성공하였습니다.");
-      navigate("/dayoffclasshistory");
+      navigate("/dayoff");
     } else if (status === "failed") alert(error);
   }, [status]);
 

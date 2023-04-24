@@ -1,16 +1,17 @@
 import axios from "axios";
 
 axios.defaults.baseURL = "http://34.64.69.238:8000";
+// axios.defaults.baseURL = "http://192.168.80.214:8000";
 
 axios.defaults.withCredentials = true; // 쿠키 값을 전송한다.
 
 export const api = async (method, url, data) => {  
-  const refreshToken = localStorage.getItem("refreshToken");
-  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("RefreshToken");
+  const accessToken = localStorage.getItem("AccessToken");
   const headers = refreshToken
     ? {
         RefreshToken: refreshToken,
-        AccesToken: accessToken,
+        AccessToken: accessToken,
       }
     : {};
   const response = await axios({

@@ -22,9 +22,9 @@ const CustomRoute = () => {
           <Route path="/homeworkwrite" element={<HomeworkWrite />} />
           <Route path="/homeworkedit" element={<HomeworkEdit />} />
           <Route path="/homeworkread" element={<HomeworkRead />} />
-          <Route path="/dayoffclasshistory" element={<DayOffClassHistory />} />
-          <Route path="/dayoffhistory" element={<DayOffHistory />} />
-          <Route path="/dayoffapply" element={<DayOffApply />} />
+          <Route path="/dayoff" element={<DayOffClassHistory />} />
+          <Route path="/dayoff/:bootcamlId" element={<DayOffHistory />} />
+          <Route path="/dayoff/apply" element={<DayOffApply />} />
           <Route path="/producthistory" element={<ProductHistory />} />
         </Route>
       </Routes>
