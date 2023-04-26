@@ -7,9 +7,13 @@ const initialState = {
   error: null,
 };
 
-export const login = createAsyncThunk("/user/login", async (user) => {
-  const response = await api("POST", "/user/login", user);
-  return response.data;
+export const login = createAsyncThunk("/user/login", async (user, thunkAPI) => {
+  try {
+    const response = await api("POST", "/user/login", user);
+    return response.data;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response);
+  }
 });
 
 const userSlice = createSlice({
@@ -33,10 +37,11 @@ const userSlice = createSlice({
         state.status = "successed";
         state.data = action.payload;
         localStorage.setItem("RefreshToken", action.payload.refreshToken);
+        localStorage.setItem("AccessToken", action.payload.accessToken);
       })
       .addCase(login.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.payload.data;
       });
   },
 });

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ErrorResponse } from "@remix-run/router";
-import { api, api_bootcamp } from "../../api/api";
+import { api } from "../../api/api";
 
 const initialState = {
   data: [],
@@ -12,7 +12,7 @@ export const applyDayOff = createAsyncThunk(
   "/dayoff/apply",
   async (request, thunkAPI) => {
     try {
-      const response = await api_bootcamp("POST", "/dayoff/apply", request);
+      const response = await api("POST", "/dayoff/apply", request);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response);
