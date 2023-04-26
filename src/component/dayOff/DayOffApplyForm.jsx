@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { applyDayOff } from "../../store/dayoff/dayOffSlice";
 
 const DayOffApplyForm = () => {
   const { status, error } = useSelector((state) => state.dayOff);
-  const { remainingDayOff } = useLocation().state;
+  const bootcampId = useParams().bootcampId;
   const [request, setRequest] = useState({
     dayOffStartDate: "",
     dayOffEndDate: "",
     dayOffReason: "",
-    bootcampId: 1,
-    remainingDayOff: remainingDayOff,
+    bootcampId: bootcampId,
   });
 
   const setInput = (e) => {
@@ -22,7 +21,7 @@ const DayOffApplyForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(request);
-    dispatch(applyDayOff(request, remainingDayOff));
+    dispatch(applyDayOff(request));
   };
 
   useEffect(() => {
@@ -131,7 +130,13 @@ const DayOffApplyForm = () => {
                     신청하기
                   </button>
                   <div className=" bg-yellow-300 rounded-lg w-1/4 h-11 text-center">
-                    <Link to={"/dayoffhistory"}>뒤로가기</Link>
+                    <button
+                      onClick={() => {
+                        navigate(`/dayoff/${bootcampId}`);
+                      }}
+                    >
+                      뒤로가기
+                    </button>
                   </div>
                 </div>
               </div>

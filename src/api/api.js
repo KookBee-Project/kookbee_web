@@ -1,7 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://34.64.69.238:8000";
-// axios.defaults.baseURL = "http://192.168.80.214:8000";
+// axios.defaults.baseURL = "http://34.64.69.238:8000";
+axios.defaults.baseURL = "http://192.168.80.214:8000";
 
 axios.defaults.withCredentials = true; // 쿠키 값을 전송한다.
 
