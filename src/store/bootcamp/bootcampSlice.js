@@ -11,6 +11,23 @@ const initialState = {
   error: null,
 };
 
+export const addBootcamp = createAsyncThunk(
+  "/bootcamp/add",
+  async (bootcampEnterCode, thunkAPI) => {
+    try {
+      const response = await api(
+        "POST",
+        "/class/bootcamp/student",
+        bootcampEnterCode
+      );
+      return response.data;
+    } catch (err) {
+      console.log(thunkAPI.rejectWithValue(err.response).data);
+      return thunkAPI.rejectWithValue(err.response);
+    }
+  }
+);
+
 export const readBootcampList = createAsyncThunk(
   "/bootcamp/read/list",
   async () => {
@@ -19,7 +36,6 @@ export const readBootcampList = createAsyncThunk(
   }
 );
 
-// 바뀔수도 있음
 export const readBootcampDetail = createAsyncThunk(
   "/bootcamp/read/detail",
   async (bootcampId) => {
@@ -34,6 +50,17 @@ const bootcampSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(addBootcamp.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(addBootcamp.fulfilled, (state, action) => {
+        state.status = "successed";
+      })
+      .addCase(addBootcamp.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload.data;
+        console.log(action.payload);
+      })
       .addCase(readBootcampList.pending, (state, action) => {
         state.status = "loading";
       })
