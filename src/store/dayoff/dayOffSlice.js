@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ErrorResponse } from "@remix-run/router";
-import { api} from "../../api/api";
+import { api } from "../../api/api";
 
 const initialState = {
   data: [],
