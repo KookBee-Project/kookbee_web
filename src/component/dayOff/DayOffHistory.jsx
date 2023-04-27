@@ -1,4 +1,4 @@
-import SideBar from "../sidebar/StudentSideBar";
+import SideBar from "../sidebar/BootcampSideBar";
 import DayOffHistoryList from "./DayOffHistoryList";
 
 const DayOffHistory = () => {

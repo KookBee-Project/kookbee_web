@@ -1,6 +1,5 @@
-import SideBar from "../sidebar/StudentSideBar";
+import SideBar from "../sidebar/BootcampSideBar";
 import HomeworkWriteForm from "./HomeworkWriteForm";
-
 
 const HomeworkWrite = () => {
   return (
