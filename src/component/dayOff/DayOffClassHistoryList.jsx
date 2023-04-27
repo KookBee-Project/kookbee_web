@@ -60,13 +60,7 @@ const DayOffClassHistoryList = () => {
                   <td className="p-1 pl-10 pr-10 bg-yellow-300 rounded-lg w-13">
                     <button
                       onClick={() => {
-                        navigate(`/dayoff/${el.bootcampId}`, {
-                          state: {
-                            bootcampName: el.bootcampName,
-                            bootcampId: el.bootcampId,
-                            remainingDayOff: el.remainingDayOff,
-                          },
-                        });
+                        navigate(`/dayoff/${el.bootcampId}`);
                       }}
                     >
                       휴가신청

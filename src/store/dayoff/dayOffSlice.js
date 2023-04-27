@@ -12,7 +12,7 @@ export const applyDayOff = createAsyncThunk(
   "/dayoff/apply",
   async (request, thunkAPI) => {
     try {
-      const response = await api("POST", "/class/dayoff/apply", request);
+      const response = await api("POST", `/class/dayoff/${request.bootcampId}/apply`, request);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response);
@@ -36,7 +36,7 @@ export const getDayOffList = createAsyncThunk(
   "/dayoff/dayOffList",
   async (bootcampId, thunkAPI) => {
     try {
-      const response = await api("GET", `/class/dayoff/dayofflist/${bootcampId}`);
+      const response = await api("GET", `/class/dayoff/${bootcampId}`);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response);
