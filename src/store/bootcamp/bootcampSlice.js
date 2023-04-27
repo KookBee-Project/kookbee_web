@@ -13,16 +13,14 @@ const initialState = {
 
 export const addBootcamp = createAsyncThunk(
   "/bootcamp/add",
-  async (bootcampEnterCode, thunkAPI) => {
+  async (bootcampCode, thunkAPI) => {
+    console.log(bootcampCode);
     try {
-      const response = await api(
-        "POST",
-        "/class/bootcamp/student",
-        bootcampEnterCode
-      );
+      const response = await api("POST", "/class/bootcamp/student", {
+        bootcampCode,
+      });
       return response.data;
     } catch (err) {
-      console.log(thunkAPI.rejectWithValue(err.response).data);
       return thunkAPI.rejectWithValue(err.response);
     }
   }

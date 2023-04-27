@@ -5,6 +5,8 @@ import productSlice from "./product/productSlice";
 import dayOffSlice from "./dayoff/dayOffSlice";
 import bootcampSlice from "./bootcamp/bootcampSlice";
 import bootcampNameSlice from "./bootcamp/bootcampNameSlice";
+import homeworkSlice from "./homework/HomeworkSlice";
+
 
 export default configureStore({
   reducer: {
@@ -15,5 +17,6 @@ export default configureStore({
     dayOff: dayOffSlice,
     bootcamp: bootcampSlice,
     bootcampName: bootcampNameSlice,
+    homework: homeworkSlice,
   },
 });

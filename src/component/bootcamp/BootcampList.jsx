@@ -32,9 +32,43 @@ const BootcampList = () => {
           </div>
         ) : (
           <div>
-            {data?.map((el) => {
-              <div>안녕</div>;
-            })}
+            <table className="my-10">
+              <thead className="font-bold text-center">
+                <tr>
+                  <td>훈련과정명</td>
+                  <td>시작일</td>
+                  <td>종료일</td>
+                  <td>캠퍼스</td>
+                  <td>출석률</td>
+                  <td>수강률</td>
+                </tr>
+              </thead>
+              <tbody className="text-center border border-black">
+                {data?.map((el, idx) => (
+                  <tr key={idx}>
+                    <td className="p-1 hover:cursor-pointer">
+                      {el.bootcampTitle}
+                    </td>
+                    <td className="p-1">{el.bootcampStartDate}</td>
+                    <td className="p-1">{el.bootcampEndDate}</td>
+                    <td className="p-1">{el.campusName}</td>
+                    <td className="p-1">??</td>
+                    <td className="p-1">???</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="flex flex-col text-center items-center">
+              <button
+                className="px-5 py-3 my-5 bg-yellow-300 border rounded-xl text-xl font-bold shadow-md
+         shadow-gray-400 hover:bg-yellow-200 focus:shadow-none"
+                onClick={() => {
+                  navigate("/bootcamp/add");
+                }}
+              >
+                추가 등록
+              </button>
+            </div>
           </div>
         )}
       </div>
