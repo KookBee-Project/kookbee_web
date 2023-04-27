@@ -12,7 +12,7 @@ const initialState = {
 export const getOfferProduct = createAsyncThunk(
   "/product/offerproduct",
   async () => {
-    const response = await api("GET", "product/offerproduct");
+    const response = await api("GET", "/class/product/offerproduct");
     console.log(response.data);
     return response.data;
   }
@@ -21,7 +21,7 @@ export const getOfferProduct = createAsyncThunk(
 export const getRentalProduct = createAsyncThunk(
   "/product/rentalproduct",
   async () => {
-    const response = await api("GET", "product/rentalproduct");
+    const response = await api("GET", "/class/product/rentalproduct");
     console.log(response.data);
     return response.data;
   }

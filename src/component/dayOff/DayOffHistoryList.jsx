@@ -1,16 +1,17 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { getDayOffList } from "../../store/dayoff/dayOffSlice";
 
 const DayOffHistoryList = () => {
-  const data = [
-    {
-      classTitle: "빅데이터 17기",
-      classCurriculum: "Spring Boot",
-      dayOffStartDate: "2023-04-01",
-      dayOffEndDate: "2023-04-03",
-      dayOffPeriod: "3",
-      dayOffStatus: "승인",
-    },
-  ];
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { bootcampId, bootcampName, remainingDayOff } = useLocation().state;
+  const { data, status, error } = useSelector((state) => state.dayOff);
+
+  useEffect(() => {
+    dispatch(getDayOffList(bootcampId));
+  }, []);
   return (
     <div>
       <div className="table items-center w-max h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
@@ -29,12 +30,12 @@ const DayOffHistoryList = () => {
             <tbody className="text-center border-t border-sky-400">
               {data?.map((el) => (
                 <tr>
-                  <td className="p-1 pl-7 pr-7">{el.classTitle}</td>
-                  <td className="p-1 pl-7 pr-7">{el.classCurriculum}</td>
+                  <td className="p-1 pl-7 pr-7">{bootcampName}</td>
+                  <td className="p-1 pl-7 pr-7">{el.curriculumName}</td>
                   <td className="p-1 pl-7 pr-7">
                     {el.dayOffStartDate} ~ {el.dayOffEndDate}
                   </td>
-                  <td className="p-1 pl-7 pr-7">{el.dayOffPeriod}</td>
+                  <td className="p-1 pl-7 pr-7">{el.useDays}</td>
                   <td className="p-1 pl-7 pr-7">{el.dayOffStatus}</td>
                 </tr>
               ))}
@@ -42,12 +43,20 @@ const DayOffHistoryList = () => {
           </table>
           <div className="flex justify-center mt-10">
             <div className="bg-yellow-300 rounded-lg w-28 h-11 text-center font-bold mr-20">
-              <Link to={"/dayoffapply"} className="">
+              <button
+                onClick={() => {
+                  navigate("/dayoff/apply", {
+                    state: {
+                      remainingDayOff: remainingDayOff,
+                    },
+                  });
+                }}
+              >
                 신청하기
-              </Link>
+              </button>
             </div>
             <div className=" bg-yellow-300 rounded-lg w-28 h-11 text-center font-bold">
-              <Link to={"/dayoffclasshistory"}>뒤로가기</Link>
+              <Link to={"/dayoff"}>뒤로가기</Link>
             </div>
           </div>
         </div>

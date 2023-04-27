@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const SideBar = () => {
   const { sideSet } = useSelector((state) => state.bootcamp);
   const studentMenu = [
+
     sideSet
       ? ({ value: "나의 강의 내역", link: "/bootcamp" },
         { value: "캘린더", link: "" },
