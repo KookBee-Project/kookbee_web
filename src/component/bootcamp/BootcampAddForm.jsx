@@ -17,7 +17,7 @@ const BootcampAddForm = () => {
   const onSubmit = (e) => {
     console.log(bootcampCode);
     e.preventDefault();
-    dispatch(addBootcamp());
+    dispatch(addBootcamp(bootcampCode));
   };
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const BootcampAddForm = () => {
   }, [status]);
 
   return (
-    <div className="table items-center w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+    <div className="table w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
       <div className="flex flex-col items-center w-full h-5/6 mt-10">
         <div className="text-center font-bold text-3xl">강의 등록하기</div>
         <div className="flex flex-col items-center text-center">
