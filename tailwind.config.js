@@ -7,11 +7,13 @@ module.exports = {
         10: "10rem",
         12: "12rem",
         20: "20rem",
+        40: "40rem",
       },
       minHeight: {
         10: "10rem",
         12: "12rem",
         30: "30rem",
+        40: "40rem",
       },
     },
   },

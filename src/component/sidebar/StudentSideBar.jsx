@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const { sideSet } = useSelector((state) => state.bootcamp);
-  const studentMenu = [
-
-    sideSet
-      ? ({ value: "나의 강의 내역", link: "/bootcamp" },
+  console.log(sideSet);
+  const studentMenu = sideSet
+    ? [
+        { value: "나의 강의 내역", link: "/bootcamp" },
         { value: "캘린더", link: "" },
         { value: "출석 및 수강율", link: "/" },
         { value: "과제", link: "/homeworkhistory" },
@@ -15,9 +15,11 @@ const SideBar = () => {
         { value: "강의평가", link: "/" },
         { value: "공지사항", link: "/" },
         { value: "QnA", link: "/" },
-        { value: "같이 밥먹을 사람", link: "/" })
-      : { value: "나의 강의 내역", link: "/bootcamp" },
-  ];
+        { value: "같이 밥먹을 사람", link: "/" },
+      ]
+    : [{ value: "나의 강의 내역", link: "/bootcamp" }];
+
+  console.log(studentMenu);
 
   return (
     <div className="w-3/12 min-w-12 min-h-40 my-20 mx-10 border-4 border-yellow-300 rounded-3xl">
