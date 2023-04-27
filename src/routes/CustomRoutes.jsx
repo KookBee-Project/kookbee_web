@@ -10,6 +10,8 @@ import DayOffHistory from "../component/dayOff/DayOffHistory";
 import DayOffApply from "../component/dayOff/DayOffApply";
 import DayOffClassHistory from "../component/dayOff/DayOffClassHistory";
 import ProductHistory from "../component/product/ProductHistory";
+import BootCamp from "../component/bootcamp/Bootcamp";
+import BootcampAdd from "../component/bootcamp/BootcampAdd";
 
 const CustomRoute = () => {
   return (
@@ -18,6 +20,8 @@ const CustomRoute = () => {
         <Route path="/" element={<Main />}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<StudentSignUp />} />
+          <Route path="/bootcamp" element={<BootCamp />} />
+          <Route path="/bootcamp/add" element={<BootcampAdd />} />
           <Route path="/homeworkhistory" element={<HomeworkHistory />} />
           <Route path="/homeworkwrite" element={<HomeworkWrite />} />
           <Route path="/homeworkedit" element={<HomeworkEdit />} />
