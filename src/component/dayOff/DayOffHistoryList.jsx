@@ -42,17 +42,17 @@ const DayOffHistoryList = () => {
             </tbody>
           </table>
           <div className="flex justify-center mt-10">
-            <div className="bg-yellow-300 rounded-lg w-28 h-11 text-center font-bold mr-20">
+            <div className="flex bg-yellow-300 rounded-lg w-28 h-11 text-center font-bold mr-20 justify-center">
               <button
                 onClick={() => {
-                  navigate(`/dayoff/${bootcampId}/apply`);
+                  navigate(`/bootcamp/dayoff/${bootcampId}/apply`);
                 }}
               >
                 신청하기
               </button>
             </div>
-            <div className=" bg-yellow-300 rounded-lg w-28 h-11 text-center font-bold">
-              <Link to={"/dayoff"}>뒤로가기</Link>
+            <div className="flex bg-yellow-300 rounded-lg w-28 h-11 text-center font-bold justify-center">
+              <button><Link to={"/dayoff"}>뒤로가기</Link></button>
             </div>
           </div>
         </div>

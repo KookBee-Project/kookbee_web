@@ -1,57 +1,58 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import logoImage from "../../img/kookbee_logo.png";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
+  BellIcon,
+  BookOpenIcon,
+  ChatBubbleLeftRightIcon,
+  CubeIcon,
+  RocketLaunchIcon,
+  UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getMe, logout } from "../../store/user/userSlice";
 
-const products = [
+const bootcamp = [
   {
-    name: "Analytics",
-    description: "Get a better understanding of your traffic",
+    name: "공지사항",
+    description: "공지사항 입니다.",
     href: "#",
-    icon: ChartPieIcon,
+    icon: BellIcon,
   },
   {
-    name: "Engagement",
-    description: "Speak directly to your customers",
+    name: "과제",
+    description: "과제는 여러분의 성장의 밑거름입니다.",
     href: "#",
-    icon: CursorArrowRaysIcon,
+    icon: BookOpenIcon,
   },
   {
-    name: "Security",
-    description: "Your customers’ data will be safe and secure",
+    name: "Q&A",
+    description: "궁금한 사항이 있다면 편하게 질문해주세요.",
     href: "#",
-    icon: FingerPrintIcon,
+    icon: ChatBubbleLeftRightIcon,
   },
   {
-    name: "Integrations",
-    description: "Connect with third-party tools",
-    href: "#",
-    icon: SquaresPlusIcon,
+    name: "휴가",
+    description: "떠나요~~ 둘이서~~ 제주도 푸른밤 한뼘아래~",
+    href: "bootcamp/dayoff",
+    icon: RocketLaunchIcon,
   },
   {
-    name: "Automations",
-    description: "Build strategic funnels that will convert",
+    name: "물품 대여",
+    description: "잃어버리시면 100배 보상금..",
     href: "#",
-    icon: ArrowPathIcon,
+    icon: CubeIcon,
   },
-];
-const callsToAction = [
-  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-  { name: "Contact sales", href: "#", icon: PhoneIcon },
+  {
+    name: "밥친구",
+    description: "혼밥.. 단무지빼고주세요",
+    href: "#",
+    icon: UsersIcon,
+  },
 ];
 
 function classNames(...classes) {
@@ -61,6 +62,13 @@ function classNames(...classes) {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const { data } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, []);
+
   return (
     <header className="bg-white">
       <nav
@@ -68,11 +76,11 @@ export default function Header() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link to={"/"} className="-m-1.5 p-1.5">
             <img className="h-16 w-20" src={logoImage} alt="KookBee" />
-          </a>
+          </Link>
           <div className="flex items-center font-bold text-2xl hover:cursor-pointer">
-            KookBee
+            <Link to={"/"}>KookBee</Link>
           </div>
         </div>
         <div className="flex lg:hidden">
@@ -88,7 +96,7 @@ export default function Header() {
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-              Product
+              <Link to={"/bootcamp"}>부트캠프</Link>
               <ChevronDownIcon
                 className="h-5 w-5 flex-none text-gray-400"
                 aria-hidden="true"
@@ -106,43 +114,28 @@ export default function Header() {
             >
               <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                 <div className="p-4">
-                  {products.map((item) => (
+                  {bootcamp.map((item) => (
                     <div
                       key={item.name}
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <item.icon
-                          className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                          className="h-6 w-6 text-gray-600 group-hover:text-yellow-400"
                           aria-hidden="true"
                         />
                       </div>
                       <div className="flex-auto">
-                        <a
-                          href={item.href}
+                        <Link
+                          to={item.href}
                           className="block font-semibold text-gray-900"
                         >
                           {item.name}
                           <span className="absolute inset-0" />
-                        </a>
+                        </Link>
                         <p className="mt-1 text-gray-600">{item.description}</p>
                       </div>
                     </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                  {callsToAction.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
-                    >
-                      <item.icon
-                        className="h-5 w-5 flex-none text-gray-400"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
                   ))}
                 </div>
               </Popover.Panel>
@@ -150,18 +143,29 @@ export default function Header() {
           </Popover>
 
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Features
+            커뮤니티
           </a>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Marketplace
+            포트폴리오
           </a>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Company
+            나의 강의실
           </a>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link to={"/login"}>Log in</Link>
-        </div>
+        {data.name? (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end font-semibold">
+            <div>
+              <Link to={""}>{data.name}님</Link>
+            </div>
+            <button className="ml-3" onClick={() => dispatch(logout())}>
+              로그아웃
+            </button>
+          </div>
+        ) : (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end font-semibold">
+            <Link to={"/login"}>로그인</Link>
+          </div>
+        )}
       </nav>
       <Dialog
         as="div"
@@ -192,7 +196,7 @@ export default function Header() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 hover:bg-gray-50">
-                        Product
+                        부트캠프
                         <ChevronDownIcon
                           className={classNames(
                             open ? "rotate-180" : "",
@@ -202,7 +206,7 @@ export default function Header() {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2">
-                        {[...products, ...callsToAction].map((item) => (
+                        {[...bootcamp].map((item) => (
                           <Disclosure.Button
                             key={item.name}
                             as="a"
@@ -220,23 +224,23 @@ export default function Header() {
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Features
+                  커뮤니티
                 </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Marketplace
+                  포트폴리오
                 </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Company
+                  나의 강의실
                 </a>
               </div>
-              <div className="py-6">
-                <Link to={"/login"}>Log in</Link>
+              <div className="py-6 font-semibold">
+                <Link to={"/login"}>로그인</Link>
               </div>
             </div>
           </div>

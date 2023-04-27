@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import SideBar from "../sidebar/StudentSideBar";
+import SideBar from "../sidebar/BootcampSideBar";
 
 const HomeworkHistoryList = () => {
   const data = [

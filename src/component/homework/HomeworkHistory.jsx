@@ -1,4 +1,4 @@
-import SideBar from "../sidebar/StudentSideBar";
+import SideBar from "../sidebar/BootcampSideBar";
 import HomeworkHistoryList from "./HomeworkHistoryList";
 
 const HomeworkHistory = () => {

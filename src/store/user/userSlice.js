@@ -16,6 +16,11 @@ export const login = createAsyncThunk("/user/login", async (user, thunkAPI) => {
   }
 });
 
+export const getMe = createAsyncThunk("/user", async () => {
+    const response = await api("GET", "/user");
+    return response.data;
+});
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -40,6 +45,17 @@ const userSlice = createSlice({
         localStorage.setItem("AccessToken", action.payload.accessToken);
       })
       .addCase(login.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload.data;
+      })
+      .addCase(getMe.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(getMe.fulfilled, (state, action) => {
+        state.status = "successed";
+        state.data = action.payload;
+      })
+      .addCase(getMe.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload.data;
       });
