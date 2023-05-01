@@ -17,10 +17,13 @@ const HomeworkHistoryList = () => {
   function getLinkByStatus(status, homeworkQuestionId, homeworkAnswerId) {
     if (status === null)
       return <Link to={`/homeworkwrite/${homeworkQuestionId}`}>제출하기</Link>;
-    if (status === "SUBMIT")
+    else if (status === "SUBMIT")
       return <Link to={`/homeworkedit/${homeworkAnswerId}`}>수정하기</Link>;
-    if (status === "COMPLETE")
+    else if (status === "COMPLETE")
       return <Link to={`/homeworkread/${homeworkAnswerId}`}>채점완료</Link>;
+    else if (status === "TIME_OVER") {
+      return <Link to={`/homeworkread/${homeworkAnswerId}`}>과제종료</Link>;
+    }
     return null;
   }
 

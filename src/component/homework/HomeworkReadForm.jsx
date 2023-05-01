@@ -53,6 +53,16 @@ const HomeworkReadForm = () => {
                 {data.homeworkQuestionContent}
               </div>
             </div>
+            {data?.homeworkQuestionImages && (
+              <img
+                src={
+                  "https://storage.googleapis.com/kookbee-test-strorage/" +
+                  data?.homeworkQuestionImages
+                }
+                className="border-2 border-yellow-300 rounded-xl whitespace-pre-wrap break-all overflow-auto p-2 w-40 h-40 font-semibold"
+              />
+            )}
+
             <div className="flex">
               <h1 className="divide-solid float-left font-bold">나의 답안 :</h1>
             </div>
@@ -61,6 +71,20 @@ const HomeworkReadForm = () => {
                 className=" whitespace-pre-wrap break-all overflow-auto"
                 dangerouslySetInnerHTML={{ __html: data.homeworkAnswerContent }}
               ></div>
+            </div>
+            <div className="flex flex-col font-bold mt-3">
+              첨부파일
+              {data?.homeworkAnswerImages ? (
+                <img
+                  src={
+                    "https://storage.googleapis.com/kookbee-test-strorage/" +
+                    data?.homeworkAnswerImages
+                  }
+                  className="border-2 border-yellow-300 rounded-xl whitespace-pre-wrap break-all overflow-auto p-2 w-40 h-40 font-semibold"
+                />
+              ) : (
+                <p className="text-sm">등록된 첨부파일이 없습니다.</p>
+              )}
             </div>
             {data.homeworkAnswerScore && <HomeworkTeacherAnswer data={data} />}
             <div className="flex justify-center mt-4">
