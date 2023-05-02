@@ -13,6 +13,7 @@ import ImgUpload from "../imageUpload/ImgUpload";
 const HomeworkWriteForm = () => {
   const { detailData, writeStatus } = useSelector((state) => state.homework);
   const { homeworkQuestionId } = useParams();
+  const [imgCheck, setImgCheck] = useState(false);
   const [file, setFile] = useState({
     file: "",
     fileName: "",
@@ -151,6 +152,31 @@ const HomeworkWriteForm = () => {
             <div className="w-full whitespace-pre-wrap break-all overflow-auto">
               {detailData?.homeworkContent}
             </div>
+            <h1 className="divide-solid float-left font-bold">참고자료 :</h1>
+            {imgCheck && (
+              <Link
+                to={
+                  "https://storage.googleapis.com/kookbee-test-strorage/" +
+                  detailData?.homeworkImage
+                }
+              >
+                {"https://storage.googleapis.com/kookbee-test-strorage/" +
+                  detailData?.homeworkImage}
+              </Link>
+            )}
+            {detailData?.homeworkImage && (
+              <img
+                src={
+                  "https://storage.googleapis.com/kookbee-test-strorage/" +
+                  detailData?.homeworkImage
+                }
+                className="border-2 border-yellow-300 rounded-xl whitespace-pre-wrap break-all overflow-auto p-2 w-40 h-40 font-semibold"
+                onError={() => {
+                  setImgCheck(true);
+                }}
+                hidden={imgCheck}
+              />
+            )}
             <div className="flex">
               <h1 className="divide-solid float-left font-bold">나의 답안 :</h1>
             </div>

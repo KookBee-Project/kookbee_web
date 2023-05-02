@@ -1,11 +1,13 @@
 import { Link, useParams } from "react-router-dom";
 import HomeworkTeacherAnswer from "./HomeworkTeacherAnswer";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getHomeworkAnswerDetail } from "../../store/homework/HomeworkSlice";
 
 const HomeworkReadForm = () => {
   const data = useSelector((state) => state.homework.answerDetailData);
+  const [imgCheck, setImgCheck] = useState(false);
+  const [imgCheck1, setImgCheck1] = useState(false);
 
   const { homeworkAnswerId } = useParams();
   const dispatch = useDispatch();
@@ -53,6 +55,19 @@ const HomeworkReadForm = () => {
                 {data.homeworkQuestionContent}
               </div>
             </div>
+            <h1 className="divide-solid float-left font-bold">참고자료 :</h1>
+            {imgCheck && (
+              <Link
+                to={
+                  "https://storage.googleapis.com/kookbee-test-strorage/" +
+                  data?.homeworkQuestionImages
+                }
+              >
+                {"https://storage.googleapis.com/kookbee-test-strorage/" +
+                  data?.homeworkQuestionImages}
+              </Link>
+            )}
+
             {data?.homeworkQuestionImages && (
               <img
                 src={
@@ -60,6 +75,10 @@ const HomeworkReadForm = () => {
                   data?.homeworkQuestionImages
                 }
                 className="border-2 border-yellow-300 rounded-xl whitespace-pre-wrap break-all overflow-auto p-2 w-40 h-40 font-semibold"
+                onError={() => {
+                  setImgCheck(true);
+                }}
+                hidden={imgCheck}
               />
             )}
 
@@ -74,6 +93,17 @@ const HomeworkReadForm = () => {
             </div>
             <div className="flex flex-col font-bold mt-3">
               첨부파일
+              {imgCheck1 && (
+                <Link
+                  to={
+                    "https://storage.googleapis.com/kookbee-test-strorage/" +
+                    data?.homeworkAnswerImages
+                  }
+                >
+                  {"https://storage.googleapis.com/kookbee-test-strorage/" +
+                    data?.homeworkAnswerImages}
+                </Link>
+              )}
               {data?.homeworkAnswerImages ? (
                 <img
                   src={
@@ -81,6 +111,10 @@ const HomeworkReadForm = () => {
                     data?.homeworkAnswerImages
                   }
                   className="border-2 border-yellow-300 rounded-xl whitespace-pre-wrap break-all overflow-auto p-2 w-40 h-40 font-semibold"
+                  onError={() => {
+                    setImgCheck1(true);
+                  }}
+                  hidden={imgCheck1}
                 />
               ) : (
                 <p className="text-sm">등록된 첨부파일이 없습니다.</p>
