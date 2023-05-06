@@ -42,7 +42,9 @@ const HomeworkEditForm = () => {
     setFile({
       ...file,
       file: { type: "image" },
-      fileURL: answerDetailData.homeworkAnswerImages,
+      fileURL:
+        "https://storage.googleapis.com/kookbee-test-strorage/" +
+        answerDetailData.homeworkAnswerImages,
       loaded: true,
     });
   }, [answerDetailData]);

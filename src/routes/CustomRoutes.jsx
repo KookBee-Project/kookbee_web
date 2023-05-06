@@ -12,8 +12,10 @@ import DayOffClassHistory from "../component/dayOff/DayOffClassHistory";
 import ProductHistory from "../component/product/ProductHistory";
 import BootCamp from "../component/bootcamp/Bootcamp";
 import BootcampAdd from "../component/bootcamp/BootcampAdd";
-import NoteCurriculumList from "../component/note/NoteCurriculumList";
 import NoteWrite from "../component/note/NoteWrite";
+import NoteList from "../component/note/NoteList";
+import NoteCurriculumList from "../component/note/NoteCurriculumList";
+import NoteDetail from "../component/note/NoteDetail";
 
 const CustomRoute = () => {
   return (
@@ -50,10 +52,12 @@ const CustomRoute = () => {
         </Route>
 
         <Route path="/portfolio/note" element={<NoteCurriculumList />} />
+        <Route path="/portfolio/note/:curriculumId" element={<NoteList />} />
         <Route
           path="/portfolio/note/write/:curriculumId"
           element={<NoteWrite />}
         />
+        <Route path="/portfolio/note/detail/:noteId" element={<NoteDetail />} />
       </Routes>
     </BrowserRouter>
   );

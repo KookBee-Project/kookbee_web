@@ -23,20 +23,22 @@ const ImgUpload = ({ file, loaded, delFile, fileURL, fileChange }) => {
             }}
           />
         </label>
-        <label
-          htmlFor="delFile"
-          className="text-sm font-bold bg-red-200 mx-2 mt-3 p-1 rounded-md shadow-sm shadow-cyan-900 hover:cursor-pointer focus:shadow-none"
-        >
-          삭제하기
-          <input
-            id="delFile"
-            className="hidden"
-            type="button"
-            onClick={() => {
-              delFile();
-            }}
-          />
-        </label>
+        {fileURL && (
+          <label
+            htmlFor="delFile"
+            className="text-sm font-bold bg-red-200 mx-2 mt-3 p-1 rounded-md shadow-sm shadow-cyan-900 hover:cursor-pointer focus:shadow-none"
+          >
+            삭제하기
+            <input
+              id="delFile"
+              className="hidden"
+              type="button"
+              onClick={() => {
+                delFile();
+              }}
+            />
+          </label>
+        )}
       </div>
     </>
   );
