@@ -6,7 +6,7 @@ const initialState = {
   curriculum: [],
   detail: {},
   status: "idle",
-  status: "idle",
+  detailStatus: "idle",
   writeStatus: "idle",
   error: null,
 };
@@ -82,11 +82,15 @@ const noteSlice = createSlice({
         state.writeStatus = "failed";
         state.error = action.error.message;
       })
-      .addCase(getNoteDetail.pending, (state, action) => {})
+      .addCase(getNoteDetail.pending, (state, action) => {
+        state.detailStatus = "pending";
+      })
       .addCase(getNoteDetail.fulfilled, (state, action) => {
+        state.detailStatus = "successed";
         state.detail = action.payload;
       })
       .addCase(getNoteDetail.rejected, (state, action) => {
+        state.detailStatus = "failed";
         state.error = action.error.message;
       })
       .addCase(EditNote.pending, (state, action) => {

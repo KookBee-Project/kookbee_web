@@ -17,6 +17,11 @@ import NoteList from "../component/note/NoteList";
 import NoteCurriculumList from "../component/note/NoteCurriculumList";
 import NoteDetail from "../component/note/NoteDetail";
 import NoteEdit from "../component/note/NoteEdit";
+import MyProjectList from "../component/project/MyProjectList";
+import ProjectDetail from "../component/project/ProjectDetail";
+import AllProjectList from "../component/project/AllProjectList";
+import ProjectCreate from "../component/project/ProjectCreate";
+import ProjectBootcampList from "../component/project/ProjectBootcampList";
 
 const CustomRoute = () => {
   return (
@@ -61,6 +66,21 @@ const CustomRoute = () => {
             element={<NoteDetail />}
           />
           <Route path="/portfolio/note/edit/:noteId" element={<NoteEdit />} />
+
+          <Route path="/portfolio/project" element={<ProjectBootcampList />} />
+          <Route
+            path="/portfolio/project/my/:bootcampId"
+            element={<MyProjectList />}
+          />
+          <Route
+            path="/portfolio/project/detail/:projectId"
+            element={<ProjectDetail />}
+          />
+          <Route path="portfolio/project/all" element={<AllProjectList />} />
+          <Route
+            path="portfolio/project/create/:bootcampId"
+            element={<ProjectCreate />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
