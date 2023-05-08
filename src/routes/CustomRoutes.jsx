@@ -12,6 +12,11 @@ import DayOffClassHistory from "../component/dayOff/DayOffClassHistory";
 import ProductHistory from "../component/product/ProductHistory";
 import BootCamp from "../component/bootcamp/Bootcamp";
 import BootcampAdd from "../component/bootcamp/BootcampAdd";
+import StudyRegist from "../component/portfolio/study/StudyRegist";
+import FindStudy from "../component/portfolio/study/FindStudy";
+import StudyMain from "../component/portfolio/study/StudyMain";
+import StudyDetail from "../component/portfolio/study/StudyDetail";
+import StudyInfo from "../component/portfolio/study/StudyInfo";
 
 const CustomRoute = () => {
   return (
@@ -45,6 +50,15 @@ const CustomRoute = () => {
             element={<DayOffApply />}
           />
           <Route path="/producthistory" element={<ProductHistory />} />
+
+          <Route path="/portfolio/study" element={<StudyMain />} />
+          <Route path="/portfolio/study/regist" element={<StudyRegist />} />
+          <Route path="/portfolio/study/findstudy" element={<FindStudy />} />
+          <Route path="/portfolio/study/studyinfo" element={<StudyInfo />} />
+          <Route
+            path="/portfolio/study/studydetail"
+            element={<StudyDetail />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
