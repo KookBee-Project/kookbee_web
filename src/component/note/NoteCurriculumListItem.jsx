@@ -40,7 +40,6 @@ const NoteCurriculumListItem = () => {
                   >
                     {el.curriculumName}
                   </td>
-                  <td className="p-1">{el.curriculumName}</td>
                   <td className="p-1">{el.curriculumStartDate}</td>
                   <td className="p-1">{el.curriculumEndDate}</td>
                   <td className="p-1">{el.bootcampTitle}</td>

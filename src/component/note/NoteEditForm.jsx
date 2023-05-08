@@ -5,19 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import ImgUpload from "../imageUpload/ImgUpload";
 import { api } from "../../api/api";
-import { createNote } from "../../store/note/noteSlice";
+import {
+  EditNote,
+  createNote,
+  getNoteDetail,
+} from "../../store/note/noteSlice";
 
-const NoteWriteForm = () => {
+const NoteEditForm = () => {
   const { writeStatus } = useSelector((state) => state.note);
+  const { detail } = useSelector((state) => state.note);
   const [file, setFile] = useState({
     file: "",
     fileName: "",
     fileURL: "",
     loaded: false,
   });
-  const { curriculumId } = useParams();
+  const { noteId } = useParams();
   const [input, setInput] = useState({
-    curriculumId: curriculumId,
+    id: noteId,
     title: "",
     content: "",
     uuid: "",
@@ -25,6 +30,29 @@ const NoteWriteForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getNoteDetail(noteId));
+  }, []);
+
+  useEffect(() => {
+    setInput({
+      id: detail.id,
+      title: detail.title,
+      content: detail.content,
+      uuid: detail.uuid,
+    });
+    detail.uuid
+      ? setFile({
+          ...file,
+          file: { type: "image" },
+          fileURL:
+            "https://storage.googleapis.com/kookbee-test-strorage/" +
+            detail.uuid,
+          loaded: true,
+        })
+      : setFile({ file: "", fileName: "", fileURL: "", loaded: false });
+  }, [detail]);
 
   const setTitle = (e) => {
     setInput({ ...input, title: e.target.value });
@@ -70,16 +98,16 @@ const NoteWriteForm = () => {
     if (input.title === "") alert("제목을 입력해주세요.");
     else {
       console.log(input);
-      dispatch(createNote(input));
+      dispatch(EditNote(input));
     }
   };
 
   useEffect(() => {
     if (writeStatus === "successed" && input.title !== "") {
-      alert("작성에 성공하였습니다.");
-      navigate(`/portfolio/note/${curriculumId}`);
+      alert("변경사항이 저장되었습니다.");
+      navigate(`/portfolio/note/${detail.curriculumId}`);
     } else if (writeStatus === "failed" && input.title !== "")
-      alert("작성에 실패하였습니다.");
+      alert("수정에 실패하였습니다.");
   }, [writeStatus]);
   return (
     <div className="table items-center w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
@@ -141,6 +169,7 @@ const NoteWriteForm = () => {
                 });
               }}
               onReady={(editor) => {
+                editor.data.set(detail.content);
                 editor.editing.view.change((writer) => {
                   writer.setStyle(
                     "min-height",
@@ -155,7 +184,7 @@ const NoteWriteForm = () => {
           </div>
           {file && (
             <div className="mt-5">
-              <div className="flex flex-col justify-center">
+              <div className="flex flex-col justify-center text-center">
                 <ImgUpload
                   file={file.file}
                   loaded={file.loaded}
@@ -167,7 +196,7 @@ const NoteWriteForm = () => {
             </div>
           )}
           <button className="px-5 py-3 my-5 bg-yellow-300 border rounded-xl text-xl font-bold shadow-md shadow-gray-400 hover:bg-yellow-200 focus:shadow-none">
-            제출하기
+            저장하기
           </button>
         </form>
       </div>
@@ -175,4 +204,4 @@ const NoteWriteForm = () => {
   );
 };
 
-export default NoteWriteForm;
+export default NoteEditForm;

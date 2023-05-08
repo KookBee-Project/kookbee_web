@@ -1,9 +1,25 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 const ImgUpload = ({ file, loaded, delFile, fileURL, fileChange }) => {
+  const [imgCheck, setImgCheck] = useState(false);
   return (
     <>
       {file.type?.includes("image") ? (
         <div className="flex justify-center">
-          {loaded === true && <img src={fileURL} className="w-48 h-48"></img>}
+          {loaded === true && (
+            <>
+              {imgCheck && <Link to={fileURL}>{fileURL}</Link>}
+              <img
+                src={fileURL}
+                className="w-48 h-48"
+                onError={() => {
+                  setImgCheck(true);
+                }}
+                hidden={imgCheck}
+              ></img>
+            </>
+          )}
         </div>
       ) : (
         <div className="text-center">{file.name}</div>

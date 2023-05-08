@@ -16,6 +16,7 @@ import NoteWrite from "../component/note/NoteWrite";
 import NoteList from "../component/note/NoteList";
 import NoteCurriculumList from "../component/note/NoteCurriculumList";
 import NoteDetail from "../component/note/NoteDetail";
+import NoteEdit from "../component/note/NoteEdit";
 
 const CustomRoute = () => {
   return (
@@ -49,15 +50,18 @@ const CustomRoute = () => {
             element={<DayOffApply />}
           />
           <Route path="/producthistory" element={<ProductHistory />} />
+          <Route path="/portfolio/note" element={<NoteCurriculumList />} />
+          <Route path="/portfolio/note/:curriculumId" element={<NoteList />} />
+          <Route
+            path="/portfolio/note/write/:curriculumId"
+            element={<NoteWrite />}
+          />
+          <Route
+            path="/portfolio/note/detail/:noteId"
+            element={<NoteDetail />}
+          />
+          <Route path="/portfolio/note/edit/:noteId" element={<NoteEdit />} />
         </Route>
-
-        <Route path="/portfolio/note" element={<NoteCurriculumList />} />
-        <Route path="/portfolio/note/:curriculumId" element={<NoteList />} />
-        <Route
-          path="/portfolio/note/write/:curriculumId"
-          element={<NoteWrite />}
-        />
-        <Route path="/portfolio/note/detail/:noteId" element={<NoteDetail />} />
       </Routes>
     </BrowserRouter>
   );
