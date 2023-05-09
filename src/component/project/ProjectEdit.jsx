@@ -1,13 +1,12 @@
-import ProjectJoinForm from "./ProjectJoinForm";
+import ProjectEditForm from "./ProjectEditForm";
 
-const ProjectJoin = () => {
+const ProjectEdit = () => {
   return (
     <div className="w-screen h-screen flex justify-center">
       <div className="flex w-5/6 h-5/6 justify-center">
-        <ProjectJoinForm />
+        <ProjectEditForm />
       </div>
     </div>
   );
 };
-
-export default ProjectJoin;
+export default ProjectEdit;

@@ -22,6 +22,8 @@ import ProjectDetail from "../component/project/ProjectDetail";
 import AllProjectList from "../component/project/AllProjectList";
 import ProjectCreate from "../component/project/ProjectCreate";
 import ProjectBootcampList from "../component/project/ProjectBootcampList";
+import ProjectJoin from "../component/project/ProjectJoin";
+import ProjectEdit from "../component/project/ProjectEdit";
 
 const CustomRoute = () => {
   return (
@@ -68,18 +70,23 @@ const CustomRoute = () => {
           <Route path="/portfolio/note/edit/:noteId" element={<NoteEdit />} />
 
           <Route path="/portfolio/project" element={<ProjectBootcampList />} />
-          <Route
-            path="/portfolio/project/my/:bootcampId"
-            element={<MyProjectList />}
-          />
+          <Route path="/portfolio/project/my" element={<MyProjectList />} />
           <Route
             path="/portfolio/project/detail/:projectId"
             element={<ProjectDetail />}
           />
-          <Route path="portfolio/project/all" element={<AllProjectList />} />
+          <Route
+            path="portfolio/project/all/:bootcampId"
+            element={<AllProjectList />}
+          />
           <Route
             path="portfolio/project/create/:bootcampId"
             element={<ProjectCreate />}
+          />
+          <Route path="portfolio/project/join" element={<ProjectJoin />} />
+          <Route
+            path="portfolio/project/edit/:projectId"
+            element={<ProjectEdit />}
           />
         </Route>
       </Routes>

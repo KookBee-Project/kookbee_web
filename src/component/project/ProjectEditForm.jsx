@@ -1,28 +1,45 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { createProject } from "../../store/project/projectSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  editProject,
+  getMyProjectDetail,
+} from "../../store/project/projectSlice";
 
-const ProjectCreateForm = () => {
+const ProjectEditForm = () => {
   const { createStatus } = useSelector((state) => state.project);
   const { userName } = useSelector((state) => state.user.data);
+  const { detailData } = useSelector((state) => state.project);
   const [request, setRequest] = useState({
     projectTitle: "",
     projectTeamName: "",
+    projectLeaderName: "",
     projectSubject: "",
     projectDescription: "",
-    projectLeaderName: "",
-    projectStatus: "PENDING",
+    bootcampId: 0,
+    projectStatus: "",
   });
-  const { bootcampId } = useParams();
+  const { projectId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const subjectList = ["미니프로젝트", "최종프로젝트"];
 
   useEffect(() => {
-    setRequest({ ...request, projectLeaderName: userName });
-  }, [userName]);
+    detailData.id == null && dispatch(getMyProjectDetail(projectId));
+  }, []);
+
+  useEffect(() => {
+    setRequest({
+      projectTitle: detailData.projectTitle,
+      projectTeamName: detailData.projectTeamName,
+      projectLeaderName: detailData.projectLeaderName,
+      projectSubject: detailData.projectSubject,
+      projectDescription: detailData.projectDescription,
+      bootcampId: detailData.bootcampId,
+      projectStatus: detailData.projectStatus,
+    });
+  }, [detailData]);
 
   const setInput = (e) => {
     const { name, value } = e.target;
@@ -32,18 +49,15 @@ const ProjectCreateForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (request.projectSubject === "") alert("프로젝트 분류를 선택해주세요.");
-    else {
-      console.log(request);
-      dispatch(createProject({ bootcampId, request }));
-    }
+    else dispatch(editProject({ projectId, request }));
   };
 
   useEffect(() => {
     if (createStatus === "successed" && request.projectTitle !== "") {
-      alert("프로젝트가 생성되었습니다");
+      alert("프로젝트가 수정되었습니다");
       navigate(`/portfolio/project/my`);
     } else if (createStatus === "failed" && request.projectTitle !== "")
-      alert("프로젝트 생성에 실패했습니다.");
+      alert("프로젝트 수정에 실패했습니다.");
   }, [createStatus]);
 
   return (
@@ -59,6 +73,8 @@ const ProjectCreateForm = () => {
               id="projectSubject"
               onChange={setInput}
               name="projectSubject"
+              key={request.projectSubject}
+              defaultValue={request.projectSubject}
               className="w-2/5 text-center border-2 border-yellow-300 rounded-md text-xl p-1"
             >
               <option value="">---선택해주세요---</option>
@@ -75,7 +91,7 @@ const ProjectCreateForm = () => {
               type="text"
               id="projectTitle"
               name="projectTitle"
-              value={request.projectTitle}
+              value={request?.projectTitle}
               className="border-2 border-yellow-300 p-1 rounded-lg text-xl"
               onChange={setInput}
               required
@@ -88,7 +104,7 @@ const ProjectCreateForm = () => {
               type="text"
               id="projectTeamName"
               name="projectTeamName"
-              value={request.projectTeamName}
+              value={request?.projectTeamName}
               className="w-3/5 border-2 border-yellow-300 p-1 rounded-lg text-xl"
               onChange={setInput}
               maxLength={8}
@@ -112,7 +128,7 @@ const ProjectCreateForm = () => {
             <textarea
               name="projectDescription"
               id="projectDescription"
-              value={request.projectDescription}
+              value={request?.projectDescription}
               onChange={setInput}
               className="resize-none border-2 border-yellow-300 p-1 rounded-lg text-xl"
               cols="20"
@@ -121,7 +137,7 @@ const ProjectCreateForm = () => {
             ></textarea>
           </div>
           <button className="px-5 py-3 my-5 bg-yellow-300 border rounded-xl text-xl font-bold shadow-md shadow-gray-400 hover:bg-yellow-200 focus:shadow-none">
-            제출하기
+            수정하기
           </button>
         </form>
       </div>
@@ -129,4 +145,4 @@ const ProjectCreateForm = () => {
   );
 };
 
-export default ProjectCreateForm;
+export default ProjectEditForm;
