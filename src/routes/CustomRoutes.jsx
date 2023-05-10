@@ -12,11 +12,18 @@ import DayOffClassHistory from "../component/dayOff/DayOffClassHistory";
 import ProductHistory from "../component/product/ProductHistory";
 import BootCamp from "../component/bootcamp/Bootcamp";
 import BootcampAdd from "../component/bootcamp/BootcampAdd";
-import StudyRegist from "../component/portfolio/study/StudyRegist";
+import StudyRegist from "../component/portfolio/study/StudyRegister";
 import FindStudy from "../component/portfolio/study/FindStudy";
 import StudyMain from "../component/portfolio/study/StudyMain";
 import StudyDetail from "../component/portfolio/study/StudyDetail";
-import StudyInfo from "../component/portfolio/study/StudyInfo";
+import LectureRegister from "../component/portfolio/study/lecture/LectureRegister";
+import StudyRegister from "../component/portfolio/study/StudyRegister";
+import PostRegister from "../component/portfolio/study/lecture/PostRegister";
+import LectureDetail from "../component/portfolio/study/lecture/LectureDetail";
+import PostDetail from "../component/portfolio/study/lecture/PostDetail";
+import StudyApply from "../component/portfolio/study/apply/StudyApply";
+import StudyApplyHistory from "../component/portfolio/study/apply/StudyApplyHistory";
+import ApplyDetail from "../component/portfolio/study/apply/ApplyDetail";
 
 const CustomRoute = () => {
   return (
@@ -52,12 +59,39 @@ const CustomRoute = () => {
           <Route path="/producthistory" element={<ProductHistory />} />
 
           <Route path="/portfolio/study" element={<StudyMain />} />
-          <Route path="/portfolio/study/regist" element={<StudyRegist />} />
+          <Route path="/portfolio/study/register" element={<StudyRegister />} />
           <Route path="/portfolio/study/findstudy" element={<FindStudy />} />
-          <Route path="/portfolio/study/studyinfo" element={<StudyInfo />} />
           <Route
-            path="/portfolio/study/studydetail"
+            path="/portfolio/study/studydetail/:groupStudyId"
             element={<StudyDetail />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/lecture/register"
+            element={<LectureRegister />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/lecture/:lectureId/detail"
+            element={<LectureDetail />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/lecture/:lectureId/post/register"
+            element={<PostRegister />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/lecture/:lectureId/post/:groupStudyPostId"
+            element={<PostDetail />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/apply"
+            element={<StudyApply />}
+          />
+          <Route
+            path="/portfolio/study/apply"
+            element={<StudyApplyHistory />}
+          />
+          <Route
+            path="/portfolio/study/apply/:groupStudyApplyId"
+            element={<ApplyDetail />}
           />
         </Route>
       </Routes>

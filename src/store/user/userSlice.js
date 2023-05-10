@@ -3,6 +3,8 @@ import { api } from "../../api/api";
 
 const initialState = {
   data: {},
+  userId: 0,
+  userName: "",
   status: "idle",
   status1: "idle",
   error: null,
@@ -70,6 +72,8 @@ const userSlice = createSlice({
       })
       .addCase(getMe.fulfilled, (state, action) => {
         state.status = "successed";
+        state.userId = action.payload.userId;
+        state.userName = action.payload.userName;
         state.data = action.payload;
       })
       .addCase(getMe.rejected, (state, action) => {

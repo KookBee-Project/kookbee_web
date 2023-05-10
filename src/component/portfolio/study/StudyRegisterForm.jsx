@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form } from "react-router-dom";
-import { findUser } from "../../../store/user/userSlice";
+import { Form, useNavigate } from "react-router-dom";
+import { findUser, getMe } from "../../../store/user/userSlice";
 import {
   inviteMember,
-  studyRegist,
+  studyRegister,
 } from "../../../store/portfolio/study/studySlice";
 
-const StudyRegistForm = () => {
-  const { status, error } = useSelector((state) => state.study);
-  const { userInfo, status1, error1 } = useSelector((state) => state.user);
+const StudyRegisterForm = () => {
+  const { status, error, studyRegisterStatus } = useSelector(
+    (state) => state.study
+  );
+  const { userInfo, status1, error1, userId, userName } = useSelector(
+    (state) => state.user
+  );
 
   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [groupStudy, setGroupStudy] = useState({
     groupStudyName: "",
@@ -23,6 +27,11 @@ const StudyRegistForm = () => {
   const [userEmail, setUserEmail] = useState("");
 
   const [user, setUser] = useState([]);
+
+  // 등록자 정보 저장
+  useEffect(() => {
+    setUser([...user, { userId: userId }]);
+  }, []);
 
   // 스터디의 이름과 목적을 저장
   const onChangeHandler = (e) => {
@@ -74,29 +83,38 @@ const StudyRegistForm = () => {
       ...user,
       { userName: userInfo.userName, userId: userInfo.userId },
     ]);
-    setGroupStudy({
-      ...groupStudy,
-      userIdList: [...user, { userName: userInfo.userName, userId: userInfo.userId }].map((el) => el.userId),
-    });
   };
 
   // 스터디 등록
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(groupStudy);
-    dispatch(studyRegist(groupStudy));
-    if (status === "successed") {
-      // navigate("/portfolio/study")
-    } else if (status === "failed") {
+    dispatch(
+      studyRegister({
+        ...groupStudy,
+        userIdList: [...user].map((el) => el.userId),
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (
+      studyRegisterStatus === "successed" &&
+      groupStudy.groupStudyName != ""
+    ) {
+      navigate("/portfolio/study");
+    } else if (
+      studyRegisterStatus === "failed" &&
+      groupStudy.groupStudyName != ""
+    ) {
       alert(error);
     }
-  };
+  }, [studyRegisterStatus]);
 
   return (
     <div>
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
-          <b>스터디 등록</b>
+          <b className="text-3xl">스터디 등록</b>
           <form onSubmit={onSubmit}>
             <div className="w-96">
               <div className="mt-4 mb-4">
@@ -119,14 +137,15 @@ const StudyRegistForm = () => {
                   onChange={onChangeHandler}
                 ></input>
               </div>
-              <p>팀원</p>
-              <div className=" bg-gray-200 mt-2">
+              <div className="mt-2">
+                <t className="flex">팀장</t>
+                <b>{userName}</b>
+                <p>팀원</p>
                 {user?.map((el) => (
-                  <b>{el.userName}</b>
+                  <b className="mr-2">{el.userName}</b>
                 ))}
               </div>
             </div>
-
             <div className="w-96 mt-2 mb-10">
               <form onKeyDown={handleKeyPress}>
                 <input
@@ -151,4 +170,4 @@ const StudyRegistForm = () => {
     </div>
   );
 };
-export default StudyRegistForm;
+export default StudyRegisterForm;

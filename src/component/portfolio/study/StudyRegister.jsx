@@ -1,14 +1,14 @@
 import PortfolioSideBar from "../../sidebar/PortfolioSideBar";
-import StudyRegistForm from "./StudyRegistForm";
+import StudyRegisterForm from "./StudyRegisterForm";
 
-const StudyRegist = () => {
+const StudyRegister = () => {
   return (
     <div className="w-screen h-screen flex justify-center">
       <div className="flex w-5/6 h-5/6 justify-center">
         <PortfolioSideBar />
-        <StudyRegistForm />
+        <StudyRegisterForm />
       </div>
     </div>
   );
 };
-export default StudyRegist;
+export default StudyRegister;
