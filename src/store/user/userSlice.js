@@ -3,8 +3,13 @@ import { api } from "../../api/api";
 
 const initialState = {
   data: {},
+  userId: 0,
+  userName: "",
   status: "idle",
+  status1: "idle",
   error: null,
+  error1: null,
+  userInfo: {},
 };
 
 export const login = createAsyncThunk("/user/login", async (user, thunkAPI) => {
@@ -17,9 +22,23 @@ export const login = createAsyncThunk("/user/login", async (user, thunkAPI) => {
 });
 
 export const getMe = createAsyncThunk("/user", async () => {
-    const response = await api("GET", "/user");
-    return response.data;
+  const response = await api("GET", "/user");
+  return response.data;
 });
+
+export const findUser = createAsyncThunk(
+  "/user/portfolio/suty/finduser",
+  async (userEmail, thunkAPI) => {
+    try {
+      const response = await api("POST", "/user/portfolio/study/finduser", {
+        userEmail,
+      });
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response);
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -53,11 +72,24 @@ const userSlice = createSlice({
       })
       .addCase(getMe.fulfilled, (state, action) => {
         state.status = "successed";
+        state.userId = action.payload.userId;
+        state.userName = action.payload.userName;
         state.data = action.payload;
       })
       .addCase(getMe.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload.data;
+      })
+      .addCase(findUser.pending, (state, action) => {
+        state.status1 = "loading";
+      })
+      .addCase(findUser.fulfilled, (state, action) => {
+        state.status1 = "successed";
+        state.userInfo = action.payload;
+      })
+      .addCase(findUser.rejected, (state, action) => {
+        state.status1 = "failed";
+        state.error1 = action.payload.data;
       });
   },
 });

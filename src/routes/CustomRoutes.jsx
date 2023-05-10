@@ -12,6 +12,7 @@ import DayOffClassHistory from "../component/dayOff/DayOffClassHistory";
 import ProductHistory from "../component/product/ProductHistory";
 import BootCamp from "../component/bootcamp/Bootcamp";
 import BootcampAdd from "../component/bootcamp/BootcampAdd";
+
 import NoteWrite from "../component/note/NoteWrite";
 import NoteList from "../component/note/NoteList";
 import NoteCurriculumList from "../component/note/NoteCurriculumList";
@@ -24,6 +25,19 @@ import ProjectCreate from "../component/project/ProjectCreate";
 import ProjectBootcampList from "../component/project/ProjectBootcampList";
 import ProjectJoin from "../component/project/ProjectJoin";
 import ProjectEdit from "../component/project/ProjectEdit";
+
+import StudyRegist from "../component/portfolio/study/StudyRegister";
+import FindStudy from "../component/portfolio/study/FindStudy";
+import StudyMain from "../component/portfolio/study/StudyMain";
+import StudyDetail from "../component/portfolio/study/StudyDetail";
+import LectureRegister from "../component/portfolio/study/lecture/LectureRegister";
+import StudyRegister from "../component/portfolio/study/StudyRegister";
+import PostRegister from "../component/portfolio/study/lecture/PostRegister";
+import LectureDetail from "../component/portfolio/study/lecture/LectureDetail";
+import PostDetail from "../component/portfolio/study/lecture/PostDetail";
+import StudyApply from "../component/portfolio/study/apply/StudyApply";
+import StudyApplyHistory from "../component/portfolio/study/apply/StudyApplyHistory";
+import ApplyDetail from "../component/portfolio/study/apply/ApplyDetail";
 
 const CustomRoute = () => {
   return (
@@ -57,6 +71,7 @@ const CustomRoute = () => {
             element={<DayOffApply />}
           />
           <Route path="/producthistory" element={<ProductHistory />} />
+
           <Route path="/portfolio/note" element={<NoteCurriculumList />} />
           <Route path="/portfolio/note/:curriculumId" element={<NoteList />} />
           <Route
@@ -87,6 +102,41 @@ const CustomRoute = () => {
           <Route
             path="portfolio/project/edit/:projectId"
             element={<ProjectEdit />}
+          />
+          <Route path="/portfolio/study" element={<StudyMain />} />
+          <Route path="/portfolio/study/register" element={<StudyRegister />} />
+          <Route path="/portfolio/study/findstudy" element={<FindStudy />} />
+          <Route
+            path="/portfolio/study/studydetail/:groupStudyId"
+            element={<StudyDetail />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/lecture/register"
+            element={<LectureRegister />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/lecture/:lectureId/detail"
+            element={<LectureDetail />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/lecture/:lectureId/post/register"
+            element={<PostRegister />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/lecture/:lectureId/post/:groupStudyPostId"
+            element={<PostDetail />}
+          />
+          <Route
+            path="/portfolio/study/:groupStudyId/apply"
+            element={<StudyApply />}
+          />
+          <Route
+            path="/portfolio/study/apply"
+            element={<StudyApplyHistory />}
+          />
+          <Route
+            path="/portfolio/study/apply/:groupStudyApplyId"
+            element={<ApplyDetail />}
           />
         </Route>
       </Routes>

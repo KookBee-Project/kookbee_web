@@ -152,10 +152,10 @@ export default function Header() {
             나의 강의실
           </a>
         </Popover.Group>
-        {data.name? (
+        {data.userName? (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end font-semibold">
             <div>
-              <Link to={""}>{data.name}님</Link>
+              <Link to={""}>{data.userName}님</Link>
             </div>
             <button className="ml-3" onClick={() => dispatch(logout())}>
               로그아웃
