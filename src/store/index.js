@@ -6,8 +6,13 @@ import dayOffSlice from "./dayoff/dayOffSlice";
 import bootcampSlice from "./bootcamp/bootcampSlice";
 import bootcampNameSlice from "./bootcamp/bootcampNameSlice";
 import homeworkSlice from "./homework/HomeworkSlice";
+
+import noteSlice from "./note/noteSlice";
+import projectSlice from "./project/projectSlice";
+
 import studySlice from "./portfolio/study/studySlice";
 import applySlice from "./portfolio/study/applySlice";
+
 
 export default configureStore({
   reducer: {
@@ -19,6 +24,8 @@ export default configureStore({
     bootcamp: bootcampSlice,
     bootcampName: bootcampNameSlice,
     homework: homeworkSlice,
+    note: noteSlice,
+    project: projectSlice,
     study: studySlice,
     apply: applySlice,
   },

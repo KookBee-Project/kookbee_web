@@ -12,6 +12,20 @@ import DayOffClassHistory from "../component/dayOff/DayOffClassHistory";
 import ProductHistory from "../component/product/ProductHistory";
 import BootCamp from "../component/bootcamp/Bootcamp";
 import BootcampAdd from "../component/bootcamp/BootcampAdd";
+
+import NoteWrite from "../component/note/NoteWrite";
+import NoteList from "../component/note/NoteList";
+import NoteCurriculumList from "../component/note/NoteCurriculumList";
+import NoteDetail from "../component/note/NoteDetail";
+import NoteEdit from "../component/note/NoteEdit";
+import MyProjectList from "../component/project/MyProjectList";
+import ProjectDetail from "../component/project/ProjectDetail";
+import AllProjectList from "../component/project/AllProjectList";
+import ProjectCreate from "../component/project/ProjectCreate";
+import ProjectBootcampList from "../component/project/ProjectBootcampList";
+import ProjectJoin from "../component/project/ProjectJoin";
+import ProjectEdit from "../component/project/ProjectEdit";
+
 import StudyRegist from "../component/portfolio/study/StudyRegister";
 import FindStudy from "../component/portfolio/study/FindStudy";
 import StudyMain from "../component/portfolio/study/StudyMain";
@@ -58,6 +72,37 @@ const CustomRoute = () => {
           />
           <Route path="/producthistory" element={<ProductHistory />} />
 
+          <Route path="/portfolio/note" element={<NoteCurriculumList />} />
+          <Route path="/portfolio/note/:curriculumId" element={<NoteList />} />
+          <Route
+            path="/portfolio/note/write/:curriculumId"
+            element={<NoteWrite />}
+          />
+          <Route
+            path="/portfolio/note/detail/:noteId"
+            element={<NoteDetail />}
+          />
+          <Route path="/portfolio/note/edit/:noteId" element={<NoteEdit />} />
+
+          <Route path="/portfolio/project" element={<ProjectBootcampList />} />
+          <Route path="/portfolio/project/my" element={<MyProjectList />} />
+          <Route
+            path="/portfolio/project/detail/:projectId"
+            element={<ProjectDetail />}
+          />
+          <Route
+            path="portfolio/project/all/:bootcampId"
+            element={<AllProjectList />}
+          />
+          <Route
+            path="portfolio/project/create/:bootcampId"
+            element={<ProjectCreate />}
+          />
+          <Route path="portfolio/project/join" element={<ProjectJoin />} />
+          <Route
+            path="portfolio/project/edit/:projectId"
+            element={<ProjectEdit />}
+          />
           <Route path="/portfolio/study" element={<StudyMain />} />
           <Route path="/portfolio/study/register" element={<StudyRegister />} />
           <Route path="/portfolio/study/findstudy" element={<FindStudy />} />

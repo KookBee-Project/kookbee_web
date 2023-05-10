@@ -5,7 +5,7 @@ axios.defaults.baseURL = "http://127.0.0.1:8000";
 
 axios.defaults.withCredentials = true; // 쿠키 값을 전송한다.
 
-export const api = async (method, url, data) => {  
+export const api = async (method, url, data) => {
   const refreshToken = localStorage.getItem("RefreshToken");
   const accessToken = localStorage.getItem("AccessToken");
   const headers = refreshToken
