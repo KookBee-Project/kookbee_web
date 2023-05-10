@@ -2,17 +2,23 @@ import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getPage } from "../../../store/portfolio/study/studySlice";
+import {
+  getPage,
+  getStudyAndLectureList,
+} from "../../../store/portfolio/study/studySlice";
 
 const FindStudyForm = () => {
   const { data, status, totalPages } = useSelector((state) => state.study);
+  const { userId } = useSelector((state) => state.user);
   const [buttons, setButtons] = useState([]);
   const dispatch = useDispatch();
 
-  const [page, setPage] = useState();
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
-    dispatch(getPage(0));
+    if (data.length === 0) {
+      dispatch(getPage(0));
+    }
   }, []);
 
   useEffect(() => {
@@ -21,9 +27,9 @@ const FindStudyForm = () => {
     setButtons(tmp);
   }, [totalPages]);
 
-  const onClick = (e, el) => {
+  const onClick = (el) => {
     setPage(Number(el) - 1);
-    dispatch(getPage(Number(page)));
+    dispatch(getPage(Number(el) - 1));
   };
 
   return (
@@ -32,7 +38,7 @@ const FindStudyForm = () => {
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
           <b className="text-3xl justify-center">전체 스터디</b>
           <div className="border-4 border-sky-400 rounded-3xl bg-sky-400 flex justify-end">
-            <Link to={"/portfolio/study/regist"}>스터디 등록</Link>
+            <Link to={"/portfolio/study/register"}>스터디 등록</Link>
           </div>
           <table className="table items-center h-5/6 w-11/12 min-h-40 border-4 border-yellow-300 rounded-3xl">
             <thead className="border-b-2">
@@ -42,10 +48,14 @@ const FindStudyForm = () => {
               <th>팀장</th>
             </thead>
             <tbody>
-              {data?.map((el) => (
+              {data.slice(page * 10 + 0, page * 10 + 10)?.map((el) => (
                 <tr>
                   <td>
-                    <Link>{el.groupStudyName}</Link>
+                    <Link
+                      to={`/portfolio/study/studydetail/${el.groupStudyId}`}
+                    >
+                      {el.groupStudyName}
+                    </Link>
                   </td>
                   <td>{el.groupStudyPurpose}</td>
                   <td>{el.groupStudyOpenDate}</td>

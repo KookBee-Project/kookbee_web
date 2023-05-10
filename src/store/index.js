@@ -7,6 +7,7 @@ import bootcampSlice from "./bootcamp/bootcampSlice";
 import bootcampNameSlice from "./bootcamp/bootcampNameSlice";
 import homeworkSlice from "./homework/HomeworkSlice";
 import studySlice from "./portfolio/study/studySlice";
+import applySlice from "./portfolio/study/applySlice";
 
 export default configureStore({
   reducer: {
@@ -19,5 +20,6 @@ export default configureStore({
     bootcampName: bootcampNameSlice,
     homework: homeworkSlice,
     study: studySlice,
+    apply: applySlice,
   },
 });
