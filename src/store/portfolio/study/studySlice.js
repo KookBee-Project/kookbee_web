@@ -4,6 +4,8 @@ import { api } from "../../../api/api";
 const initialState = {
   data: [],
   status: "idle",
+  WriteStatus: "idle",
+  studyRegisterStatus: "idle",
   error: null,
   totalPages: null,
   studyJoin: "",
@@ -113,14 +115,14 @@ const studySlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(studyRegister.pending, (state, action) => {
-        state.status = "loading";
+        state.studyRegisterStatus = "loading";
       })
       .addCase(studyRegister.fulfilled, (state, action) => {
-        state.status = "successed";
+        state.studyRegisterStatus = "successed";
         state.studyPost = action.payload;
       })
       .addCase(studyRegister.rejected, (state, action) => {
-        state.status = "failed";
+        state.studyRegisterStatus = "failed";
         state.error = action.payload.data;
       })
       .addCase(getPage.pending, (state, action) => {
@@ -148,14 +150,13 @@ const studySlice = createSlice({
         state.error = action.payload.data;
       })
       .addCase(lectureRegister.pending, (state, action) => {
-        state.status = "loading";
+        state.WriteStatus = "loading";
       })
       .addCase(lectureRegister.fulfilled, (state, action) => {
-        state.status = "successed";
-        state.data = action.payload.data;
+        state.WriteStatus = "successed";
       })
       .addCase(lectureRegister.rejected, (state, action) => {
-        state.status = "failed";
+        state.WriteStatus = "failed";
         state.error = action.payload.data;
       })
       .addCase(getStudyAndLectureList.pending, (state, action) => {

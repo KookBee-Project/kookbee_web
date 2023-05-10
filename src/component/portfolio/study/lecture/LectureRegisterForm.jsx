@@ -7,7 +7,9 @@ import {
 } from "../../../../store/portfolio/study/studySlice";
 
 const LectureRegisterForm = () => {
-  const { data, responseList } = useSelector((state) => state.study);
+  const { data, responseList, WriteStatus } = useSelector(
+    (state) => state.study
+  );
 
   const param = useParams();
 
@@ -34,8 +36,12 @@ const LectureRegisterForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(lectureRegister({ groupStudyId: param.groupStudyId, request }));
-    navigate(`/portfolio/study/studydetail/${param.groupStudyId}`);
   };
+
+  useEffect(() => {
+    if (WriteStatus === "successed" && request.groupStudyLectureTitle != "")
+      navigate(`/portfolio/study/studydetail/${param.groupStudyId}`);
+  }, [WriteStatus]);
 
   return (
     <div>
@@ -72,7 +78,6 @@ const LectureRegisterForm = () => {
                             name="groupStudyLectureTitle"
                             onChange={onChangeHandler}
                             className="bg-gray-200 w-9/12"
-                            placeholder="제목을 입력하세요"
                           ></input>
                         </div>
                       </div>

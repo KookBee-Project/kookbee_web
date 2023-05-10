@@ -41,20 +41,23 @@ const StudyMainForm = () => {
               <th>팀장</th>
             </thead>
             <tbody>
-              {data.slice(page * 10 + 0, page * 10 + 10)?.map((el) => (
-                <tr>
-                  <td>
-                    <Link
-                      to={`/portfolio/study/studydetail/${el.groupStudyId}`}
-                    >
-                      {el.groupStudyName}
-                    </Link>
-                  </td>
-                  <td>{el.groupStudyPurpose}</td>
-                  <td>{el.groupStudyOpenDate}</td>
-                  <td>{el.groupStudyLeaderName}</td>
-                </tr>
-              ))}
+              {data.slice(page * 10 + 0, page * 10 + 10)?.map(
+                (el) =>
+                  status === "successed" && (
+                    <tr>
+                      <td>
+                        <Link
+                          to={`/portfolio/study/studydetail/${el.groupStudyId}`}
+                        >
+                          {el.groupStudyName}
+                        </Link>
+                      </td>
+                      <td>{el.groupStudyPurpose}</td>
+                      <td>{el.groupStudyOpenDate}</td>
+                      <td>{el.groupStudyLeaderName}</td>
+                    </tr>
+                  )
+              )}
             </tbody>
           </table>
           <div className="flex mt-5">

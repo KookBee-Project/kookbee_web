@@ -8,7 +8,9 @@ import {
 } from "../../../store/portfolio/study/studySlice";
 
 const StudyRegisterForm = () => {
-  const { status, error } = useSelector((state) => state.study);
+  const { status, error, studyRegisterStatus } = useSelector(
+    (state) => state.study
+  );
   const { userInfo, status1, error1, userId, userName } = useSelector(
     (state) => state.user
   );
@@ -92,12 +94,21 @@ const StudyRegisterForm = () => {
         userIdList: [...user].map((el) => el.userId),
       })
     );
-    if (status === "successed") {
+  };
+
+  useEffect(() => {
+    if (
+      studyRegisterStatus === "successed" &&
+      groupStudy.groupStudyName != ""
+    ) {
       navigate("/portfolio/study");
-    } else if (status === "failed") {
+    } else if (
+      studyRegisterStatus === "failed" &&
+      groupStudy.groupStudyName != ""
+    ) {
       alert(error);
     }
-  };
+  }, [studyRegisterStatus]);
 
   return (
     <div>
