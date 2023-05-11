@@ -7,7 +7,9 @@ import {
 } from "../../../../store/portfolio/study/studySlice";
 
 const PostDetailForm = () => {
-  const { postList, postCommentList } = useSelector((state) => state.study);
+  const { postList, postCommentList, reviewStatus } = useSelector(
+    (state) => state.study
+  );
 
   const param = useParams();
   const dispatch = useDispatch();
@@ -53,40 +55,42 @@ const PostDetailForm = () => {
             )
         )}
 
-        <div className="flex-col justify-center border-8 bg-gray-200 w-4/6">
-          <table className="justify-center">
-            <thead>
-              <th>이름</th>
-              <th>내용</th>
-            </thead>
-            {postCommentList?.map(
-              (el) =>
-                el.groupStudyPostId === Number(param.groupStudyPostId) &&
-                el.reviewList.map((ele) => (
-                  <tbody>
-                    <tr>
-                      <td>{ele.groupStudyReviewWriterName}</td>
-                      <td>{ele.groupStudyReviewContents}</td>
-                    </tr>
-                  </tbody>
-                ))
-            )}
-          </table>
-          <div className="flex">
-            <form onSubmit={onSubmit}>
-              <input
-                type="text"
-                id="groupStudyReviewContents"
-                name="groupStudyReviewContents"
-                onChange={onChangeHandler}
-              ></input>
-              <button
-                type="submit"
-                className="border-8 border-sky-400 rounded-3xl bg-sky-400 flex justify-center"
-              >
-                입력
-              </button>
-            </form>
+        <div className="flex-col border-8 bg-gray-200 w-4/6">
+          <div className="justify-center">
+            <table>
+              <thead>
+                <th>이름</th>
+                <th>내용</th>
+              </thead>
+              {postCommentList?.map(
+                (el) =>
+                  el.groupStudyPostId === Number(param.groupStudyPostId) &&
+                  el.reviewList.map((ele) => (
+                    <tbody>
+                      <tr>
+                        <td>{ele.groupStudyReviewWriterName}</td>
+                        <td>{ele.groupStudyReviewContents}</td>
+                      </tr>
+                    </tbody>
+                  ))
+              )}
+            </table>
+            <div className="">
+              <form onSubmit={onSubmit}>
+                <input
+                  type="text"
+                  id="groupStudyReviewContents"
+                  name="groupStudyReviewContents"
+                  onChange={onChangeHandler}
+                ></input>
+                <button
+                  type="submit"
+                  className="border-8 border-sky-400 rounded-3xl bg-sky-400 flex justify-center"
+                >
+                  입력
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
