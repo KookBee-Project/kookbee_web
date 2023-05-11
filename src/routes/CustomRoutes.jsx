@@ -38,6 +38,8 @@ import PostDetail from "../component/portfolio/study/lecture/PostDetail";
 import StudyApply from "../component/portfolio/study/apply/StudyApply";
 import StudyApplyHistory from "../component/portfolio/study/apply/StudyApplyHistory";
 import ApplyDetail from "../component/portfolio/study/apply/ApplyDetail";
+import EatingTogether from "../component/eatingTogether/EatingTogether";
+import PostRestaurant from "../component/eatingTogether/PostRestaurant";
 
 const CustomRoute = () => {
   return (
@@ -138,6 +140,9 @@ const CustomRoute = () => {
             path="/portfolio/study/apply/:groupStudyApplyId"
             element={<ApplyDetail />}
           />
+
+          <Route path="/bootcamp/eatingtogether" element={<EatingTogether />} />
+          <Route path="/bootcamp/eatingtogether/postrestaurant" element={<PostRestaurant />} />
         </Route>
       </Routes>
     </BrowserRouter>
