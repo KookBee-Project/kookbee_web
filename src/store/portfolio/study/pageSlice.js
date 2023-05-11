@@ -3,9 +3,12 @@ import { api } from "../../../api/api";
 
 const initialState = {
   data: [],
+  data2: [],
   status: "idle",
+  status2: "idle",
   error: null,
   totalPages: null,
+  mainTotalPages: "",
 };
 
 export const getPage = createAsyncThunk(
@@ -42,15 +45,15 @@ const pageSlice = createSlice({
         state.error = action.payload.data;
       })
       .addCase(studyMain.pending, (state, action) => {
-        state.status = "loading";
+        state.status2 = "loading";
       })
       .addCase(studyMain.fulfilled, (state, action) => {
-        state.status = "successed";
-        state.data = [...state.data, ...action.payload.content];
-        state.totalPages = action.payload.totalPages;
+        state.status2 = "successed";
+        state.data2 = [...state.data2, ...action.payload.content];
+        state.mainTotalPages = action.payload.totalPages;
       })
       .addCase(studyMain.rejected, (state, action) => {
-        state.status = "failed";
+        state.status2 = "failed";
         state.error = action.payload.data;
       });
   },

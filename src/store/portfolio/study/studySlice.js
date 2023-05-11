@@ -13,6 +13,8 @@ const initialState = {
   postList: [],
   studyPost: {},
   postCommentList: [],
+  registerStatus: "idle",
+  reviewStatus: "idle",
 };
 
 export const studyRegister = createAsyncThunk(
@@ -183,14 +185,14 @@ const studySlice = createSlice({
         state.error = action.payload.data;
       })
       .addCase(registerGroupStudyPost.pending, (state, action) => {
-        state.status = "loading";
+        state.registerStatus = "loading";
       })
       .addCase(registerGroupStudyPost.fulfilled, (state, action) => {
-        state.status = "successed";
+        state.registerStatus = "successed";
         state.data = action.payload.data;
       })
       .addCase(registerGroupStudyPost.rejected, (state, action) => {
-        state.status = "failed";
+        state.registerStatus = "failed";
         state.error = action.payload.data;
       })
       .addCase(getPostCommentList.pending, (state, action) => {
@@ -205,14 +207,14 @@ const studySlice = createSlice({
         state.error = action.payload.data;
       })
       .addCase(registerGroupStudyReview.pending, (state, action) => {
-        state.status = "loading";
+        state.reviewStatus = "loading";
       })
       .addCase(registerGroupStudyReview.fulfilled, (state, action) => {
-        state.status = "successed";
+        state.reviewStatus = "successed";
         state.data = action.payload.data;
       })
       .addCase(registerGroupStudyReview.rejected, (state, action) => {
-        state.status = "failed";
+        state.reviewStatus = "failed";
         state.error = action.payload.data;
       });
   },
