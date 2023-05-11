@@ -12,7 +12,7 @@ import projectSlice from "./project/projectSlice";
 
 import studySlice from "./portfolio/study/studySlice";
 import applySlice from "./portfolio/study/applySlice";
-
+import curriculumSlice from "./curriculum/curriculumSlice";
 
 export default configureStore({
   reducer: {
@@ -28,5 +28,6 @@ export default configureStore({
     project: projectSlice,
     study: studySlice,
     apply: applySlice,
+    curriculum: curriculumSlice,
   },
 });

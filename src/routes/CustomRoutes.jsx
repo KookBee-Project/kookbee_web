@@ -38,6 +38,7 @@ import PostDetail from "../component/portfolio/study/lecture/PostDetail";
 import StudyApply from "../component/portfolio/study/apply/StudyApply";
 import StudyApplyHistory from "../component/portfolio/study/apply/StudyApplyHistory";
 import ApplyDetail from "../component/portfolio/study/apply/ApplyDetail";
+import MyCalendar from "../component/Calendar/MyCalendar";
 
 const CustomRoute = () => {
   return (
@@ -138,6 +139,7 @@ const CustomRoute = () => {
             path="/portfolio/study/apply/:groupStudyApplyId"
             element={<ApplyDetail />}
           />
+          <Route path="/calendar" element={<MyCalendar />} />
         </Route>
       </Routes>
     </BrowserRouter>
