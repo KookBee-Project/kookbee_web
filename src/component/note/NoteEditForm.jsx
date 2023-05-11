@@ -12,8 +12,9 @@ import {
 } from "../../store/note/noteSlice";
 
 const NoteEditForm = () => {
-  const { writeStatus } = useSelector((state) => state.note);
-  const { detail } = useSelector((state) => state.note);
+  const { writeStatus, detail, detailStatus } = useSelector(
+    (state) => state.note
+  );
   const [file, setFile] = useState({
     file: "",
     fileName: "",
@@ -111,85 +112,90 @@ const NoteEditForm = () => {
   }, [writeStatus]);
   return (
     <div className="table items-center w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
-      <div className="flex flex-col items-center w-full h-5/6 mt-10">
-        <div className="text-center font-bold text-3xl">노트 작성</div>
-        <form onSubmit={onSubmit} className="flex flex-col w-full items-center">
-          <div className="flex flex-col w-5/6">
-            <label htmlFor="title" className="font-bold">
-              제목
-            </label>
-            <input
-              type="text"
-              className="border-2 border-black p-2 rounded-md"
-              id="title"
-              value={input.title}
-              onChange={setTitle}
-            />
-          </div>
-          <div className="w-5/6 m-5 whitespace-pre-wrap break-all overflow-auto">
-            <CKEditor
-              editor={ClassicEditor}
-              config={{
-                toolbar: [
-                  "undo",
-                  "redo",
-                  "|",
-                  "heading",
-                  "|",
-                  "bold",
-                  "italic",
-                  "|",
-                  "link",
-                  "blockQuote",
-                  "codeBlock",
-                  "|",
-                  "bulletedList",
-                  "numberedList",
-                  "outdent",
-                  "indent",
-                ],
-                placeholder: "내용을 입력하세요.",
-              }}
-              value={input.content}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                setInput({
-                  ...input,
-                  content: data,
-                });
-              }}
-              onReady={(editor) => {
-                editor.data.set(detail.content);
-                editor.editing.view.change((writer) => {
-                  writer.setStyle(
-                    "min-height",
-                    "200px",
-                    editor.editing.view.document.getRoot()
-                  );
-                });
-              }}
-              onBlur={(event, editor) => {}}
-              onFocus={(event, editor) => {}}
-            />
-          </div>
-          {file && (
-            <div className="mt-5">
-              <div className="flex flex-col justify-center text-center">
-                <ImgUpload
-                  file={file.file}
-                  loaded={file.loaded}
-                  delFile={delFile}
-                  fileURL={file.fileURL}
-                  fileChange={fileChange}
-                />
-              </div>
+      {detailStatus === "successed" && (
+        <div className="flex flex-col items-center w-full h-5/6 mt-10">
+          <div className="text-center font-bold text-3xl">노트 작성</div>
+          <form
+            onSubmit={onSubmit}
+            className="flex flex-col w-full items-center"
+          >
+            <div className="flex flex-col w-5/6">
+              <label htmlFor="title" className="font-bold">
+                제목
+              </label>
+              <input
+                type="text"
+                className="border-2 border-black p-2 rounded-md"
+                id="title"
+                value={input.title}
+                onChange={setTitle}
+              />
             </div>
-          )}
-          <button className="px-5 py-3 my-5 bg-yellow-300 border rounded-xl text-xl font-bold shadow-md shadow-gray-400 hover:bg-yellow-200 focus:shadow-none">
-            저장하기
-          </button>
-        </form>
-      </div>
+            <div className="w-5/6 m-5 whitespace-pre-wrap break-all overflow-auto">
+              <CKEditor
+                editor={ClassicEditor}
+                config={{
+                  toolbar: [
+                    "undo",
+                    "redo",
+                    "|",
+                    "heading",
+                    "|",
+                    "bold",
+                    "italic",
+                    "|",
+                    "link",
+                    "blockQuote",
+                    "codeBlock",
+                    "|",
+                    "bulletedList",
+                    "numberedList",
+                    "outdent",
+                    "indent",
+                  ],
+                  placeholder: "내용을 입력하세요.",
+                }}
+                value={input.content}
+                onChange={(event, editor) => {
+                  const data = editor.getData();
+                  setInput({
+                    ...input,
+                    content: data,
+                  });
+                }}
+                onReady={(editor) => {
+                  editor.data.set(detail.content);
+                  editor.editing.view.change((writer) => {
+                    writer.setStyle(
+                      "min-height",
+                      "200px",
+                      editor.editing.view.document.getRoot()
+                    );
+                  });
+                }}
+                onBlur={(event, editor) => {}}
+                onFocus={(event, editor) => {}}
+              />
+            </div>
+            {file && (
+              <div className="mt-5">
+                <div className="flex flex-col justify-center text-center">
+                  <ImgUpload
+                    file={file.file}
+                    loaded={file.loaded}
+                    delFile={delFile}
+                    fileURL={file.fileURL}
+                    fileChange={fileChange}
+                  />
+                </div>
+              </div>
+            )}
+            <button className="px-5 py-3 my-5 bg-yellow-300 border rounded-xl text-xl font-bold shadow-md shadow-gray-400 hover:bg-yellow-200 focus:shadow-none">
+              저장하기
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

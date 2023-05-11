@@ -30,7 +30,7 @@ const bootcampNameSlice = createSlice({
       })
       .addCase(getBootcampNameList.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.payload.data;
+        state.error = action.payload;
       });
   },
 });

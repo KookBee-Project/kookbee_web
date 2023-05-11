@@ -12,7 +12,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe, logout } from "../../store/user/userSlice";
 
@@ -64,6 +64,7 @@ export default function Header() {
 
   const { data } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getMe());
@@ -152,12 +153,18 @@ export default function Header() {
             나의 강의실
           </a>
         </Popover.Group>
-        {data.userName? (
+        {data.userName ? (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end font-semibold">
             <div>
               <Link to={""}>{data.userName}님</Link>
             </div>
-            <button className="ml-3" onClick={() => dispatch(logout())}>
+            <button
+              className="ml-3"
+              onClick={() => {
+                dispatch(logout());
+                navigate("/");
+              }}
+            >
               로그아웃
             </button>
           </div>

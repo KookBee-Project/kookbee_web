@@ -91,16 +91,16 @@ const CustomRoute = () => {
             element={<ProjectDetail />}
           />
           <Route
-            path="portfolio/project/all/:bootcampId"
+            path="/portfolio/project/all/:bootcampId"
             element={<AllProjectList />}
           />
           <Route
-            path="portfolio/project/create/:bootcampId"
+            path="/portfolio/project/create/:bootcampId"
             element={<ProjectCreate />}
           />
-          <Route path="portfolio/project/join" element={<ProjectJoin />} />
+          <Route path="/portfolio/project/join" element={<ProjectJoin />} />
           <Route
-            path="portfolio/project/edit/:projectId"
+            path="/portfolio/project/edit/:projectId"
             element={<ProjectEdit />}
           />
           <Route path="/portfolio/study" element={<StudyMain />} />

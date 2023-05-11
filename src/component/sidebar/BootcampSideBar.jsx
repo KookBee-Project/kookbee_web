@@ -31,8 +31,8 @@ const BootcampSideBar = () => {
       <div className="flex flex-col items-center mt-20">
         <p className="font-bold text-lg">부트캠프</p>
         {data?.map((el) => (
-          <select className="mb-8">
-            <option>{el.bootcampName}</option>)
+          <select key={el.bootcampId} className="mb-8">
+            <option>{el.bootcampName}</option>
           </select>
         ))}
         <ul className="list-disc mb-2">
