@@ -12,6 +12,8 @@ import projectSlice from "./project/projectSlice";
 
 import studySlice from "./portfolio/study/studySlice";
 import applySlice from "./portfolio/study/applySlice";
+
+import curriculumSlice from "./curriculum/curriculumSlice";
 import pageSlice from "./portfolio/study/pageSlice";
 
 export default configureStore({
@@ -29,5 +31,6 @@ export default configureStore({
     study: studySlice,
     page: pageSlice,
     apply: applySlice,
+    curriculum: curriculumSlice,
   },
 });
