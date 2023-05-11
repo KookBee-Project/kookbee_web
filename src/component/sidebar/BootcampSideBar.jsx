@@ -16,12 +16,12 @@ const BootcampSideBar = () => {
   const studentMenu = sideSet
     ? [
         { value: "나의 강의 내역", link: "/bootcamp" },
-        { value: "공지사항", link: "/" },
+        { value: "공지사항", link: "/notification" },
         { value: "과제", link: "/homeworkhistory" },
-        { value: "QnA", link: "/" },
+        { value: "QnA", link: "/QNA" },
         { value: "휴가", link: "/bootcamp/dayoff" },
         { value: "물품 대여", link: "/producthistory" },
-        { value: "밥친구", link: "/" },
+        { value: "밥친구", link: "/bootcamp/eatingtogether" },
         { value: "캘린더", link: "/calendar" },
         { value: "출석 및 수강율 (출예)", link: "/" },
         { value: "강의평가 (출시예정)", link: "/" },
