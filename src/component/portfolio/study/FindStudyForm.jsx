@@ -2,14 +2,10 @@ import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {
-  getPage,
-  getStudyAndLectureList,
-} from "../../../store/portfolio/study/studySlice";
+import { getPage } from "../../../store/portfolio/study/pageSlice";
 
 const FindStudyForm = () => {
-  const { data, status, totalPages } = useSelector((state) => state.study);
-  const { userId } = useSelector((state) => state.user);
+  const { data, totalPages } = useSelector((state) => state.page);
   const [buttons, setButtons] = useState([]);
   const dispatch = useDispatch();
 
