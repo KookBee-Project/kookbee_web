@@ -6,7 +6,7 @@ const MyTableView = ({ data, status, setMode }) => {
           <div className="text-center border-b-2 border-gray-100 pb-5 w-5/6 font-bold text-3xl">
             나의 일정
           </div>
-          <div className="flex justify-center w-5/6 h-5/6">
+          <div className="flex flex-col justify-center w-5/6 h-5/6">
             <table className="my-10 min-w-30">
               <thead className="font-bold text-center">
                 <tr>
@@ -31,6 +31,16 @@ const MyTableView = ({ data, status, setMode }) => {
                 ))}
               </tbody>
             </table>
+            <div className="w-full flex justify-center">
+              <button
+                className="px-5 py-3 my-5 bg-yellow-300 border rounded-xl text-xl font-bold shadow-md shadow-gray-400 hover:bg-yellow-200 focus:shadow-none"
+                onClick={() => {
+                  setMode("calendar");
+                }}
+              >
+                캘린더로 보기
+              </button>
+            </div>
           </div>
         </div>
       )}
