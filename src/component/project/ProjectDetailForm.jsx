@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import {
   deleteProject,
   getMyProjectDetail,
+  setStatusInit,
   startProject,
 } from "../../store/project/projectSlice";
 import ProjectSubmitForm from "./ProjectSubmitForm";
@@ -61,28 +62,27 @@ const ProjectDetailForm = () => {
   };
 
   useEffect(() => {
-    if (
-      startStatus === "successed" &&
-      detailData?.projectStatus != "PROGRESS"
-    ) {
+    console.log(detailData);
+    if (startStatus === "successed") {
       alert("프로젝트가 시작되었습니다.");
       dispatch(getMyProjectDetail(projectId));
+      dispatch(setStatusInit());
     } else if (startStatus === "failed") {
       alert("프로젝트 시작에 실패하였습니다.");
       dispatch(getMyProjectDetail(projectId));
+      dispatch(setStatusInit());
     }
   }, [startStatus]);
 
   useEffect(() => {
-    if (
-      deleteStatus === "successed" &&
-      detailData?.projectStatus != "DELETED"
-    ) {
+    if (deleteStatus === "successed") {
       alert("프로젝트가 삭제되었습니다.");
+      dispatch(setStatusInit());
       navigate("/portfolio/project/my");
     } else if (deleteStatus === "failed") {
       alert("프로젝트 삭제에 실패하였습니다.");
       dispatch(getMyProjectDetail(projectId));
+      dispatch(setStatusInit());
     }
   }, [deleteStatus]);
 

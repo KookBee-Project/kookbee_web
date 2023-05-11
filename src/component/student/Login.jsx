@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/user/userSlice";
+import { getMe, login } from "../../store/user/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -27,7 +27,10 @@ const Login = () => {
 
   useEffect(() => {
     if (status === "failed") alert(error);
-    else if (status === "successed") navigate("/bootcamp");
+    else if (status === "successed") {
+      dispatch(getMe());
+      navigate("/bootcamp");
+    }
   }, [status]);
 
   return (

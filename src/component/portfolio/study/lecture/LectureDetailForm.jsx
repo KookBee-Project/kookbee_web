@@ -4,15 +4,15 @@ import { Link, useParams } from "react-router-dom";
 import { getPostList } from "../../../../store/portfolio/study/studySlice";
 
 const LectureDetailForm = () => {
-  const { responseList, postList } = useSelector((state) => state.study);
+  const { responseList, postList, registerStatus } = useSelector(
+    (state) => state.study
+  );
   const param = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPostList(param.lectureId));
   }, []);
-
-  console.log(param);
 
   return (
     <div>
@@ -39,7 +39,7 @@ const LectureDetailForm = () => {
               <th className="ml-3 mr-3">제출자</th>
             </thead>
             {postList?.map((el) => (
-              <tbody className="flex ">
+              <tbody className=" ">
                 <tr className="mr-2 ml-2">
                   <td>
                     <Link

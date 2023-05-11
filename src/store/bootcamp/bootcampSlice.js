@@ -7,7 +7,6 @@ const initialState = {
   status: "idle",
   delStatus: "idle",
   detailStatus: "idle",
-  sideSet: false,
   error: null,
 };
 
@@ -65,7 +64,6 @@ const bootcampSlice = createSlice({
       .addCase(readBootcampList.fulfilled, (state, action) => {
         state.status = "successed";
         state.data = action.payload;
-        if (action.payload.length !== 0) state.sideSet = true;
       })
       .addCase(readBootcampList.rejected, (state, action) => {
         state.status = "failed";

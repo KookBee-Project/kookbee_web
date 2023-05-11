@@ -26,6 +26,18 @@ import ProjectBootcampList from "../component/project/ProjectBootcampList";
 import ProjectJoin from "../component/project/ProjectJoin";
 import ProjectEdit from "../component/project/ProjectEdit";
 
+import BootcampListForNotification from "../component/notification/BootcampListForNotification";
+import Notification from "../component/notification/Notification";
+import NotificationList from "../component/notification/NotificationList";
+import NotificationCreate from "../component/notification/NotificationCreate";
+import NotificationDetail from "../component/notification/NotificationDetail";
+
+import BootcampListForQNA from "../component/QNA/BootcampListForQNA";
+import QNA from "../component/QNA/QNA";
+import QNAList from "../component/QNA/QNAList";
+import QNACreate from "../component/QNA/QNACreate";
+import QNADetail from "../component/QNA/QNADetail";
+
 import StudyRegist from "../component/portfolio/study/StudyRegister";
 import FindStudy from "../component/portfolio/study/FindStudy";
 import StudyMain from "../component/portfolio/study/StudyMain";
@@ -40,6 +52,12 @@ import StudyApplyHistory from "../component/portfolio/study/apply/StudyApplyHist
 import ApplyDetail from "../component/portfolio/study/apply/ApplyDetail";
 import MyPage from "../component/mypage/MyPage";
 import ChangeInfo from "../component/mypage/ChangeInfo";
+
+import MyCalendar from "../component/Calendar/MyCalendar";
+
+import EatingTogether from "../component/eatingTogether/EatingTogether";
+import PostRestaurant from "../component/eatingTogether/PostRestaurant";
+
 
 const CustomRoute = () => {
   return (
@@ -96,16 +114,16 @@ const CustomRoute = () => {
             element={<ProjectDetail />}
           />
           <Route
-            path="portfolio/project/all/:bootcampId"
+            path="/portfolio/project/all/:bootcampId"
             element={<AllProjectList />}
           />
           <Route
-            path="portfolio/project/create/:bootcampId"
+            path="/portfolio/project/create/:bootcampId"
             element={<ProjectCreate />}
           />
-          <Route path="portfolio/project/join" element={<ProjectJoin />} />
+          <Route path="/portfolio/project/join" element={<ProjectJoin />} />
           <Route
-            path="portfolio/project/edit/:projectId"
+            path="/portfolio/project/edit/:projectId"
             element={<ProjectEdit />}
           />
           <Route path="/portfolio/study" element={<StudyMain />} />
@@ -143,6 +161,28 @@ const CustomRoute = () => {
             path="/portfolio/study/apply/:groupStudyApplyId"
             element={<ApplyDetail />}
           />
+
+          <Route path="notification/" element={<Notification />}>
+            <Route path="" element={<BootcampListForNotification />} />
+            <Route path=":bootcampId" element={<NotificationList />} />
+            <Route path="insert/:bootcampId" element={<NotificationCreate />} />
+            <Route
+              path=":bootcampId/:notificationId"
+              element={<NotificationDetail />}
+            />
+          </Route>
+
+          <Route path="QNA/" element={<QNA />}>
+            <Route path="" element={<BootcampListForQNA />} />
+            <Route path=":bootcampId" element={<QNAList />} />
+            <Route path="insert/:bootcampId" element={<QNACreate />} />
+            <Route path=":bootcampId/:notificationId" element={<QNADetail />} />
+          </Route>
+
+          <Route path="/calendar" element={<MyCalendar />} />
+          <Route path="/bootcamp/eatingtogether" element={<EatingTogether />} />
+          <Route path="/bootcamp/eatingtogether/postrestaurant" element={<PostRestaurant />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

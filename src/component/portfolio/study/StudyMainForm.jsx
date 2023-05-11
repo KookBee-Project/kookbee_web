@@ -2,30 +2,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useEffect, useState } from "react";
-import { getPage, studyMain } from "../../../store/portfolio/study/studySlice";
+import { studyMain } from "../../../store/portfolio/study/pageSlice";
 
 const StudyMainForm = () => {
-  const { data, status, totalPages } = useSelector((state) => state.study);
+  const { status } = useSelector((state) => state.study);
+
+  const { mainTotalPages, data2 } = useSelector((state) => state.page);
+
   const [buttons, setButtons] = useState([]);
+
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    if (data.length === 0) {
+    if (data2.length === 0) {
       dispatch(studyMain(0));
     }
   }, []);
 
   useEffect(() => {
     const tmp = [];
-    for (let i = 1; i <= totalPages; i++) tmp.push(i);
+    for (let i = 1; i <= mainTotalPages; i++) tmp.push(i);
     setButtons(tmp);
-  }, [totalPages]);
+  }, [mainTotalPages]);
 
   const onClick = (e, el) => {
     setPage(Number(el) - 1);
-    dispatch(getPage(Number(Number(el) - 1)));
+    dispatch(studyMain(Number(Number(el) - 1)));
   };
 
   return (
@@ -41,7 +45,7 @@ const StudyMainForm = () => {
               <th>팀장</th>
             </thead>
             <tbody>
-              {data.slice(page * 10 + 0, page * 10 + 10)?.map(
+              {data2.slice(page * 10 + 0, page * 10 + 10)?.map(
                 (el) =>
                   status === "successed" && (
                     <tr>

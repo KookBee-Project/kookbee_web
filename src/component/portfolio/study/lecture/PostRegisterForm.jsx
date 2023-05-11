@@ -26,7 +26,7 @@ const PostRegisterForm = () => {
     e.preventDefault();
     dispatch(registerGroupStudyPost({ lectureId, request }));
     navigate(
-      `/portfolio/study/${param.groupStudyId}/lecture/${param.lectureId}/post`
+      `/portfolio/study/${param.groupStudyId}/lecture/${param.lectureId}/detail`
     );
   };
 
@@ -34,7 +34,7 @@ const PostRegisterForm = () => {
     <div>
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
-          <b className="text-3xl">회차 등록하기</b>
+          <b className="text-3xl">글쓰기</b>
           <form onSubmit={onSubmit}>
             <div>
               <div className="w-96">

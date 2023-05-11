@@ -7,7 +7,7 @@ import {
 } from "../../../../store/portfolio/study/applySlice";
 
 const ApplyDetailForm = () => {
-  const { applyList } = useSelector((state) => state.apply);
+  const { applyList, status } = useSelector((state) => state.apply);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,8 +26,10 @@ const ApplyDetailForm = () => {
   };
 
   useEffect(() => {
-    dispatch(putStudyApply({ applyId, request }));
-    navigate("/portfolio/study/apply");
+    if (request.studyApplyStatus !== "") {
+      dispatch(putStudyApply({ applyId, request }));
+      navigate("/portfolio/study/apply");
+    }
   }, [request]);
 
   return (
