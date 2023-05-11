@@ -26,6 +26,18 @@ import ProjectBootcampList from "../component/project/ProjectBootcampList";
 import ProjectJoin from "../component/project/ProjectJoin";
 import ProjectEdit from "../component/project/ProjectEdit";
 
+import BootcampListForNotification from "../component/notification/BootcampListForNotification";
+import Notification from "../component/notification/Notification";
+import NotificationList from "../component/notification/NotificationList";
+import NotificationCreate from "../component/notification/NotificationCreate";
+import NotificationDetail from "../component/notification/NotificationDetail";
+
+import BootcampListForQNA from "../component/QNA/BootcampListForQNA";
+import QNA from "../component/QNA/QNA";
+import QNAList from "../component/QNA/QNAList";
+import QNACreate from "../component/QNA/QNACreate";
+import QNADetail from "../component/QNA/QNADetail";
+
 import StudyRegist from "../component/portfolio/study/StudyRegister";
 import FindStudy from "../component/portfolio/study/FindStudy";
 import StudyMain from "../component/portfolio/study/StudyMain";
@@ -138,6 +150,22 @@ const CustomRoute = () => {
             path="/portfolio/study/apply/:groupStudyApplyId"
             element={<ApplyDetail />}
           />
+          <Route path="notification/" element={<Notification />}>
+            <Route path="" element={<BootcampListForNotification />} />
+            <Route path=":bootcampId" element={<NotificationList />} />
+            <Route path="insert/:bootcampId" element={<NotificationCreate />} />
+            <Route
+              path=":bootcampId/:notificationId"
+              element={<NotificationDetail />}
+            />
+          </Route>
+
+          <Route path="QNA/" element={<QNA />}>
+            <Route path="" element={<BootcampListForQNA />} />
+            <Route path=":bootcampId" element={<QNAList />} />
+            <Route path="insert/:bootcampId" element={<QNACreate />} />
+            <Route path=":bootcampId/:notificationId" element={<QNADetail />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
