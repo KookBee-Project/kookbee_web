@@ -155,7 +155,7 @@ export default function Header() {
         {data.userName? (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end font-semibold">
             <div>
-              <Link to={""}>{data.userName}님</Link>
+              <Link to={"/my"}>{data.userName}님 마이페이지</Link>
             </div>
             <button className="ml-3" onClick={() => dispatch(logout())}>
               로그아웃
