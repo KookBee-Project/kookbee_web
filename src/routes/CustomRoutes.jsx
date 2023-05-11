@@ -51,6 +51,12 @@ import StudyApply from "../component/portfolio/study/apply/StudyApply";
 import StudyApplyHistory from "../component/portfolio/study/apply/StudyApplyHistory";
 import ApplyDetail from "../component/portfolio/study/apply/ApplyDetail";
 
+import MyCalendar from "../component/Calendar/MyCalendar";
+
+import EatingTogether from "../component/eatingTogether/EatingTogether";
+import PostRestaurant from "../component/eatingTogether/PostRestaurant";
+
+
 const CustomRoute = () => {
   return (
     <BrowserRouter>
@@ -103,16 +109,16 @@ const CustomRoute = () => {
             element={<ProjectDetail />}
           />
           <Route
-            path="portfolio/project/all/:bootcampId"
+            path="/portfolio/project/all/:bootcampId"
             element={<AllProjectList />}
           />
           <Route
-            path="portfolio/project/create/:bootcampId"
+            path="/portfolio/project/create/:bootcampId"
             element={<ProjectCreate />}
           />
-          <Route path="portfolio/project/join" element={<ProjectJoin />} />
+          <Route path="/portfolio/project/join" element={<ProjectJoin />} />
           <Route
-            path="portfolio/project/edit/:projectId"
+            path="/portfolio/project/edit/:projectId"
             element={<ProjectEdit />}
           />
           <Route path="/portfolio/study" element={<StudyMain />} />
@@ -150,6 +156,7 @@ const CustomRoute = () => {
             path="/portfolio/study/apply/:groupStudyApplyId"
             element={<ApplyDetail />}
           />
+
           <Route path="notification/" element={<Notification />}>
             <Route path="" element={<BootcampListForNotification />} />
             <Route path=":bootcampId" element={<NotificationList />} />
@@ -166,6 +173,11 @@ const CustomRoute = () => {
             <Route path="insert/:bootcampId" element={<QNACreate />} />
             <Route path=":bootcampId/:notificationId" element={<QNADetail />} />
           </Route>
+
+          <Route path="/calendar" element={<MyCalendar />} />
+          <Route path="/bootcamp/eatingtogether" element={<EatingTogether />} />
+          <Route path="/bootcamp/eatingtogether/postrestaurant" element={<PostRestaurant />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

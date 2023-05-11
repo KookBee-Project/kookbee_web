@@ -103,6 +103,14 @@ export const joinProject = createAsyncThunk(
 const projectSlice = createSlice({
   name: "project",
   initialState,
+  reducers: {
+    setStatusInit: (state) => {
+      state.status = "idle";
+      state.createStatus = "idle";
+      state.startStatus = "idle";
+      state.deleteStatus = "idle";
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getMyProjectList.pending, (state, action) => {
@@ -200,4 +208,5 @@ const projectSlice = createSlice({
       });
   },
 });
+export const { setStatusInit } = projectSlice.actions;
 export default projectSlice.reducer;
