@@ -71,7 +71,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="bg-white">
+    <header className="bg-white border-b border-gray-300 shadow-sm">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -146,9 +146,14 @@ export default function Header() {
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
             커뮤니티
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <div
+            onClick={() => {
+              navigate("/portfolio/note");
+            }}
+            className="text-sm font-semibold leading-6 text-gray-900 hover:cursor-pointer"
+          >
             포트폴리오
-          </a>
+          </div>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
             나의 강의실
           </a>

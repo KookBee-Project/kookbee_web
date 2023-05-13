@@ -55,13 +55,14 @@ import MyCalendar from "../component/Calendar/MyCalendar";
 
 import EatingTogether from "../component/eatingTogether/EatingTogether";
 import PostRestaurant from "../component/eatingTogether/PostRestaurant";
-
+import Home from "../component/home/Home";
 
 const CustomRoute = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}>
+          <Route path="" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<StudentSignUp />} />
           <Route path="/bootcamp" element={<BootCamp />} />
@@ -176,8 +177,10 @@ const CustomRoute = () => {
 
           <Route path="/calendar" element={<MyCalendar />} />
           <Route path="/bootcamp/eatingtogether" element={<EatingTogether />} />
-          <Route path="/bootcamp/eatingtogether/postrestaurant" element={<PostRestaurant />} />
-
+          <Route
+            path="/bootcamp/eatingtogether/postrestaurant"
+            element={<PostRestaurant />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
