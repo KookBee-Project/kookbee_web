@@ -23,43 +23,49 @@ const StudyTab = () => {
           <div className="text-center text-2xl font-bold">스터디</div>
         </div>
         {status === "successed" && (
-          <ul className="w-full my-5">
-            {data?.map((el) => (
-              <li key={el.groupStudyId}>
-                <div className="flex justify-between">
-                  <div
-                    className="text-gray-800 text-base font-bold hover:text-yellow-500 cursor-pointer"
-                    onClick={() => {
-                      navigate(
-                        `/portfolio/study/studydetail/${el.groupStudyId}`
-                      );
-                    }}
-                  >
-                    {el.groupStudyName}
-                  </div>
-                  <div className="flex text-gray-600">
-                    <div className="flex mr-1">
-                      <div>
-                        <BsPersonFill className="mt-1" />
+          <div className="p-2 w-full">
+            {data?.length == 0 ? (
+              <div>새 소식이 없네요...</div>
+            ) : (
+              <ul className="w-full my-5">
+                {data?.map((el) => (
+                  <li key={el.groupStudyId}>
+                    <div className="flex justify-between">
+                      <div
+                        className="text-gray-800 text-base font-bold hover:text-yellow-500 cursor-pointer"
+                        onClick={() => {
+                          navigate(
+                            `/portfolio/study/studydetail/${el.groupStudyId}`
+                          );
+                        }}
+                      >
+                        {el.groupStudyName}
                       </div>
-                      <div className="font-bold">
-                        {el.groupStudyMemberCount}
+                      <div className="flex text-gray-600">
+                        <div className="flex mr-1">
+                          <div>
+                            <BsPersonFill className="mt-1" />
+                          </div>
+                          <div className="font-bold">
+                            {el.groupStudyMemberCount}
+                          </div>
+                        </div>
+                        <div className="flex">
+                          <div>
+                            <BsFillCalendarWeekFill className="mt-1" />
+                          </div>
+                          <div className="font-bold">
+                            {el.currentGroupStudyLectureIteration}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex">
-                      <div>
-                        <BsFillCalendarWeekFill className="mt-1" />
-                      </div>
-                      <div className="font-bold">
-                        {el.currentGroupStudyLectureIteration}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="mb-5 mt-3 border-b border-gray-400"></div>
-              </li>
-            ))}
-          </ul>
+                    <div className="mb-5 mt-3 border-b border-gray-400"></div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         )}
       </div>
     </div>

@@ -23,13 +23,21 @@ module.exports = withMT({
         40: "40rem",
       },
       keyframes: {
-        slide: {
-          "0%": { transform: "translateX(-1000px)" },
-          "100%": { transform: "translateX(0)" },
+        puff: {
+          "0%": {
+            transform: "scale(1.2)",
+            filter: "blur(4px)",
+            opacity: 0,
+          },
+          "100%": {
+            transform: "scale(1)",
+            filter: "blur(0px)",
+            opacity: 1,
+          },
         },
       },
       animation: {
-        "slide-right": "slide 1s ease-in-out",
+        "puff-in": "puff 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715)",
       },
     },
   },
