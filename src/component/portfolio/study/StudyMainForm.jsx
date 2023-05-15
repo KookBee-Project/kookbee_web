@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { studyMain } from "../../../store/portfolio/study/pageSlice";
+import Loading from "../../../loading/Loading";
 
 const StudyMainForm = () => {
   const { status } = useSelector((state) => state.study);
@@ -37,7 +38,7 @@ const StudyMainForm = () => {
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
           <b className="text-3xl justify-center">나의 스터디</b>
-          <table className="table items-center h-5/6 w-11/12  min-h-40 border-4 border-yellow-300 rounded-3xl">
+          {status === "loading" ? <Loading /> :          <table className="table items-center h-5/6 w-11/12  min-h-40 border-4 border-yellow-300 rounded-3xl">
             <thead className="border-b-2">
               <th>스터디명</th>
               <th>목적</th>
@@ -63,7 +64,8 @@ const StudyMainForm = () => {
                   )
               )}
             </tbody>
-          </table>
+          </table>}
+
           <div className="flex mt-5">
             <Link>
               <AiOutlineArrowLeft className="mt-1 mr-1" />

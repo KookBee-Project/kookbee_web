@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { registerGroupStudyPost } from "../../../../store/portfolio/study/studySlice";
+import Loading from "../../../../loading/Loading";
 
 const PostRegisterForm = () => {
   const { data, responseList, status } = useSelector((state) => state.study);
@@ -33,6 +34,7 @@ const PostRegisterForm = () => {
   return (
     <div>
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+        {status === "loading" && <Loading></Loading>}
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
           <b className="text-3xl">글쓰기</b>
           <form onSubmit={onSubmit}>

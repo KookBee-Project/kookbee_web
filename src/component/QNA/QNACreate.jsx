@@ -1,27 +1,34 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { createNotification } from "../../store/notification/notificationSlice";
+import {
+  createNotification,
+  getQNAList,
+} from "../../store/notification/notificationSlice";
 import { api } from "../../api/api";
 
 const QNACreate = () => {
+  const { selectData } = useSelector((state) => state.bootcampName);
   const { status, error } = useSelector((state) => state.notification);
   const [request, setRequest] = useState({
     postTitle: "",
     postContent: "",
-    postType: "NOTIFICATION",
+    postType: "QNA",
     fileUUID: "",
+    bootcampId: selectData,
   });
 
   const [file, setFile] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { bootcampId } = useParams();
-
+  useEffect(() => {
+    selectData != undefined && dispatch(getQNAList(selectData));
+  }, [selectData]);
   const setInput = (e) => {
     const { name, value } = e.target;
     setRequest({ ...request, [name]: value });
   };
+  console.log(selectData);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -30,10 +37,10 @@ const QNACreate = () => {
 
   useEffect(() => {
     if (status === "successed" && request.postTitle !== "") {
-      alert("Q&N 등록에 성공하였습니다.");
-      navigate(`/QNA/${bootcampId}`);
+      alert("에러공유 등록에 성공하였습니다.");
+      navigate(`/QNA`);
     } else if (status === "failed" && request.postTitle !== "")
-      alert("Q&N 등록에 실패하였습니다.");
+      alert("에러공유 등록에 실패하였습니다.");
   }, [status]);
 
   const onClickFile = async (e) => {

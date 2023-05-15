@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { joinProject } from "../../store/project/projectSlice";
+import Loading from "../../loading/Loading";
 
 const ProjectJoinForm = () => {
   const { userName } = useSelector((state) => state.user.data);
@@ -33,12 +34,13 @@ const ProjectJoinForm = () => {
   useEffect(() => {
     if (status === "successed" && project.projectCode != "") {
       alert("프로젝트의 일원이 되셨습니다!");
-      navigate("/bootcamp");
+      navigate("/portfolio/project/my");
     } else if (status === "failed" && project.projectCode != "") alert(error);
   }, [status]);
 
   return (
     <div className="table w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+      {status === "loading" && <Loading></Loading>}
       <div className="flex flex-col items-center w-full h-5/6 mt-10">
         <div className="text-center font-bold text-3xl">포로젝트 참가</div>
         <div className="flex flex-col items-center text-center">

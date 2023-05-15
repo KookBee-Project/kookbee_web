@@ -14,7 +14,7 @@ const BootcampList = () => {
   }, []);
 
   return (
-    <div className="table items-center w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+    <div className="table items-center w-1/2 h-5/6 min-w-40 min-h-40 mx-20">
       {status === "successed" && (
         <div className="flex flex-col items-center w-full h-5/6 mt-10">
           <div className="text-center font-bold text-3xl">나의 강의</div>

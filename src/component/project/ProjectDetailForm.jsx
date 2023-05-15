@@ -9,6 +9,7 @@ import {
   startProject,
 } from "../../store/project/projectSlice";
 import ProjectSubmitForm from "./ProjectSubmitForm";
+import Loading from "../../loading/Loading";
 
 const ProjectDetailForm = () => {
   const { userId } = useSelector((state) => state.user.data);
@@ -88,6 +89,7 @@ const ProjectDetailForm = () => {
 
   return (
     <div className="table items-center w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+      {status === "loading" && <Loading></Loading>}
       {status === "successed" && (
         <div className="flex flex-col items-center w-full h-5/6 mt-10">
           <div className="flex">
@@ -222,7 +224,7 @@ const ProjectDetailForm = () => {
                             className="px-5 py-3 my-5 bg-red-300 border rounded-xl text-xl font-bold shadow-md shadow-gray-400 hover:bg-red-200 focus:shadow-none"
                             onClick={deletingProject}
                           >
-                            프로젝트 폭파
+                            프로젝트 삭제
                           </button>
                         </div>
                       </div>

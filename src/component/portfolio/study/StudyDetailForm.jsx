@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getStudyAndLectureList } from "../../../store/portfolio/study/studySlice";
+import Loading from "../../../loading/Loading";
 
 const StudyDetailForm = () => {
   const { data, studyJoin, responseList, status } = useSelector(
@@ -20,6 +21,7 @@ const StudyDetailForm = () => {
   return (
     <div>
       <div className="table items-center h-2/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+        {status === "loading" && <Loading></Loading>}
         {data?.map(
           (el) =>
             el.groupStudyId === Number(param.groupStudyId) && (

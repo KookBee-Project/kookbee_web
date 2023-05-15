@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getPostList } from "../../../../store/portfolio/study/studySlice";
+import Loading from "../../../../loading/Loading";
 
 const LectureDetailForm = () => {
   const { responseList, postList, registerStatus } = useSelector(
@@ -17,6 +18,7 @@ const LectureDetailForm = () => {
   return (
     <div>
       <div className="table items-center h-2/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+        {registerStatus === "loading" && <Loading></Loading>}
         {responseList?.map(
           (el) =>
             el.groupStudyLectureIteration === Number(param.lectureId) && (

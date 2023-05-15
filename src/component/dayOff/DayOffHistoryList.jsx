@@ -6,7 +6,7 @@ import { getDayOffList } from "../../store/dayoff/dayOffSlice";
 const DayOffHistoryList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data, status, error } = useSelector((state) => state.dayOff);
+  const { dayOffList, status, error } = useSelector((state) => state.dayOff);
   const bootcampId = useParams().bootcampId;
   
   useEffect(() => {
@@ -28,7 +28,7 @@ const DayOffHistoryList = () => {
               </tr>
             </thead>
             <tbody className="text-center border-t border-sky-400">
-              {data?.map((el) => (
+              {dayOffList?.map((el) => (
                 <tr>
                   <td className="p-1 pl-7 pr-7">{el.bootcampName}</td>
                   <td className="p-1 pl-7 pr-7">{el.curriculumName}</td>

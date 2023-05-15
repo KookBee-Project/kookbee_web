@@ -18,6 +18,8 @@ import notificationSlice from "./notification/notificationSlice";
 import curriculumSlice from "./curriculum/curriculumSlice";
 import pageSlice from "./portfolio/study/pageSlice";
 import EatingTogetherSlice from "./eatingTogether/EatingTogetherSlice";
+import homeStudySlice from "./home/homeStudySlice";
+import homeProjectSlice from "./home/homeProjectSlice";
 
 export default configureStore({
   reducer: {
@@ -37,5 +39,7 @@ export default configureStore({
     notification: notificationSlice,
     curriculum: curriculumSlice,
     eatingTogether: EatingTogetherSlice,
+    homeStudy: homeStudySlice,
+    homeProject: homeProjectSlice,
   },
 });

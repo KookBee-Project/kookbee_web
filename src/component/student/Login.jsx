@@ -29,7 +29,7 @@ const Login = () => {
     if (status === "failed") alert(error);
     else if (status === "successed") {
       dispatch(getMe());
-      navigate("/bootcamp");
+      navigate("/");
     }
   }, [status]);
 
