@@ -1,9 +1,23 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postRestaurant } from "../../store/eatingTogether/EatingTogetherSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const { kakao } = window;
 
 const PostRestaurantForm = () => {
-  const [restaurant, setRestaurant] = useState("");
+  const { selectData } = useSelector((state) => state.bootcampName);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [request, setRequest] = useState({
+    restaurantName: "",
+    restaurantPositionLa: 0,
+    restaurantPositionMa: 0,
+  });
+
+  const [searchWord, setSearchWord] = useState("");
 
   useEffect(() => {
     const container = document.getElementById("map"); // 지도를 표시할 HTML 엘리먼트 선택
@@ -14,82 +28,88 @@ const PostRestaurantForm = () => {
     };
     const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
 
-    // 주소-좌표 변환 객체를 생성합니다.
-    const geocoder = new window.kakao.maps.services.Geocoder();
+    // 장소 검색 객체를 생성합니다
+    var ps = new kakao.maps.services.Places();
 
-    const campusAddress = "서울시 서초구 효령로 355";
-    const campusName = "플레이데이터 서초점";
+    // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-    // 주소로 좌표를 검색합니다..
-    geocoder.addressSearch(campusAddress, function (result, status) {
-      // 정상적으로 검색이 완료됐으면
+    // 키워드로 장소를 검색합니다
+    ps.keywordSearch(searchWord, placesSearchCB);
+
+    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+    function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        var bounds = new kakao.maps.LatLngBounds();
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-          map: map,
-          position: coords,
-        });
+        for (var i = 0; i < data.length; i++) {
+          displayMarker(data[i]);
+          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-          content: `<div style="width:150px;color:red;text-align:center;padding:6px 0;">${campusName}</div>`,
-        });
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds);
+      }
+    }
+
+    // 지도에 마커를 표시하는 함수입니다
+    function displayMarker(place) {
+      // 마커를 생성하고 지도에 표시합니다
+      var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x),
+      });
+
+      // 마커에 클릭이벤트를 등록합니다
+      kakao.maps.event.addListener(marker, "click", function () {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        infowindow.setContent(
+          '<div style="padding:5px;font-size:12px;">' +
+            place.place_name +
+            "</div>"
+        );
+
         infowindow.open(map, marker);
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-      }
-    });
-
-    // 저장된 맛집 지도에 표시하기
-    const positions = [
-      {
-        title: "KFC",
-        latlng: new kakao.maps.LatLng(37.485018595965, 127.015025591396),
-      },
-      {
-        title: "롯데리아",
-        latlng: new kakao.maps.LatLng(37.4851294931638, 127.015844898549),
-      },
-      {
-        title: "삼보부대찌개",
-        latlng: new kakao.maps.LatLng(37.4854064736992, 127.019398672306),
-      },
-      {
-        title: "한솥도시락",
-        latlng: new kakao.maps.LatLng(37.4853058757741, 127.018559459555),
-      },
-    ];
-
-    // 마커 이미지의 이미지 주소입니다
-    const imageSrc =
-      "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
-    for (let i = 0; i < positions.length; i++) {
-      // 마커 이미지의 이미지 크기 입니다
-      const imageSize = new kakao.maps.Size(24, 35);
-
-      // 마커 이미지를 생성합니다
-      const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-      // 마커를 생성합니다
-      const marker = new kakao.maps.Marker({
-        map: map, // 마커를 표시할 지도
-        position: positions[i].latlng, // 마커를 표시할 위치
-        title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-        image: markerImage, // 마커 이미지
+        setRequest({
+          ...request,
+          restaurantName: searchWord,
+          restaurantPositionLa: marker.getPosition().getLat(),
+          restaurantPositionMa: marker.getPosition().getLng(),
+        });
       });
     }
-  }, []);
+  }, [searchWord]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postRestaurant(request));
+    navigate(`/bootcamp/eatingtogether/getrestaurant/${selectData}`);
+  };
 
   return (
     <div>
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
+          <b className="text-3xl mb-5">맛집 등록하기</b>
           <div id="map" style={{ width: "500px", height: "500px" }}></div>
-          <input type="text" placeholder="주소를 입력해 주세요."></input>
+          <div className="flex m-10">
+            <input
+              type="text"
+              placeholder="검색어를 입력해 주세요."
+              className="mt-2 border-4"
+              id="restaurantName"
+              name="restaurantName"
+              onChange={(e) => setSearchWord(e.target.value)}
+            ></input>
+            <div className="bg-yellow-300 rounded-lg w-1/4 ml-5">
+              <form onSubmit={onSubmit}>
+                <button>등록하기</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

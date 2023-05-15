@@ -5,10 +5,15 @@ import {
   getBootcampNameList,
   setData,
 } from "../../store/bootcamp/bootcampNameSlice";
+import { readBootcampDetail } from "../../store/bootcamp/bootcampSlice";
 
 const BootcampSideBar = () => {
-  const { data, sideSet, status } = useSelector((state) => state.bootcampName);
+  const { data, sideSet, status, selectData } = useSelector(
+    (state) => state.bootcampName
+  );
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getBootcampNameList());
   }, []);
@@ -21,7 +26,10 @@ const BootcampSideBar = () => {
         { value: "QnA", link: "/" },
         { value: "휴가", link: "/bootcamp/dayoff" },
         { value: "물품 대여", link: "/producthistory" },
-        { value: "밥친구", link: "/" },
+        {
+          value: "밥친구",
+          link: `/bootcamp/eatingtogether/${selectData}`,
+        },
         { value: "캘린더", link: "/calendar" },
         { value: "출석 및 수강율 (출예)", link: "/" },
         { value: "강의평가 (출시예정)", link: "/" },

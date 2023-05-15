@@ -17,6 +17,7 @@ import notificationSlice from "./notification/notificationSlice";
 
 import curriculumSlice from "./curriculum/curriculumSlice";
 import pageSlice from "./portfolio/study/pageSlice";
+import EatingTogetherSlice from "./eatingTogether/EatingTogetherSlice";
 
 export default configureStore({
   reducer: {
@@ -35,5 +36,6 @@ export default configureStore({
     apply: applySlice,
     notification: notificationSlice,
     curriculum: curriculumSlice,
+    eatingTogether: EatingTogetherSlice,
   },
 });
