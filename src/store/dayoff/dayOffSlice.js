@@ -37,7 +37,7 @@ export const getDayOffList = createAsyncThunk(
   "/dayoff/dayOffList",
   async (bootcampId, thunkAPI) => {
     try {
-      const response = await api("GET", `/class/dayoff/${bootcampId}`);
+      const response = await api("GET", `/class/dayoff/list/${bootcampId}`);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response);
