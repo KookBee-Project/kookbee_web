@@ -7,7 +7,7 @@ import StudyTab from "./StudyTab";
 const Home = () => {
   const scroll = useScroll();
   return (
-    <div className="mt-10 min-w-40 flex flex-col items-center">
+    <div className="mt-10 min-w-65 flex flex-col items-center">
       <div className="shadow w-5/6 h-full">
         <ADTab />
         <div className="flex h-full">

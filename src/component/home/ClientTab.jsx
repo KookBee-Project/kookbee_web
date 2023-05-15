@@ -1,21 +1,24 @@
-import { RiTeamFill } from "react-icons/ri";
+import { FaSchool } from "react-icons/fa";
 import { GiNotebook } from "react-icons/gi";
+import { IoChatbubblesSharp } from "react-icons/io5";
 
 const ClientTab = ({ scroll }) => {
-  console.log(scroll);
-
   const textList = [
     {
-      icon: <RiTeamFill size={80} />,
-      title: "팀프로젝트",
-      description: "간략한 서비스의 대한 내용~~~~~~~~~~~~~~~~~",
+      icon: <FaSchool size={80} />,
+      title: "부트캠프",
+      description: "간편한 부트캠프 이용, 공부에만 집중하세요!!",
     },
     {
       icon: <GiNotebook size={80} />,
       title: "포트폴리오",
-      description: "간략한 서비스의 대한 내용~~~~~~~~~~~~~~~~~",
+      description: "여러분의 발자취를 남겨보세요!!",
     },
-    { icon: "", title: "", description: "" },
+    {
+      icon: <IoChatbubblesSharp size={80} />,
+      title: "커뮤니티",
+      description: "공부하다 지칠 땐 동료들과 대화를 남겨보세요!!",
+    },
   ];
 
   return (
@@ -30,9 +33,9 @@ const ClientTab = ({ scroll }) => {
               <div className="flex flex-col text-white h-1/2 justify-center">
                 {el.icon}
               </div>
-              <div className="flex flex-col text-center text-white">
+              <div className="flex flex-col items-center text-center text-white">
                 <span className="text-xl font-bold">{el.title}</span>
-                <span className="">{el.description}</span>
+                <span className="w-11/12">{el.description}</span>
               </div>
             </div>
           ))}

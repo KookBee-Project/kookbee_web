@@ -14,8 +14,6 @@ const ProjectTab = () => {
     dispatch(getHomeProject());
   }, []);
 
-  console.log(data.length);
-
   return (
     <div className="flex flex-col mt-10 items-center w-1/2 h-96">
       <div className="flex flex-col my-3 items-center w-4/5">

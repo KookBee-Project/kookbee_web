@@ -48,6 +48,7 @@ const userSlice = createSlice({
       state.data = initialState.data;
       state.status = initialState.status;
       state.error = initialState.error;
+      state.userId = initialState.userId;
       localStorage.clear();
       alert("정상적으로 로그아웃 되었습니다.");
     },
