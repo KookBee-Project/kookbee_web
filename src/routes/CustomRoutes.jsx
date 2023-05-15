@@ -60,6 +60,9 @@ import TipDetail from "../component/tips/TipDetail";
 import TipCreate from "../component/tips/TipCreate";
 import TipList from "../component/tips/TipList";
 import PostRestaurant from "../component/eatingTogether/PostRestaurant";
+import GetRestaurant from "../component/eatingTogether/GetRestaurant";
+import PostWriting from "../component/eatingTogether/PostWriting";
+import EatingTogetherPostDetail from "../component/eatingTogether/EatingTogetherPostDetail";
 import Tips from "../component/tips/Tips";
 import ErrorCreate from "../component/errorShare/ErrorCreate";
 import ErrorList from "../component/errorShare/ErrorList";
@@ -211,10 +214,26 @@ const CustomRoute = () => {
           </Route>
 
           <Route path="/calendar" element={<MyCalendar />} />
-          <Route path="/bootcamp/eatingtogether" element={<EatingTogether />} />
+          <Route
+            path="/bootcamp/eatingtogether/:bootcampId"
+            element={<EatingTogether />}
+          />
+
           <Route
             path="/bootcamp/eatingtogether/postrestaurant"
             element={<PostRestaurant />}
+          />
+          <Route
+            path="/bootcamp/eatingtogether/getrestaurant/:bootcampId"
+            element={<GetRestaurant />}
+          />
+          <Route
+            path="/bootcamp/eatingtogether/postwriting/:bootcampId"
+            element={<PostWriting />}
+          />
+          <Route
+            path="/bootcamp/eatingtogether/postdetail/:eatingTogetherId"
+            element={<EatingTogetherPostDetail />}
           />
         </Route>
       </Routes>

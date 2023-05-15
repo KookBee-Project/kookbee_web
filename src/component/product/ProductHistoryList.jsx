@@ -13,8 +13,6 @@ const ProductHistoryList = () => {
   useEffect(() => {
     dispatch(getOfferProduct());
     dispatch(getRentalProduct());
-    console.log(offerData);
-    console.log(rentalData);
   }, []);
 
   function offerStatus(status) {
@@ -28,6 +26,26 @@ const ProductHistoryList = () => {
     if (status === "RETURN_COMPLETE") return <td className="p-1">반납 완료</td>;
     return null;
   }
+
+  console.log(offerData);
+  console.log(rentalData);
+
+  const today = new Date();
+
+  const RentalStatus = (productRentalStartDate, productRentalEndDate) => {
+    if (new Date(productRentalStartDate) > today) return "대여 예정";
+    if (
+      new Date(productRentalStartDate) < today &&
+      new Date(productRentalEndDate) > today
+    )
+      return "대여 중";
+    if (new Date(productRentalEndDate) < today) return "반납 완료";
+  };
+
+  const OfferStatus = (productRentalStartDate) => {
+    if (new Date(productRentalStartDate) > today) return "제공 예정";
+    if (new Date(productRentalStartDate) < today) return "제공 완료";
+  };
 
   return (
     <div>
@@ -48,12 +66,12 @@ const ProductHistoryList = () => {
               {offerData?.map((el) => (
                 <tr>
                   <td className="p-1 pl-5 pr-5">{el.bootcampTitle}</td>
-                  <td className="p-1 pl-5 pr-5">{el.productName}</td>
+                  <td className="p-1 pl-5 pr-5">{el.productItemName}</td>
                   <td className="p-1 pl-5 pr-5">{el.productCount}</td>
                   <td className="p-1 pl-5 pr-5">
                     {el.productRentalStartDate.slice(0, 10)}
                   </td>
-                  {offerStatus(el.productStatus)}
+                  {OfferStatus(el.productRentalStartDate)}
                 </tr>
               ))}
             </tbody>
@@ -68,7 +86,7 @@ const ProductHistoryList = () => {
                 <td>품명</td>
                 <td>수량</td>
                 <td>대여일</td>
-                <td>반닙일</td>
+                <td>반납일</td>
                 <td>상태</td>
               </tr>
             </thead>
@@ -76,7 +94,7 @@ const ProductHistoryList = () => {
               {rentalData?.map((el) => (
                 <tr>
                   <td className="p-1 pl-5 pr-5">{el.bootcampTitle}</td>
-                  <td className="p-1 pl-5 pr-5">{el.productName}</td>
+                  <td className="p-1 pl-5 pr-5">{el.productItemName}</td>
                   <td className="p-1 pl-5 pr-5">{el.productCount}</td>
                   <td className="p-1 pl-5 pr-5">
                     {el.productRentalStartDate.slice(0, 10)}
@@ -84,7 +102,10 @@ const ProductHistoryList = () => {
                   <td className="p-1 pl-5 pr-5">
                     {el.productRentalEndDate.slice(0, 10)}
                   </td>
-                  {rentalStatus(el.productStatus)}
+                  <td>{RentalStatus(
+                        el.productRentalStartDate,
+                        el.productRentalEndDate
+                      )}</td>
                 </tr>
               ))}
             </tbody>
