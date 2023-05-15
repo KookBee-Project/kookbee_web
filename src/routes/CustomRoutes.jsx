@@ -47,11 +47,12 @@ import PostDetail from "../component/portfolio/study/lecture/PostDetail";
 import StudyApply from "../component/portfolio/study/apply/StudyApply";
 import StudyApplyHistory from "../component/portfolio/study/apply/StudyApplyHistory";
 import ApplyDetail from "../component/portfolio/study/apply/ApplyDetail";
+import MyPage from "../component/mypage/MyPage";
+import ChangeInfo from "../component/mypage/ChangeInfo";
 
 import MyCalendar from "../component/Calendar/MyCalendar";
 
 import EatingTogether from "../component/eatingTogether/EatingTogether";
-
 import Fighting from "../component/fighting/Fighting";
 import FightingList from "../component/fighting/FightingList";
 import FightingCreate from "../component/fighting/FightingCreate";
@@ -65,14 +66,22 @@ import ErrorList from "../component/errorShare/ErrorList";
 import Error from "../component/errorShare/Error";
 import ErrorDetail from "../component/errorShare/ErrorDetail";
 import FightingDetail from "../component/fighting/FightingDetail";
+import PostRestaurant from "../component/eatingTogether/PostRestaurant";
+import Home from "../component/home/Home";
+import DashBoard from "../component/mypage/DashBoard";
 
 const CustomRoute = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}>
+          <Route path="" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<StudentSignUp />} />
+          <Route path="my/" element={<MyPage />}>
+            <Route path="" element={<DashBoard />} />
+            <Route path="changeinfo" element={<ChangeInfo />} />
+          </Route>
           <Route path="/bootcamp" element={<BootCamp />} />
           <Route path="/bootcamp/add" element={<BootcampAdd />} />
           <Route path="/homeworkhistory" element={<HomeworkHistory />} />

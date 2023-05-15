@@ -22,7 +22,6 @@ const bootcampNameSlice = createSlice({
   initialState,
   reducers: {
     setData: (state, action) => {
-      console.log(action.payload);
       state.selectData = action.payload;
     },
   },

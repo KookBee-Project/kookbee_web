@@ -34,7 +34,7 @@ const ProjectJoinForm = () => {
   useEffect(() => {
     if (status === "successed" && project.projectCode != "") {
       alert("프로젝트의 일원이 되셨습니다!");
-      navigate("/bootcamp");
+      navigate("/portfolio/project/my");
     } else if (status === "failed" && project.projectCode != "") alert(error);
   }, [status]);
 

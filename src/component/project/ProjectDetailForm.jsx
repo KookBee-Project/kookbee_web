@@ -224,7 +224,7 @@ const ProjectDetailForm = () => {
                             className="px-5 py-3 my-5 bg-red-300 border rounded-xl text-xl font-bold shadow-md shadow-gray-400 hover:bg-red-200 focus:shadow-none"
                             onClick={deletingProject}
                           >
-                            프로젝트 폭파
+                            프로젝트 삭제
                           </button>
                         </div>
                       </div>
