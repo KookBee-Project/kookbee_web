@@ -69,7 +69,6 @@ import ErrorList from "../component/errorShare/ErrorList";
 import Error from "../component/errorShare/Error";
 import ErrorDetail from "../component/errorShare/ErrorDetail";
 import FightingDetail from "../component/fighting/FightingDetail";
-import PostRestaurant from "../component/eatingTogether/PostRestaurant";
 import Home from "../component/home/Home";
 import DashBoard from "../component/mypage/DashBoard";
 
