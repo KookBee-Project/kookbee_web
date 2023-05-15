@@ -50,12 +50,15 @@ import PostDetail from "../component/portfolio/study/lecture/PostDetail";
 import StudyApply from "../component/portfolio/study/apply/StudyApply";
 import StudyApplyHistory from "../component/portfolio/study/apply/StudyApplyHistory";
 import ApplyDetail from "../component/portfolio/study/apply/ApplyDetail";
+import MyPage from "../component/mypage/MyPage";
+import ChangeInfo from "../component/mypage/ChangeInfo";
 
 import MyCalendar from "../component/Calendar/MyCalendar";
 
 import EatingTogether from "../component/eatingTogether/EatingTogether";
 import PostRestaurant from "../component/eatingTogether/PostRestaurant";
 import Home from "../component/home/Home";
+import DashBoard from "../component/mypage/DashBoard";
 
 const CustomRoute = () => {
   return (
@@ -65,6 +68,10 @@ const CustomRoute = () => {
           <Route path="" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<StudentSignUp />} />
+          <Route path="my/" element={<MyPage />}>
+            <Route path="" element={<DashBoard />} />
+            <Route path="changeinfo" element={<ChangeInfo />} />
+          </Route>
           <Route path="/bootcamp" element={<BootCamp />} />
           <Route path="/bootcamp/add" element={<BootcampAdd />} />
           <Route path="/homeworkhistory" element={<HomeworkHistory />} />
