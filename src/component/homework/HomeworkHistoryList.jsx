@@ -5,14 +5,15 @@ import { useEffect } from "react";
 import { getHomeworkList } from "../../store/homework/HomeworkSlice";
 
 const HomeworkHistoryList = () => {
+  const { selectData } = useSelector((state) => state.bootcampName);
   const { data, status } = useSelector((state) => state.homework);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getHomeworkList(1));
-  }, []);
+    selectData != undefined && dispatch(getHomeworkList(selectData));
+  }, [selectData]);
 
   function getLinkByStatus(status, homeworkQuestionId, homeworkAnswerId) {
     if (status === null)
@@ -50,7 +51,7 @@ const HomeworkHistoryList = () => {
                 </thead>
                 <tbody className="text-center border-t border-sky-400">
                   {data?.map((el) => (
-                    <tr>
+                    <tr key={el.homeworkQuestionId}>
                       <td
                         className="p-1 hover:cursor-pointer"
                         onClick={() => {

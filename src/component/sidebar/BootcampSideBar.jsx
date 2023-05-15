@@ -7,11 +7,10 @@ import {
 } from "../../store/bootcamp/bootcampNameSlice";
 
 const BootcampSideBar = () => {
-  const { data, sideSet, status } = useSelector((state) => state.bootcampName);
+  const { data, sideSet, status, selectData } = useSelector(
+    (state) => state.bootcampName
+  );
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getBootcampNameList());
-  }, []);
 
   const studentMenu = sideSet
     ? [
@@ -39,7 +38,7 @@ const BootcampSideBar = () => {
           <p className="font-bold text-lg">부트캠프</p>
           <select
             onChange={setBootcamp}
-            // defaultValue={data[0].bootcampId}
+            defaultValue={selectData}
             className="mb-8"
           >
             {data?.map((el) => (

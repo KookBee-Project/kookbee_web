@@ -15,6 +15,8 @@ import { ChevronDownIcon, DocumentTextIcon, PencilIcon } from "@heroicons/react/
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe, logout } from "../../store/user/userSlice";
+import { api } from "../../api/api";
+import { getBootcampNameList } from "../../store/bootcamp/bootcampNameSlice";
 
 const portfoilo = [
   {
@@ -83,15 +85,27 @@ function classNames(...classes) {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const { data } = useSelector((state) => state.user);
+  const { data, userId } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getMe());
+    checkJwt();
+    setInterval(checkJwt, 120000);
   }, []);
 
+  useEffect(() => {
+    dispatch(getBootcampNameList());
+  }, [userId]);
+
+  const checkJwt = async () => {
+    const response = await api("GET", "user/token");
+    return response.status;
+  };
+
   return (
+
     <header className="bg-white border-b-2 border-yellow-300 shadow-sm">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
@@ -314,9 +328,25 @@ export default function Header() {
                   나의 강의실
                 </a>
               </div>
-              <div className="py-6 font-semibold">
-                <Link to={"/login"}>로그인</Link>
-              </div>
+              {data.userName ? (
+                <div className="font-semibold">
+                  <div className="py-6">
+                    <Link to={""}>{data.userName}님</Link>
+                  </div>
+                  <button
+                    onClick={() => {
+                      dispatch(logout());
+                      navigate("/");
+                    }}
+                  >
+                    로그아웃
+                  </button>
+                </div>
+              ) : (
+                <div className="py-6 font-semibold">
+                  <Link to={"/login"}>로그인</Link>
+                </div>
+              )}
             </div>
           </div>
         </Dialog.Panel>

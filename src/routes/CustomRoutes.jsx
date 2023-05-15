@@ -57,6 +57,7 @@ import MyCalendar from "../component/Calendar/MyCalendar";
 
 import EatingTogether from "../component/eatingTogether/EatingTogether";
 import PostRestaurant from "../component/eatingTogether/PostRestaurant";
+import Home from "../component/home/Home";
 import DashBoard from "../component/mypage/DashBoard";
 
 const CustomRoute = () => {
@@ -64,6 +65,7 @@ const CustomRoute = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}>
+          <Route path="" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<StudentSignUp />} />
           <Route path="my/" element={<MyPage />}>
