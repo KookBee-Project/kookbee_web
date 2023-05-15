@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 import { studentSignUp } from "../../store/student/studentSignUpSlice";
 
@@ -18,6 +19,8 @@ const ChangeInfo = () => {
     userPw: "",
     userPhoneNumber: "",
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     findMyInfo();
@@ -37,7 +40,11 @@ const ChangeInfo = () => {
 
   const putUserInfo = async (putRequest) => {
     const response = await api("PUT", "/user/my", putRequest);
+    console.log(response.status);
     setUsers(response.data);
+    if (response.status === 200) {
+      navigate("/my");
+    }
   };
 
   // 오류메세지 상태 저장
@@ -86,14 +93,19 @@ const ChangeInfo = () => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(putRequest);
-    putUserInfo(putRequest);
+    if (putRequest.userPw) {
+      e.preventDefault();
+      console.log(putRequest);
+      putUserInfo(putRequest);
+    } else {
+      e.preventDefault();
+      alert("비밀번호를 입력해주세요.");
+    }
   };
 
   return (
     <>
-      <div class="bg-grey-lighter min-h-screen flex flex-col">
+      <div class="bg-grey-lighter min-h-screen min-w-30 flex flex-col mt-20">
         <div class="bg-white px-6 py-8 rounded shadow-md text-black w-11/12 border border-yellow-200">
           <h1 class="mb-8 text-3xl text-center">개인정보수정</h1>
           <form method="POST" onSubmit={onSubmit}>

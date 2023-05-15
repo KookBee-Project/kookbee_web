@@ -57,7 +57,7 @@ import MyCalendar from "../component/Calendar/MyCalendar";
 
 import EatingTogether from "../component/eatingTogether/EatingTogether";
 import PostRestaurant from "../component/eatingTogether/PostRestaurant";
-
+import DashBoard from "../component/mypage/DashBoard";
 
 const CustomRoute = () => {
   return (
@@ -67,6 +67,7 @@ const CustomRoute = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<StudentSignUp />} />
           <Route path="my/" element={<MyPage />}>
+            <Route path="" element={<DashBoard />} />
             <Route path="changeinfo" element={<ChangeInfo />} />
           </Route>
           <Route path="/bootcamp" element={<BootCamp />} />
@@ -181,8 +182,10 @@ const CustomRoute = () => {
 
           <Route path="/calendar" element={<MyCalendar />} />
           <Route path="/bootcamp/eatingtogether" element={<EatingTogether />} />
-          <Route path="/bootcamp/eatingtogether/postrestaurant" element={<PostRestaurant />} />
-
+          <Route
+            path="/bootcamp/eatingtogether/postrestaurant"
+            element={<PostRestaurant />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

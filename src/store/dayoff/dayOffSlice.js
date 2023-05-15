@@ -3,7 +3,8 @@ import { ErrorResponse } from "@remix-run/router";
 import { api } from "../../api/api";
 
 const initialState = {
-  data: [],
+  bootcampList: [],
+  dayOffList: [],
   status: "idle",
   error: null,
 };
@@ -22,9 +23,9 @@ export const applyDayOff = createAsyncThunk(
 
 export const getBootcampList = createAsyncThunk(
   "/dayoff/bootcampList",
-  async (request, thunkAPI) => {
+  async (bootcampId, thunkAPI) => {
     try {
-      const response = await api("GET", "/class/dayoff/bootcamplist");
+      const response = await api("GET", `/class/dayoff/${bootcampId}`);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response);
@@ -67,7 +68,7 @@ const dayOffSlice = createSlice({
       })
       .addCase(getBootcampList.fulfilled, (state, action) => {
         state.status = "successed";
-        state.data = action.payload;
+        state.bootcampList = action.payload;
       })
       .addCase(getBootcampList.rejected, (state, action) => {
         state.status = "failed";
@@ -78,7 +79,7 @@ const dayOffSlice = createSlice({
       })
       .addCase(getDayOffList.fulfilled, (state, action) => {
         state.status = "successed";
-        state.data = action.payload;
+        state.dayOffList = action.payload;
       })
       .addCase(getDayOffList.rejected, (state, action) => {
         state.status = "failed";
