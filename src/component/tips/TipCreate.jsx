@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   createNotification,
-  getQNAList,
+  getTipList,
 } from "../../store/notification/notificationSlice";
 import { api } from "../../api/api";
 
-const QNACreate = () => {
+const TipCreate = () => {
   const { selectData } = useSelector((state) => state.bootcampName);
   const { status, error } = useSelector((state) => state.notification);
   const [request, setRequest] = useState({
     postTitle: "",
     postContent: "",
-    postType: "QNA",
+    postType: "TIP",
     fileUUID: "",
     bootcampId: selectData,
   });
@@ -22,7 +22,7 @@ const QNACreate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    selectData != undefined && dispatch(getQNAList(selectData));
+    selectData != undefined && dispatch(getTipList(selectData));
   }, [selectData]);
   const setInput = (e) => {
     const { name, value } = e.target;
@@ -37,10 +37,10 @@ const QNACreate = () => {
 
   useEffect(() => {
     if (status === "successed" && request.postTitle !== "") {
-      alert("에러공유 등록에 성공하였습니다.");
-      navigate(`/QNA`);
+      alert("꿀팁 등록에 성공하였습니다.");
+      navigate(`/tip`);
     } else if (status === "failed" && request.postTitle !== "")
-      alert("에러공유 등록에 실패하였습니다.");
+      alert("꿀팁 등록에 실패하였습니다.");
   }, [status]);
 
   const onClickFile = async (e) => {
@@ -61,7 +61,7 @@ const QNACreate = () => {
 
   return (
     <div className="table w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
-      <div className="text-center font-bold text-3xl mt-10">Q&N 등록</div>
+      <div className="text-center font-bold text-3xl mt-10">꿀팁 등록</div>
       <form onSubmit={onSubmit} className="flex flex-col h-4/5 items-center">
         <div className="flex flex-col items-center my-5 w-full">
           <div className="flex flex-col w-10/12">
@@ -129,4 +129,4 @@ const QNACreate = () => {
   );
 };
 
-export default QNACreate;
+export default TipCreate;

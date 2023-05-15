@@ -5,9 +5,12 @@ import {
   getRequestApplyList,
 } from "../../../../store/portfolio/study/applySlice";
 import { Link } from "react-router-dom";
+import Loading from "../../../../loading/Loading";
 
 const StudentApplyHistoryForm = () => {
-  const { applyList, requestApplyList } = useSelector((state) => state.apply);
+  const { applyList, requestApplyList, status } = useSelector(
+    (state) => state.apply
+  );
 
   const dispatch = useDispatch();
 
@@ -47,6 +50,7 @@ const StudentApplyHistoryForm = () => {
   return (
     <div>
       <div className="table items-center h-2/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+        {status === "loading" && <Loading></Loading>}
         <div className="flex justify-center m-10">
           <b className="text-3xl">스터디 신청내역</b>
         </div>

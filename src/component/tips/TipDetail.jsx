@@ -1,11 +1,12 @@
 import {
-  createComment,
+  deleteNotification,
   getNotification,
 } from "../../store/notification/notificationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-const NotificationDetail = () => {
+import { api } from "../../api/api";
+const TipDetail = () => {
   const { userId } = useSelector((state) => state.user.data);
   const { bootcampId, notificationId } = useParams();
   const { detailData, status, error } = useSelector(
@@ -18,6 +19,12 @@ const NotificationDetail = () => {
     dispatch(getNotification(notificationId));
   }, []);
 
+  const onDeleteNotification = () => {
+    dispatch(deleteNotification(notificationId));
+    alert("팁 삭제 성공.");
+    navigate(`/tip`);
+  };
+
   const [request, setRequest] = useState({
     commentContents: "",
   });
@@ -26,16 +33,21 @@ const NotificationDetail = () => {
     setRequest({ ...request, [name]: value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createComment({ request, notificationId }));
+    console.log(request, notificationId);
+    const response = await api(
+      "POST",
+      `class/comment/${notificationId}`,
+      request
+    );
+    window.location.reload();
   };
 
   useEffect(() => {
     if (status === "successed" && request.commentContents !== "") {
       alert("댓글 등록에 성공하였습니다.");
-      dispatch(getNotification(notificationId));
-      setRequest({ ...request, commentContents: "" });
+      navigate(`/notification/${bootcampId}/${notificationId}`);
     } else if (status === "failed" && request.commentContents !== "")
       alert("댓글 등록에 실패하였습니다.");
   }, [status]);
@@ -43,7 +55,7 @@ const NotificationDetail = () => {
   return (
     detailData && (
       <div className="table w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
-        <div className="text-center font-bold text-3xl mt-10">공지사항</div>
+        <div className="text-center font-bold text-3xl mt-10">꿀팁</div>
         <div className="flex flex-col items-center my-5 w-full">
           <div className="flex flex-col w-10/12 font-bold mt-3 justify-between">
             <div className="flex w-full">
@@ -78,6 +90,11 @@ const NotificationDetail = () => {
               {}
               <div className="mt-2 w-1/2">
                 <br />
+                {userId == detailData.writerId && (
+                  <div className="border-2 border-yellow-300 rounded-xl p-1 w-4/5 text-center font-semibold">
+                    <button onClick={onDeleteNotification}>삭제</button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -100,7 +117,7 @@ const NotificationDetail = () => {
                 </label>
                 <textarea
                   className="border-2  border-gray-400 p-1 
-              rounded-lg text-xl h-32 resized-false"
+              rounded-lg text-xl h-32 "
                   type="text"
                   name={"commentContents"}
                   id={"commentContents"}
@@ -145,4 +162,4 @@ const NotificationDetail = () => {
   );
 };
 
-export default NotificationDetail;
+export default TipDetail;

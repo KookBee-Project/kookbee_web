@@ -5,9 +5,10 @@ import {
   getMyProjectDetail,
   submitProject,
 } from "../../store/project/projectSlice";
+import Loading from "../../loading/Loading";
 
 const ProjectSubmitForm = ({ projectId, setEditMode, dispatch, navigate }) => {
-  const { createStatus, error } = useSelector((state) => state.project);
+  const { createStatus, error, status } = useSelector((state) => state.project);
   const [submit, setSubmit] = useState({
     projectOutputLink: "",
     projectOutputFileUUID: "",
@@ -53,6 +54,7 @@ const ProjectSubmitForm = ({ projectId, setEditMode, dispatch, navigate }) => {
   return (
     <div>
       <form className="flex flex-col" onSubmit={onSubmit}>
+        {status === "loading" && <Loading></Loading>}
         <label htmlFor="projectOutputLink" className="mt-5 font-bold">
           산출물 링크
         </label>

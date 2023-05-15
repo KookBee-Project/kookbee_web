@@ -1,27 +1,34 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { createNotification } from "../../store/notification/notificationSlice";
+import {
+  createNotification,
+  getErrorList,
+} from "../../store/notification/notificationSlice";
 import { api } from "../../api/api";
 
-const NotificationCreate = () => {
+const ErrorCreate = () => {
+  const { selectData } = useSelector((state) => state.bootcampName);
   const { status, error } = useSelector((state) => state.notification);
   const [request, setRequest] = useState({
     postTitle: "",
     postContent: "",
-    postType: "NOTIFICATION",
+    postType: "ERROR",
     fileUUID: "",
+    bootcampId: selectData,
   });
 
   const [file, setFile] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { bootcampId } = useParams();
-
+  useEffect(() => {
+    selectData != undefined && dispatch(getErrorList(selectData));
+  }, [selectData]);
   const setInput = (e) => {
     const { name, value } = e.target;
     setRequest({ ...request, [name]: value });
   };
+  console.log(selectData);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -30,10 +37,10 @@ const NotificationCreate = () => {
 
   useEffect(() => {
     if (status === "successed" && request.postTitle !== "") {
-      alert("공지사항 등록에 성공하였습니다.");
-      navigate(`/notification/${bootcampId}`);
+      alert("에러공유  등록에 성공하였습니다.");
+      navigate(`/error`);
     } else if (status === "failed" && request.postTitle !== "")
-      alert("공지사항 등록에 실패하였습니다.");
+      alert("에러공유 등록에 실패하였습니다.");
   }, [status]);
 
   const onClickFile = async (e) => {
@@ -51,10 +58,10 @@ const NotificationCreate = () => {
   const setFileData = (e) => {
     setFile(e.target.files[0]);
   };
-  
+
   return (
     <div className="table w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
-      <div className="text-center font-bold text-3xl mt-10">공지사항 등록</div>
+      <div className="text-center font-bold text-3xl mt-10">에러공유 등록</div>
       <form onSubmit={onSubmit} className="flex flex-col h-4/5 items-center">
         <div className="flex flex-col items-center my-5 w-full">
           <div className="flex flex-col w-10/12">
@@ -122,4 +129,4 @@ const NotificationCreate = () => {
   );
 };
 
-export default NotificationCreate;
+export default ErrorCreate;

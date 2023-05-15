@@ -5,6 +5,7 @@ import {
   getStudyAndLectureList,
   lectureRegister,
 } from "../../../../store/portfolio/study/studySlice";
+import Loading from "../../../../loading/Loading";
 
 const LectureRegisterForm = () => {
   const { data, responseList, WriteStatus } = useSelector(
@@ -46,6 +47,7 @@ const LectureRegisterForm = () => {
   return (
     <div>
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+        {WriteStatus === "loading" && <Loading></Loading>}
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
           <b className="text-3xl">회차 등록하기</b>
           <form onSubmit={onSubmit}>

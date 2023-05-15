@@ -6,6 +6,7 @@ import {
   inviteMember,
   studyRegister,
 } from "../../../store/portfolio/study/studySlice";
+import Loading from "../../../loading/Loading";
 
 const StudyRegisterForm = () => {
   const { status, error, studyRegisterStatus } = useSelector(
@@ -113,6 +114,7 @@ const StudyRegisterForm = () => {
   return (
     <div>
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+        {status === "loading" && <Loading></Loading>}
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
           <b className="text-3xl">스터디 등록</b>
           <form onSubmit={onSubmit}>

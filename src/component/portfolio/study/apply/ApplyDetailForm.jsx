@@ -5,6 +5,7 @@ import {
   getStudyApplyList,
   putStudyApply,
 } from "../../../../store/portfolio/study/applySlice";
+import Loading from "../../../../loading/Loading";
 
 const ApplyDetailForm = () => {
   const { applyList, status } = useSelector((state) => state.apply);
@@ -35,6 +36,7 @@ const ApplyDetailForm = () => {
   return (
     <div>
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+        {status === "loading" && <Loading></Loading>}
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
           {applyList?.map(
             (el) =>
