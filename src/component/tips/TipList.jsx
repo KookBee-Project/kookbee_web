@@ -1,30 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getQNAList } from "../../store/notification/notificationSlice";
+import { getTipList } from "../../store/notification/notificationSlice";
 import { useEffect } from "react";
 import Loading from "../../loading/Loading";
 
-const QNAList = () => {
+const TipList = () => {
   const { selectData } = useSelector((state) => state.bootcampName);
   const { data, status, error } = useSelector((state) => state.notification);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    selectData != undefined && dispatch(getQNAList(selectData));
+    selectData != undefined && dispatch(getTipList(selectData));
   }, [selectData]);
   return (
     <div className="table items-center w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
       {status === "loading" && <Loading></Loading>}
       {status === "successed" && (
         <div className="flex flex-col items-center w-full h-5/6 mt-10">
-          <div className="text-center font-bold text-3xl">Q&A</div>
+          <div className="text-center font-bold text-3xl">꿀팁</div>
           <ul role="list" className="divide-y divide-gray-100">
             {data.map((el) => (
               <li key={el.id} className="flex justify-between gap-x-6 py-5">
                 <div className="flex gap-x-4">
                   <div className="min-w-0 flex-auto">
-                    <Link to={`/QNA/${selectData}/${el.id}`}>
+                    <Link to={`/tip/${selectData}/${el.id}`}>
                       <p className="text-m  font-bold leading-6 text-gray-900">
                         {el.postTitle}
                       </p>
@@ -60,7 +60,7 @@ const QNAList = () => {
               </li>
             ))}
           </ul>
-          <Link to={`/QNA/insert/${selectData}`}>
+          <Link to={`/tip/insert/${selectData}`}>
             <button
               className="px-5 py-3 my-5 bg-yellow-300 border rounded-xl text-xl font-bold 
         shadow-md shadow-gray-400 hover:bg-yellow-200 focus:shadow-none right"
@@ -74,4 +74,4 @@ const QNAList = () => {
   );
 };
 
-export default QNAList;
+export default TipList;

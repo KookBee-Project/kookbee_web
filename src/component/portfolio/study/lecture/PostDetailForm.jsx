@@ -5,6 +5,7 @@ import {
   getPostCommentList,
   registerGroupStudyReview,
 } from "../../../../store/portfolio/study/studySlice";
+import Loading from "../../../../loading/Loading";
 
 const PostDetailForm = () => {
   const { postList, postCommentList, reviewStatus } = useSelector(
@@ -36,6 +37,7 @@ const PostDetailForm = () => {
   return (
     <div>
       <div className="table items-center h-2/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+        {reviewStatus === "loading" && <Loading></Loading>}
         {postList?.map(
           (el) =>
             el.groupStudyPostId === Number(param.groupStudyPostId) && (

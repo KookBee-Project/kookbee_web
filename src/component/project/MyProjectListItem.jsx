@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { getMyProjectList } from "../../store/project/projectSlice";
+import Loading from "../../loading/Loading";
 
 const MyProjectListItem = () => {
   const { data, status } = useSelector((state) => state.project);
@@ -32,6 +33,7 @@ const MyProjectListItem = () => {
 
   return (
     <div className="table items-center w-1/2 h-5/6 min-w-40 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+      {status === "loading" && <Loading></Loading>}
       {status === "successed" && (
         <div className="flex flex-col items-center w-full h-5/6 mt-10">
           <div className="text-center font-bold text-3xl">나의 프로젝트</div>

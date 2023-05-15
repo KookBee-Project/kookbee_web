@@ -26,17 +26,14 @@ import ProjectBootcampList from "../component/project/ProjectBootcampList";
 import ProjectJoin from "../component/project/ProjectJoin";
 import ProjectEdit from "../component/project/ProjectEdit";
 
-import BootcampListForNotification from "../component/notification/BootcampListForNotification";
 import Notification from "../component/notification/Notification";
 import NotificationList from "../component/notification/NotificationList";
-import NotificationCreate from "../component/notification/NotificationCreate";
 import NotificationDetail from "../component/notification/NotificationDetail";
 
-import BootcampListForQNA from "../component/QNA/BootcampListForQNA";
 import QNA from "../component/QNA/QNA";
 import QNAList from "../component/QNA/QNAList";
-import QNACreate from "../component/QNA/QNACreate";
 import QNADetail from "../component/QNA/QNADetail";
+import QNACreate from "../component/QNA/QNACreate";
 
 import StudyRegist from "../component/portfolio/study/StudyRegister";
 import FindStudy from "../component/portfolio/study/FindStudy";
@@ -56,6 +53,19 @@ import ChangeInfo from "../component/mypage/ChangeInfo";
 import MyCalendar from "../component/Calendar/MyCalendar";
 
 import EatingTogether from "../component/eatingTogether/EatingTogether";
+import Fighting from "../component/fighting/Fighting";
+import FightingList from "../component/fighting/FightingList";
+import FightingCreate from "../component/fighting/FightingCreate";
+import TipDetail from "../component/tips/TipDetail";
+import TipCreate from "../component/tips/TipCreate";
+import TipList from "../component/tips/TipList";
+import PostRestaurant from "../component/eatingTogether/PostRestaurant";
+import Tips from "../component/tips/Tips";
+import ErrorCreate from "../component/errorShare/ErrorCreate";
+import ErrorList from "../component/errorShare/ErrorList";
+import Error from "../component/errorShare/Error";
+import ErrorDetail from "../component/errorShare/ErrorDetail";
+import FightingDetail from "../component/fighting/FightingDetail";
 import PostRestaurant from "../component/eatingTogether/PostRestaurant";
 import Home from "../component/home/Home";
 import DashBoard from "../component/mypage/DashBoard";
@@ -166,9 +176,7 @@ const CustomRoute = () => {
           />
 
           <Route path="notification/" element={<Notification />}>
-            <Route path="" element={<BootcampListForNotification />} />
-            <Route path=":bootcampId" element={<NotificationList />} />
-            <Route path="insert/:bootcampId" element={<NotificationCreate />} />
+            <Route path="" element={<NotificationList />} />
             <Route
               path=":bootcampId/:notificationId"
               element={<NotificationDetail />}
@@ -176,10 +184,30 @@ const CustomRoute = () => {
           </Route>
 
           <Route path="QNA/" element={<QNA />}>
-            <Route path="" element={<BootcampListForQNA />} />
-            <Route path=":bootcampId" element={<QNAList />} />
+            <Route path="" element={<QNAList />} />
             <Route path="insert/:bootcampId" element={<QNACreate />} />
             <Route path=":bootcampId/:notificationId" element={<QNADetail />} />
+          </Route>
+          <Route path="error/" element={<Error />}>
+            <Route path="" element={<ErrorList />} />
+            <Route path="insert/:bootcampId" element={<ErrorCreate />} />
+            <Route
+              path=":bootcampId/:notificationId"
+              element={<ErrorDetail />}
+            />
+          </Route>
+          <Route path="tip/" element={<Tips />}>
+            <Route path="" element={<TipList />} />
+            <Route path="insert/:bootcampId" element={<TipCreate />} />
+            <Route path=":bootcampId/:notificationId" element={<TipDetail />} />
+          </Route>
+          <Route path="fighting/" element={<Fighting />}>
+            <Route path="" element={<FightingList />} />
+            <Route path="insert/:bootcampId" element={<FightingCreate />} />
+            <Route
+              path=":bootcampId/:notificationId"
+              element={<FightingDetail />}
+            />
           </Route>
 
           <Route path="/calendar" element={<MyCalendar />} />

@@ -83,7 +83,7 @@ const noteSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(getNoteDetail.pending, (state, action) => {
-        state.detailStatus = "pending";
+        state.detailStatus = "loading";
       })
       .addCase(getNoteDetail.fulfilled, (state, action) => {
         state.detailStatus = "successed";

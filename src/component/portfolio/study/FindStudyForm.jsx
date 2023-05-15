@@ -3,9 +3,10 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getPage } from "../../../store/portfolio/study/pageSlice";
+import Loading from "../../../loading/Loading";
 
 const FindStudyForm = () => {
-  const { data, totalPages } = useSelector((state) => state.page);
+  const { data, totalPages, status } = useSelector((state) => state.page);
   const [buttons, setButtons] = useState([]);
   const dispatch = useDispatch();
 
@@ -31,12 +32,14 @@ const FindStudyForm = () => {
   return (
     <div>
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">
+        {status === "loading" && <Loading></Loading>}
         <div className="flex flex-col items-center h-5/6 mt-10 ml-3 mr-3">
           <b className="text-3xl justify-center">전체 스터디</b>
           <div className="border-4 border-sky-400 rounded-3xl bg-sky-400 flex justify-end">
             <Link to={"/portfolio/study/register"}>스터디 등록</Link>
           </div>
           <table className="table items-center h-5/6 w-11/12 min-h-40 border-4 border-yellow-300 rounded-3xl">
+            {status === "loading" && <Loading></Loading>}
             <thead className="border-b-2">
               <th>스터디명</th>
               <th>목적</th>
