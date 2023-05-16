@@ -38,17 +38,17 @@ const ProjectSubmitForm = ({ projectId, setEditMode, dispatch, navigate }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(submit);
-    if (window.confirm("과제를 제출하시겠습니까?"))
+    if (window.confirm("프로젝트를 제출하시겠습니까?"))
       dispatch(submitProject({ projectId, submit }));
   };
 
   useEffect(() => {
     if (createStatus === "successed" && submit.projectOutputLink !== "") {
-      alert("과제가 제출되었습니다.");
+      alert("프로젝트가 제출되었습니다.");
       dispatch(getMyProjectDetail(projectId));
       setEditMode(false);
     } else if (createStatus === "failed" && submit.projectOutputLink !== "")
-      alert("과제 제출에 실패했습니다");
+      alert("프로젝트 제출에 실패했습니다");
   }, [createStatus]);
 
   return (
@@ -79,7 +79,7 @@ const ProjectSubmitForm = ({ projectId, setEditMode, dispatch, navigate }) => {
         />
         <div className="flex justify-center mt-5">
           <button className="px-5 py-3 my-3 bg-yellow-300 border rounded-xl text-xl font-bold shadow-md shadow-gray-400 hover:bg-yellow-200 focus:shadow-none">
-            재출하기
+            제출하기
           </button>
         </div>
         <div className="flex justify-center mt-5">

@@ -2,10 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  getBootcampNameList,
   setData,
 } from "../../store/bootcamp/bootcampNameSlice";
-import { readBootcampDetail } from "../../store/bootcamp/bootcampSlice";
 
 const BootcampSideBar = () => {
   const { data, sideSet, status, selectData } = useSelector(
@@ -13,10 +11,6 @@ const BootcampSideBar = () => {
   );
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getBootcampNameList());
-  }, []);
 
   const studentMenu = sideSet
     ? [

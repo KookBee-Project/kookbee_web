@@ -42,7 +42,6 @@ const BootcampList = () => {
                     <td>시작일</td>
                     <td>종료일</td>
                     <td>캠퍼스</td>
-                    <td>출석률</td>
                     <td>수강률</td>
                   </tr>
                 </thead>
@@ -55,8 +54,7 @@ const BootcampList = () => {
                       <td className="p-1">{el.bootcampStartDate}</td>
                       <td className="p-1">{el.bootcampEndDate}</td>
                       <td className="p-1">{el.campusName}</td>
-                      <td className="p-1">??</td>
-                      <td className="p-1">???</td>
+                      <td className="p-1"></td>
                     </tr>
                   ))}
                 </tbody>

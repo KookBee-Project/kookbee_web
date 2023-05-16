@@ -11,7 +11,11 @@ import {
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { ChevronDownIcon, DocumentTextIcon, PencilIcon } from "@heroicons/react/20/solid";
+import {
+  ChevronDownIcon,
+  DocumentTextIcon,
+  PencilIcon,
+} from "@heroicons/react/20/solid";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe, logout } from "../../store/user/userSlice";
@@ -90,9 +94,8 @@ export default function Header() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getMe());
     checkJwt();
-    setInterval(checkJwt, 120000);
+    setInterval(checkJwt, 60000 * 25);
   }, []);
 
   useEffect(() => {
@@ -101,11 +104,13 @@ export default function Header() {
 
   const checkJwt = async () => {
     const response = await api("GET", "user/token");
+    if (response.data !== "OK" && response.status == 200)
+      localStorage.setItem("AccessToken", response.data);
+    dispatch(getMe());
     return response.status;
   };
 
   return (
-
     <header className="bg-white border-b-2 border-yellow-300 shadow-sm">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
@@ -228,12 +233,12 @@ export default function Header() {
               </Popover.Panel>
             </Transition>
           </Popover>
-          <a
-            href="/my"
+          <Link
+            to="/my"
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             마이 페이지
-          </a>
+          </Link>
         </Popover.Group>
         {data.userName ? (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end font-semibold">
