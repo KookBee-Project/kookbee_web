@@ -31,17 +31,17 @@ const StudentApplyHistoryForm = () => {
   function statusView(status) {
     if (status === "PENDING") {
       return (
-        <td className="border-8 text-white rounded-3xl bg-sky-400">대기중</td>
+        <td className="border-8 text-black rounded-3xl bg-sky-400">대기중</td>
       );
     }
     if (status === "APPROVAL") {
       return (
-        <td className="border-8 text-white rounded-3xl bg-sky-400">승인</td>
+        <td className="border-8 text-black rounded-3xl bg-sky-400">승인</td>
       );
     }
     if (status === "REJECT") {
       return (
-        <td className="border-8 text-white rounded-3xl bg-sky-400">거절</td>
+        <td className="border-8 text-black rounded-3xl bg-sky-400">거절</td>
       );
     }
   }
@@ -58,14 +58,14 @@ const StudentApplyHistoryForm = () => {
           <button
             value={true}
             onClick={onClick}
-            className="border-8 text-white rounded-3xl border-sky-400 bg-sky-400 mr-5"
+            className="p-1 font-semibold border-8 text-black rounded-3xl border-sky-400 bg-sky-400 mr-5"
           >
             나에게 온 요청
           </button>
           <button
             value={false}
             onClick={onClick}
-            className="border-8 text-white rounded-3xl border-sky-400 bg-sky-400"
+            className="p-1 font-semibold border-8 text-black rounded-3xl border-sky-400 bg-sky-400"
           >
             내가 신청한 내역
           </button>
@@ -112,7 +112,7 @@ const StudentApplyHistoryForm = () => {
                   <tr>
                     <td>{el.groupStudyName}</td>
                     <td>{el.groupStudyApplyCreateAt}</td>
-                    {statusView(el.estudyApplyStatus)}
+                    <td>{statusView(el.estudyApplyStatus)}</td>
                   </tr>
                 </tbody>
               ))}
