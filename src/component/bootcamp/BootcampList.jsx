@@ -54,7 +54,7 @@ const BootcampList = () => {
                       <td className="p-1">{el.bootcampStartDate}</td>
                       <td className="p-1">{el.bootcampEndDate}</td>
                       <td className="p-1">{el.campusName}</td>
-                      <td className="p-1"></td>
+                      <td className="p-1">{el.attendanceRate}%</td>
                     </tr>
                   ))}
                 </tbody>
