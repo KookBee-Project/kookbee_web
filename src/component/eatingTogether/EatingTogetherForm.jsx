@@ -14,7 +14,6 @@ const EatingTogetherForm = () => {
     dispatch(getPost(param.bootcampId));
   }, []);
 
-  console.log(postList);
   return (
     <div>
       <div className="table items-center h-5/6 w-11/12 min-h-40 my-20 mx-20 border-4 border-yellow-300 rounded-3xl">

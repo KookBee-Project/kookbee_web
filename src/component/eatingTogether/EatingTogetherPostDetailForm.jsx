@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { participate } from "../../store/eatingTogether/EatingTogetherSlice";
+import {
+  getCampusInfo,
+  getRestaurant,
+  participate,
+} from "../../store/eatingTogether/EatingTogetherSlice";
 
 const { kakao } = window;
 
 const EatingTogetherPostDetailForm = () => {
-  const { campusInfo, postList, status, error } = useSelector(
-    (state) => state.eatingTogether
-  );
+  const { campusInfo, postList, status, errorMessage, participateStatus } =
+    useSelector((state) => state.eatingTogether);
   const { selectData } = useSelector((state) => state.bootcampName);
 
   const dispatch = useDispatch();
@@ -19,17 +22,31 @@ const EatingTogetherPostDetailForm = () => {
     eatingTogetherId: param.eatingTogetherId,
   });
 
+  useEffect(() => {
+    dispatch(getCampusInfo(selectData));
+  }, []);
+
+  console.log(selectData);
+
+  console.log(campusInfo, param);
+
   const onClick = (e) => {
     e.preventDefault();
-    dispatch(participate(request));
-    if (status === "successed") {
+    dispatch(
+      participate({
+        eatingTogetherId: param.eatingTogetherId,
+      })
+    );
+    if (participateStatus === "successed") {
       navigate(`/bootcamp/eatingtogether/${selectData}`);
-    } else if (status === "failed") {
-      alert(error);
+    } else if (participateStatus === "failed") {
+      alert(errorMessage);
     }
   };
 
   useEffect(() => {
+    const post = postList.find((el) => el.id == param.eatingTogetherId);
+    console.log(post);
     const container = document.getElementById("map"); // 지도를 표시할 HTML 엘리먼트 선택
 
     const options = {
@@ -40,7 +57,7 @@ const EatingTogetherPostDetailForm = () => {
 
     // 주소-좌표 변환 객체를 생성합니다.
     const geocoder = new window.kakao.maps.services.Geocoder();
-
+    if (!campusInfo.campusAddress) return;
     // 주소로 좌표를 검색합니다..
     geocoder.addressSearch(campusInfo.campusAddress, function (result, status) {
       // 정상적으로 검색이 완료됐으면
@@ -64,29 +81,29 @@ const EatingTogetherPostDetailForm = () => {
       }
     });
 
-    // 마커 이미지의 이미지 주소입니다
-    // const imageSrc =
-    //   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-    // for (let i = 0; i < postList.map((el => el.restaurantList)).length; i++) {
+    // // 마커 이미지의 이미지 주소입니다
+    const imageSrc =
+      "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+    // for (let i = 0; i < postList.map((el => el.id === Number(el.eatingTogetherId) && el)).length; i++) {
     //   // 마커 이미지의 이미지 크기 입니다
-    //   const imageSize = new kakao.maps.Size(24, 35);
+    const imageSize = new kakao.maps.Size(24, 35);
 
-    //   // 마커 이미지를 생성합니다
-    //   const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+    // 마커 이미지를 생성합니다
+    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-    //   // 마커를 생성합니다
-    //   const marker = new kakao.maps.Marker({
-    //     map: map, // 마커를 표시할 지도
-    //     // position: positions[i].latlng, // 마커를 표시할 위치
-    //     position: new kakao.maps.LatLng(
-    //       restaurantList.restaurantPositionLa,
-    //       restaurantList.restaurantPositionMa
-    //     ),
-    //     title: restaurantList.restaurantName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-    //     image: markerImage, // 마커 이미지
-    //   });
+    // 마커를 생성합니다
+    const marker = new kakao.maps.Marker({
+      map: map, // 마커를 표시할 지도
+      // position: positions[i].latlng, // 마커를 표시할 위치
+      position: new kakao.maps.LatLng(
+        post.restaurantPositionLa,
+        post.restaurantPositionMa
+      ),
+      title: post.restaurantName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+      image: markerImage, // 마커 이미지
+    });
     // }
-  }, [postList]);
+  }, [postList, campusInfo, param]);
 
   return (
     <div>
