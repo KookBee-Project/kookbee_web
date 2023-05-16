@@ -27,7 +27,7 @@ const FightingList = () => {
               <li key={el.id} className="flex justify-between gap-x-6 py-5">
                 <div className="flex gap-x-4">
                   <div className="min-w-0 flex-auto">
-                    <Link to={`/fighting/${selectData}/${el.id}`}>
+                    <Link to={`/community/fighting/${selectData}/${el.id}`}>
                       <p className="text-m  font-bold leading-6 text-gray-900">
                         {el.postTitle}
                       </p>
