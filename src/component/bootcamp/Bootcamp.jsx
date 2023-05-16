@@ -4,7 +4,7 @@ import BootcampList from "./BootcampList";
 
 const BootCamp = () => {
   return (
-    <div className="w-screen h-screen flex justify-center">
+    <div className="w-screen min-h-screen flex justify-center">
       <div className="flex w-full h-5/6 justify-center">
         <BootcampSideBar />
         <BootcampList />
