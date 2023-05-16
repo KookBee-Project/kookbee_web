@@ -38,7 +38,7 @@ const ErrorCreate = () => {
   useEffect(() => {
     if (status === "successed" && request.postTitle !== "") {
       alert("에러공유  등록에 성공하였습니다.");
-      navigate(`/error`);
+      navigate(`/community/error`);
     } else if (status === "failed" && request.postTitle !== "")
       alert("에러공유 등록에 실패하였습니다.");
   }, [status]);

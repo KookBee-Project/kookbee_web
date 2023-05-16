@@ -60,7 +60,7 @@ const ErrorList = () => {
               </li>
             ))}
           </ul>
-          <Link to={`/error/insert/${selectData}`}>
+          <Link to={`/community/error/insert/${selectData}`}>
             <button
               className="px-5 py-3 my-5 bg-yellow-300 border rounded-xl text-xl font-bold 
         shadow-md shadow-gray-400 hover:bg-yellow-200 focus:shadow-none right"

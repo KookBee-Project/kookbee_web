@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
 import BootcampSideBar from "../sidebar/BootcampSideBar";
+import CommunitySideBar from "../sidebar/CommunitySideBar";
 
 const Error = () => {
   return (
     <div className="w-screen h-screen flex justify-center">
       <div className="flex w-5/6 h-5/6 justify-center">
-        <BootcampSideBar />
+        <CommunitySideBar />
         <Outlet />
       </div>
     </div>

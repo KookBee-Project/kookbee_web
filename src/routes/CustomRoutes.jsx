@@ -190,26 +190,20 @@ const CustomRoute = () => {
             <Route path="insert/:bootcampId" element={<QNACreate />} />
             <Route path=":bootcampId/:notificationId" element={<QNADetail />} />
           </Route>
-          <Route path="error/" element={<Error />}>
+          <Route path="community/error/" element={<Error />}>
             <Route path="" element={<ErrorList />} />
             <Route path="insert/:bootcampId" element={<ErrorCreate />} />
-            <Route
-              path=":bootcampId/:notificationId"
-              element={<ErrorDetail />}
-            />
+            <Route path=":bootcampId/:notificationId" element={<ErrorDetail />} />
           </Route>
-          <Route path="tip/" element={<Tips />}>
+          <Route path="community/tip/" element={<Tips />}>
             <Route path="" element={<TipList />} />
             <Route path="insert/:bootcampId" element={<TipCreate />} />
             <Route path=":bootcampId/:notificationId" element={<TipDetail />} />
           </Route>
-          <Route path="fighting/" element={<Fighting />}>
+          <Route path="community/fighting/" element={<Fighting />}>
             <Route path="" element={<FightingList />} />
             <Route path="insert/:bootcampId" element={<FightingCreate />} />
-            <Route
-              path=":bootcampId/:notificationId"
-              element={<FightingDetail />}
-            />
+            <Route path=":bootcampId/:notificationId" element={<FightingDetail />} />
           </Route>
 
           <Route path="/calendar" element={<MyCalendar />} />

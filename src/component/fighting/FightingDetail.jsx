@@ -22,7 +22,7 @@ const FightingDetail = () => {
   const onDeleteNotification = () => {
     dispatch(deleteNotification(notificationId));
     alert("화이팅 메세지 삭제 성공.");
-    navigate(`/fighting/${bootcampId}`);
+    navigate(`/community/fighting/${bootcampId}`);
   };
 
   const [request, setRequest] = useState({
@@ -47,7 +47,7 @@ const FightingDetail = () => {
   useEffect(() => {
     if (status === "successed" && request.commentContents !== "") {
       alert("댓글 등록에 성공하였습니다.");
-      navigate(`/fighting/${bootcampId}/${notificationId}`);
+      navigate(`/community/fighting/${bootcampId}/${notificationId}`);
     } else if (status === "failed" && request.commentContents !== "")
       alert("댓글 등록에 실패하였습니다.");
   }, [status]);

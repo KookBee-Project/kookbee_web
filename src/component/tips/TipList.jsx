@@ -24,7 +24,7 @@ const TipList = () => {
               <li key={el.id} className="flex justify-between gap-x-6 py-5">
                 <div className="flex gap-x-4">
                   <div className="min-w-0 flex-auto">
-                    <Link to={`/tip/${selectData}/${el.id}`}>
+                    <Link to={`/community/tip/${selectData}/${el.id}`}>
                       <p className="text-m  font-bold leading-6 text-gray-900">
                         {el.postTitle}
                       </p>
@@ -60,7 +60,7 @@ const TipList = () => {
               </li>
             ))}
           </ul>
-          <Link to={`/tip/insert/${selectData}`}>
+          <Link to={`/community/tip/insert/${selectData}`}>
             <button
               className="px-5 py-3 my-5 bg-yellow-300 border rounded-xl text-xl font-bold 
         shadow-md shadow-gray-400 hover:bg-yellow-200 focus:shadow-none right"

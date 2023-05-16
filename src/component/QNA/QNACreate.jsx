@@ -37,10 +37,10 @@ const QNACreate = () => {
 
   useEffect(() => {
     if (status === "successed" && request.postTitle !== "") {
-      alert("에러공유 등록에 성공하였습니다.");
+      alert("Q&A 등록에 성공하였습니다.");
       navigate(`/QNA`);
     } else if (status === "failed" && request.postTitle !== "")
-      alert("에러공유 등록에 실패하였습니다.");
+      alert("Q&A 등록에 실패하였습니다.");
   }, [status]);
 
   const onClickFile = async (e) => {

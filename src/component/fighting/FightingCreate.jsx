@@ -38,7 +38,7 @@ const FightingCreate = () => {
   useEffect(() => {
     if (status === "successed" && request.postTitle !== "") {
       alert("화이팅 메세지 등록에 성공하였습니다.");
-      navigate(`/fighting`);
+      navigate(`/community/fighting`);
     } else if (status === "failed" && request.postTitle !== "")
       alert("화이팅 메세지 등록에 실패하였습니다.");
   }, [status]);

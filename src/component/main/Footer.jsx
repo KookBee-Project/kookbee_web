@@ -5,7 +5,7 @@ const Footer = () => {
     <div className="w-full mt-80 flex justify-center min-w-65">
       <footer className="w-full bg-gray-800 shadow dark:bg-gray-900 ">
         <div className="w-full p-4 md:py-8">
-          <div className="text-white sm:flex sm:items-center sm:justify-between">
+          <div className="text-white sm:flex sm:items-center sm:justify-between" >
             <a href="/" className="flex items-center mb-4 sm:mb-0">
               <img
                 src={logoImage}

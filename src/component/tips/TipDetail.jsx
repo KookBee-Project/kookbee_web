@@ -22,7 +22,7 @@ const TipDetail = () => {
   const onDeleteNotification = () => {
     dispatch(deleteNotification(notificationId));
     alert("팁 삭제 성공.");
-    navigate(`/tip`);
+    navigate(`/community/tip`);
   };
 
   const [request, setRequest] = useState({
@@ -47,7 +47,7 @@ const TipDetail = () => {
   useEffect(() => {
     if (status === "successed" && request.commentContents !== "") {
       alert("댓글 등록에 성공하였습니다.");
-      navigate(`/notification/${bootcampId}/${notificationId}`);
+      navigate(`/community/tip/${bootcampId}/${notificationId}`);
     } else if (status === "failed" && request.commentContents !== "")
       alert("댓글 등록에 실패하였습니다.");
   }, [status]);
