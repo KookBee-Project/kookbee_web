@@ -30,14 +30,14 @@ const ProjectTab = () => {
                   <li key={el.projectId}>
                     <div className="flex justify-between">
                       <div
-                        className="text-gray-800 text-base font-bold hover:text-yellow-500 cursor-pointer"
+                        className="w-1/3 text-gray-800 text-base font-bold hover:text-yellow-500 cursor-pointer"
                         onClick={() => {
                           navigate(`/portfolio/project/detail/${el.projectId}`);
                         }}
                       >
                         {el.projectName}
                       </div>
-                      <div className="mr-2 text-gray-600 font-bold">
+                      <div className="w-1/3 mr-2 text-gray-600 font-bold">
                         <div>{el.projectTeamName}</div>
                       </div>
                       <div className="flex text-gray-600">

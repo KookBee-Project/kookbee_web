@@ -1,5 +1,7 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import MyPageSideBar from "../sidebar/MyPageSideBar";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const MyPage = () => {
   return (

@@ -94,9 +94,8 @@ export default function Header() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getMe());
     checkJwt();
-    setInterval(checkJwt, 120000);
+    setInterval(checkJwt, 60000 * 25);
   }, []);
 
   useEffect(() => {
@@ -105,6 +104,9 @@ export default function Header() {
 
   const checkJwt = async () => {
     const response = await api("GET", "user/token");
+    if (response.data !== "OK" && response.status == 200)
+      localStorage.setItem("AccessToken", response.data);
+    dispatch(getMe());
     return response.status;
   };
 
@@ -234,12 +236,12 @@ export default function Header() {
               </Popover.Panel>
             </Transition>
           </Popover>
-          <a
-            href="/my"
+          <Link
+            to="/my"
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             마이 페이지
-          </a>
+          </Link>
         </Popover.Group>
         {data.userName ? (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end font-semibold">

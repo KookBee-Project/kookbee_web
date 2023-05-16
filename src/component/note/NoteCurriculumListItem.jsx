@@ -5,6 +5,7 @@ import { getNoteCurriculumList } from "../../store/note/noteSlice";
 import Loading from "../../loading/Loading";
 
 const NoteCurriculumListItem = () => {
+  const { userId } = useSelector((state) => state.user);
   const curriculumList = useSelector((state) => state.note.curriculum);
   const { status } = useSelector((state) => state.note);
 
