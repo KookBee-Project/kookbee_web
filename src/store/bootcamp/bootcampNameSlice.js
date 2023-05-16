@@ -3,7 +3,9 @@ import { api } from "../../api/api";
 
 const initialState = {
   data: [],
+  selectData: undefined,
   status: "idle",
+  sideSet: false,
   error: null,
 };
 
@@ -18,7 +20,11 @@ export const getBootcampNameList = createAsyncThunk(
 const bootcampNameSlice = createSlice({
   name: "bootcampName",
   initialState,
-  reducers: {},
+  reducers: {
+    setData: (state, action) => {
+      state.selectData = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getBootcampNameList.pending, (state, action) => {
@@ -27,11 +33,16 @@ const bootcampNameSlice = createSlice({
       .addCase(getBootcampNameList.fulfilled, (state, action) => {
         state.status = "successed";
         state.data = action.payload;
+        if (state.data.length != 0) {
+          state.sideSet = true;
+          state.selectData = state.data[0].bootcampId;
+        }
       })
       .addCase(getBootcampNameList.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.payload.data;
+        state.error = action.payload;
       });
   },
 });
+export const { setData } = bootcampNameSlice.actions;
 export default bootcampNameSlice.reducer;

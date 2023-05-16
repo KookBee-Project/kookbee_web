@@ -5,11 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store";
+import { ThemeProvider } from "@material-tailwind/react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </Provider>
 );
 
@@ -17,3 +20,8 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
+
+
+
