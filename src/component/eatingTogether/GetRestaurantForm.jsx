@@ -10,14 +10,13 @@ const { kakao } = window;
 
 const GetRestaurantForm = () => {
   const param = useParams();
-  const { restaurantList, campusInfo } = useSelector(
+  const { restaurantList, campusInfo, status } = useSelector(
     (state) => state.eatingTogether
   );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // 저장된 맛집 지도에 표시하기
     dispatch(getRestaurant());
     dispatch(getCampusInfo(param.bootcampId));
   }, []);
@@ -78,7 +77,7 @@ const GetRestaurantForm = () => {
         image: markerImage, // 마커 이미지
       });
     }
-  }, [restaurantList]);
+  }, [restaurantList, campusInfo]);
 
   return (
     <div>

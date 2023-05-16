@@ -9,6 +9,9 @@ const initialState = {
   campusInfo: {},
   postList: [],
   counts: 0,
+  postStatus: "idle",
+  errorMessage: null,
+  participateStatus: "idle",
 };
 
 export const postRestaurant = createAsyncThunk(
@@ -70,16 +73,8 @@ export const participate = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.response);
+      return thunkAPI.rejectWithValue(error.response);
     }
-  }
-);
-
-export const countParty = createAsyncThunk(
-  "/class/eatingtogether/{eatingPartyId}",
-  async (eatingPartyId) => {
-    const response = await api("GET", `/class/eatingtogether/${eatingPartyId}`);
-    return response.data;
   }
 );
 
@@ -124,7 +119,7 @@ const EatingTogetherSlice = createSlice({
         state.status = "loading";
       })
       .addCase(postWrite.fulfilled, (state, action) => {
-        state.status = "successed";
+        state.postStatus = "successed";
       })
       .addCase(postWrite.rejected, (state, action) => {
         state.status = "failed";
@@ -142,25 +137,15 @@ const EatingTogetherSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(participate.pending, (state, action) => {
-        state.status = "loading";
+        state.participateStatus = "loading";
       })
       .addCase(participate.fulfilled, (state, action) => {
-        state.status = "successed";
+        state.participateStatus = "successed";
+        state.data = action.payload.data;
       })
       .addCase(participate.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload.data;
-      })
-      .addCase(countParty.pending, (state, action) => {
-        state.status = "loading";
-      })
-      .addCase(countParty.fulfilled, (state, action) => {
-        state.status = "successed";
-        state.counts = action.payload.data;
-      })
-      .addCase(countParty.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload.data;
+        state.participateStatus = "failed";
+        state.errorMessage = action.payload.data;
       });
   },
 });

@@ -16,7 +16,7 @@ const PostWritingForm = () => {
 
   const { selectData } = useSelector((state) => state.bootcampName);
 
-  const { restaurantList, campusInfo } = useSelector(
+  const { restaurantList, campusInfo, postStatus } = useSelector(
     (state) => state.eatingTogether
   );
 
@@ -115,7 +115,7 @@ const PostWritingForm = () => {
 
     // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-  }, [restaurantList]);
+  }, [restaurantList, campusInfo]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -124,9 +124,11 @@ const PostWritingForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(participate(request));
     dispatch(postWrite(request));
-    navigate(`/bootcamp/eatingtogether/${selectData}`);
+    if (postStatus === "successed") {
+      dispatch(participate(request.bootcampId));
+      navigate(`/bootcamp/eatingtogether/${selectData}`);
+    }
   };
 
   return (
